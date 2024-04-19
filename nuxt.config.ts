@@ -1,11 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/kinde", "nuxt-mongoose"],
+  modules: ["@nuxt/ui", "@nuxtjs/kinde"], // , "nuxt-mongoose"
   runtimeConfig: {
     GithubClient: process.env.GITHUB_CLIENT_ID,
     GithubSecret: process.env.GITHUB_SECRET_SECRET,
-    MongoDbURI: process.env.MONGODB_URI,
+    MongodbURI: process.env.MONGODB_URI,
+  },
+  nitro: {
+    plugins: ["~/server/index.ts"],
   },
   // mongoose: {
   //   uri: "process.env.MONGODB_URI",
