@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/kinde"], // , "nuxt-mongoose"
+  modules: ["nuxt-mongoose", "@nuxt/ui", "@nuxtjs/kinde"], // ,
   runtimeConfig: {
     GithubClient: process.env.GITHUB_CLIENT_ID,
     GithubSecret: process.env.GITHUB_SECRET_SECRET,

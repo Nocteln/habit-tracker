@@ -14,9 +14,23 @@
   </div>
 </template>
 <script setup lang="ts">
+// import mongoose from 'mongoose';
+
 definePageMeta({
   middleware: ["auth-logged-in"],
 });
+
+// const getData= async ({
+//   email, id, firstName, lastName, profileImage
+// }: {
+//   email: string;
+//   id: string;
+//   firstName: string | undefined | null;
+//   lastName: string | undefined | null;
+//   profileImage: string | undefined | null;
+// }) => {
+//   const user = await mongoose.findOne()
+// }
 </script>
 
 <style lang="scss" scoped></style>
