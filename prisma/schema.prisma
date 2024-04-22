@@ -7,23 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  title  String
-  userId String @db.ObjectId
-  body String
-  slug String
-  comment String
-  comments String[]
-  user User @relation(fields: [userId], references: [id])
-}
-
 model User {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  email String
-  name String
-  posts Post[]
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  email          String
+  kindeId        String
+  name           String
+  profilePicture String
+  pseudo         String
 }
 
 
-// IMPORTANT : RUN LA COMMANDE prisma genenerate A CHAQUES CAHNGEMENTS
+
+// model Post {
+//   id     String @id @default(auto()) @map("_id") @db.ObjectId
+//   title  String
+//   userId String @db.ObjectId
+//   body String
+//   slug String
+//   comment String
+//   comments String[]
+//   user User @relation(fields: [userId], references: [id])
+// }
+
+// model User {
+//   id    String @id @default(auto()) @map("_id") @db.ObjectId
+//   email String
+//   name String
+//   posts Post[]
+// }

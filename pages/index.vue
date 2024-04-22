@@ -18,10 +18,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+<!-- <script setup lang="ts">
+import { prisma } from "../prisma/db";
 
 async function main() {
   await prisma.post.update({
@@ -58,6 +56,6 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
-</script>
+</script> -->
 
 <style scoped></style>
