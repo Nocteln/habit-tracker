@@ -21,16 +21,22 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useKindeClient } from "#imports";
 // import mongoose from 'mongoose';
 // console.log(client.getUserProfile);
+let userInfo;
 async function loadUserProfile() {
   const client = useKindeClient();
   const user = await client.getUserProfile();
   console.log(user);
 
-  const userInfo = await useFetch(`/api/users/${user.id}`, {
-    method: "GET",
-  });
+  try {
+    userInfo = await useFetch(`/api/users/`, {
+      query: { id: user.id },
+    });
+  } catch (e) {
+    userInfo = e;
+  }
 
   console.log(userInfo);
 }
