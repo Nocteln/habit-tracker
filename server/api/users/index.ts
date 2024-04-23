@@ -4,6 +4,7 @@ export default defineEventHandler(async (event) => {
   const { name, email, kindeId, profilePicture, pseudo } = await readBody(
     event
   );
+  console.log("bosoiirrrr");
   console.log(name);
   const createUser = await prisma.user
     .create({

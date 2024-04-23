@@ -7,15 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Post {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  body     String
+  comment  String
+  comments String[]
+  slug     String
+  title    String
+  user     String
+  userId   String
+}
+
 model User {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
   email          String
-  kindeId        String
+  kindeId        Float
   name           String
   profilePicture String
   pseudo         String
 }
 
+
+// model User {
+//   id             String @id @default(auto()) @map("_id") @db.ObjectId
+//   email          String
+//   kindeId        Float
+//   name           String
+//   profilePicture String
+//   pseudo         String
+//   posts          Post[]
+// }
 
 
 // model Post {

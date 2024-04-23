@@ -14,7 +14,7 @@
 
     <p>{{ $auth.user }}</p>
 
-    <button @click="execute">Execute</button>
+    <!-- <button @click="execute">Execute</button> -->
   </div>
 </template>
 

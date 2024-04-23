@@ -22,7 +22,19 @@
 </template>
 <script setup lang="ts">
 // import mongoose from 'mongoose';
+// console.log(client.getUserProfile);
+async function loadUserProfile() {
+  const client = useKindeClient();
+  const user = await client.getUserProfile();
+  console.log(user);
 
+  const userInfo = await useFetch(`/api/users/${user.id}`, {
+    method: "GET",
+  });
+
+  console.log(userInfo);
+}
+loadUserProfile();
 definePageMeta({
   middleware: ["auth-logged-in"],
 });
@@ -31,7 +43,7 @@ const main = async () => {
   const body = {
     name: "bibi",
     email: "bibi@gmail.com",
-    kindeId: "36523653",
+    kindeId: 36523653,
     profilePicture:
       "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png",
     pseudo: "bibipseud",
