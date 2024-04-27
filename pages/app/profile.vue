@@ -22,51 +22,48 @@
 </template>
 <script setup lang="ts">
 import { useKindeClient } from "#imports";
-// import mongoose from 'mongoose';
-// console.log(client.getUserProfile);
-let userInfo;
 async function loadUserProfile() {
   const client = useKindeClient();
   const user = await client.getUserProfile();
-  console.log(user);
 
-  try {
-    userInfo = await useFetch(`/api/users/`, {
-      query: { id: user.id },
-    });
-  } catch (e) {
-    userInfo = e;
-  }
-
-  console.log(userInfo);
+  return user;
 }
-loadUserProfile();
+
+try {
+  // userInfo = await useFetch(`/api/users`);
+  const user = await loadUserProfile();
+  const { data } = await useFetch(`/api/users/${user.id}`);
+  console.log(data.value);
+} catch (e) {
+  console.error(e);
+}
+
 definePageMeta({
   middleware: ["auth-logged-in"],
 });
 
-const main = async () => {
-  const body = {
-    name: "bibi",
-    email: "bibi@gmail.com",
-    kindeId: 36523653,
-    profilePicture:
-      "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png",
-    pseudo: "bibipseud",
-  };
+// const main = async () => {
+//   const body = {
+//     name: "bibi",
+//     email: "bibi@gmail.com",
+//     kindeId: 36523653,
+//     profilePicture:
+//       "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png",
+//     pseudo: "bibipseud",
+//   };
 
-  await fetch("/api/users", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  })
-    .then(() => {
-      console.log("user created");
-    })
-    .catch((err) => console.error("Failed to create user", err));
-};
+//   await fetch("/api/users", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(body),
+//   })
+//     .then(() => {
+//       console.log("user created");
+//     })
+//     .catch((err) => console.error("Failed to create user", err));
+// };
 // const getData= async ({
 //   email, id, firstName, lastName, profileImage
 // }: {

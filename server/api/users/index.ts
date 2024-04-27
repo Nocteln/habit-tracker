@@ -1,7 +1,7 @@
 import { prisma } from "~/prisma/db";
 
 export default defineEventHandler(async (event) => {
-  console.log("cc");
+  console.log("ccc");
   const { name, email, kindeId, profilePicture, pseudo } = await readBody(
     event
   );
