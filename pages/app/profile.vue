@@ -1,13 +1,14 @@
 <template>
   <div>
-    <img
+    <!--<img
       :src="
         $auth.user?.picture
           ? $auth.user.picture
           : 'https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png'
       "
       alt="profile picture"
-    />
+    />-->
+    <img :src="userInfo.profilePicture" />
 
     <h1>
       {{
@@ -22,6 +23,9 @@
 </template>
 <script setup lang="ts">
 import { useKindeClient } from "#imports";
+
+let userInfo;
+
 async function loadUserProfile() {
   const client = useKindeClient();
   const user = await client.getUserProfile();
@@ -30,10 +34,19 @@ async function loadUserProfile() {
 }
 
 try {
-  // userInfo = await useFetch(`/api/users`);
   const user = await loadUserProfile();
-  const { data } = await useFetch(`/api/users/${user.id}`);
-  console.log(data.value);
+  // const { data } = await useFetch(`/api/users/${user.id}`);
+  const { data } = await useFetch(`/api/users/${user.id}`, {
+    method: "POST",
+    //@ts-ignore
+    body: {
+      user: user,
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  userInfo = data.value;
 } catch (e) {
   console.error(e);
 }
