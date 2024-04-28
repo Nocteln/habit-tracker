@@ -1,5 +1,5 @@
 <template>
-  <div>cc</div>
+  <h1>hey {{ $auth.user?.name }}</h1>
 </template>
 
 <script setup lang="ts">

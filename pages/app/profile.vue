@@ -35,10 +35,11 @@ async function loadUserProfile() {
 
 try {
   const user = await loadUserProfile();
-  // const { data } = await useFetch(`/api/users/${user.id}`);
+
   const { data } = await useFetch(`/api/users/${user.id}`, {
     method: "POST",
     //@ts-ignore
+
     body: {
       user: user,
     },
@@ -54,40 +55,6 @@ try {
 definePageMeta({
   middleware: ["auth-logged-in"],
 });
-
-// const main = async () => {
-//   const body = {
-//     name: "bibi",
-//     email: "bibi@gmail.com",
-//     kindeId: 36523653,
-//     profilePicture:
-//       "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png",
-//     pseudo: "bibipseud",
-//   };
-
-//   await fetch("/api/users", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(body),
-//   })
-//     .then(() => {
-//       console.log("user created");
-//     })
-//     .catch((err) => console.error("Failed to create user", err));
-// };
-// const getData= async ({
-//   email, id, firstName, lastName, profileImage
-// }: {
-//   email: string;
-//   id: string;
-//   firstName: string | undefined | null;
-//   lastName: string | undefined | null;
-//   profileImage: string | undefined | null;
-// }) => {
-//   const user = await mongoose.findOne()
-// }
 </script>
 
 <style lang="scss" scoped></style>
