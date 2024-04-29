@@ -39,6 +39,8 @@ const items = [
     },
   ],
 ];
+
+const foo = useUser();
 </script>
 
 <template>
@@ -49,6 +51,7 @@ const items = [
     <ul>
       <li><NuxtLink>Lien</NuxtLink></li>
     </ul>
+    <h1>{{ foo }}</h1>
     <div v-if="$auth.loggedIn">
       <UDropdown
         :items="items"
@@ -89,7 +92,7 @@ const items = [
     </div>
     <div v-else class="gap-5 flex items-center justify-center">
       <UButton>
-        <NuxtLink to="/api/login" external>Create an account</NuxtLink>
+        <NuxtLink to="/api/register" external>Create an account</NuxtLink>
       </UButton>
       <UButton variant="outline">
         <NuxtLink to="/api/login" external>Log In</NuxtLink>

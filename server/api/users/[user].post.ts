@@ -1,7 +1,9 @@
 import { prisma } from "../../../prisma/db";
 
 export default defineEventHandler(async (event) => {
+  console.log("cc");
   const { user: userInfo } = await readBody(event);
+  // console.log(userInfo);
 
   if (!userInfo)
     return "error while fetching user : not user found ([user].post.ts]";
@@ -20,7 +22,9 @@ export default defineEventHandler(async (event) => {
     });
 
     if (user.length > 0) {
-      return user[0];
+      return {
+        user: user[0],
+      };
     } else {
       newUser = await prisma.user.create({
         data: {
@@ -33,7 +37,9 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    return newUser;
+    return {
+      user: newUser,
+    };
   } catch (error) {
     console.error(error);
   }
