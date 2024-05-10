@@ -39,8 +39,9 @@ const items = [
     },
   ],
 ];
-
-const foo = useUser();
+const { getUser } = await useUser();
+const { userr } = await getUser();
+console.log("u", userr);
 </script>
 
 <template>
@@ -51,7 +52,8 @@ const foo = useUser();
     <ul>
       <li><NuxtLink>Lien</NuxtLink></li>
     </ul>
-    <h1>{{ foo }}</h1>
+    <!--<h1>{{ foo.data }}</h1>-->
+    <h1>{{ userr?.user.id }}</h1>
     <div v-if="$auth.loggedIn">
       <UDropdown
         :items="items"
