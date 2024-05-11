@@ -1,8 +1,9 @@
 <script setup lang="ts">
+const { user } = useAuth();
 const items = [
   [
     {
-      label: "ben@example.com",
+      label: user?.email,
       slot: "account",
       disabled: true,
     },
@@ -11,20 +12,31 @@ const items = [
     {
       label: "Profile",
       icon: "i-heroicons-user-circle",
+      click: () => {
+        navigateTo("/app/profile", {
+          external: true,
+        });
+      },
     },
   ],
   [
     {
       label: "My Habits",
       icon: "i-heroicons-book-open",
+      click: () => {
+        navigateTo("/app", {
+          external: true,
+        });
+      },
     },
     {
       label: "My Friends",
       icon: "i-heroicons-megaphone",
-    },
-    {
-      label: "Status",
-      icon: "i-heroicons-signal",
+      click: () => {
+        navigateTo("/app", {
+          external: true,
+        });
+      },
     },
   ],
   [
@@ -39,9 +51,6 @@ const items = [
     },
   ],
 ];
-const { getUser } = await useUser();
-const { userr } = await getUser();
-console.log("u", userr);
 </script>
 
 <template>
@@ -49,11 +58,7 @@ console.log("u", userr);
     <h1 class="font-bold text-3xl">
       <NuxtLink to="/">Habit Tracker</NuxtLink>
     </h1>
-    <ul>
-      <li><NuxtLink>Lien</NuxtLink></li>
-    </ul>
-    <!--<h1>{{ foo.data }}</h1>-->
-    <h1>{{ userr?.user.id }}</h1>
+
     <div v-if="$auth.loggedIn">
       <UDropdown
         :items="items"
@@ -66,11 +71,7 @@ console.log("u", userr);
           :label="$auth.user?.name"
           trailing-icon="i-heroicons-chevron-down-20-solid"
         >
-          <template #leading
-            ><UAvatar
-              src="https://avatars.githubusercontent.com/u/739984?v=4"
-            />
-          </template>
+          <template #leading><UAvatar :src="`${user?.picture}`" /> </template>
         </UButton>
 
         <template #account="{ item }">
@@ -92,6 +93,7 @@ console.log("u", userr);
         </template>
       </UDropdown>
     </div>
+
     <div v-else class="gap-5 flex items-center justify-center">
       <UButton>
         <NuxtLink to="/api/register" external>Create an account</NuxtLink>

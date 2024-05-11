@@ -1,42 +1,46 @@
 <template>
-  <div>
-    <!--<img
-      :src="
-        $auth.user?.picture
-          ? $auth.user.picture
-          : 'https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png'
-      "
-      alt="profile picture"
-    />-->
-    <img :src="userInfo.profilePicture" />
+  <div class="flex items-center justify-center flex-col pt-3">
+    <div
+      class="flex items-center justify-center m-5 p-5 border-gray-500 border-4 rounded-full"
+    >
+      <img
+        :src="userInfo.profilePicture"
+        :alt="`${userInfo.name}'s profile picture`"
+        class="rounded-full"
+        width="150"
+        height="150"
+      />
 
-    <h1>
-      {{
-        //@ts-expect-error
-        $auth.user?.name ? $auth.user?.name : "user"
-      }}
-    </h1>
-    <h2>{{ $auth.user?.email }}</h2>
+      <div class="pl-5">
+        <h1 class="text-lg font-bold">
+          {{
+            //@ts-expect-error
+            $auth.user?.name ? $auth.user?.name : "user"
+          }}
+        </h1>
+        <h2>{{ $auth.user?.email }}</h2>
+        <UButton @click="openEditModal" class="my-2 px-5"
+          >Edit <UIcon name="i-heroicons-pencil-square"
+        /></UButton>
+      </div>
+    </div>
     <p>{{ $auth.user }}</p>
-    <button @click="main">add user</button>
   </div>
 </template>
-<script setup lang="ts">
-import { useKindeClient } from "#imports";
 
+<script setup lang="ts">
+import { EditUserInfoModal } from "#components";
+const { user } = useAuth();
+
+const modal = useModal();
 let userInfo;
 
-async function loadUserProfile() {
-  const client = useKindeClient();
-  const user = await client.getUserProfile();
-
-  return user;
-}
-
+const isEditOpen = ref(false);
 try {
-  const user = await loadUserProfile();
-
-  const { data } = await useFetch(`/api/users/${user.id}`, {
+  if (!user) {
+    navigateTo("/");
+  }
+  const { data } = await useFetch(`/api/users/${user?.id}`, {
     method: "POST",
     //@ts-ignore
 
@@ -47,10 +51,12 @@ try {
       "Content-Type": "application/json",
     },
   });
-  userInfo = data.value;
+  userInfo = data?.value?.user;
 } catch (e) {
   console.error(e);
 }
+
+console.log(userInfo);
 
 definePageMeta({
   middleware: ["auth-logged-in"],
