@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { EditUserInfoModal } from "#components";
 
-const modal = useModal();
-
-function openEditModal() {
-  console.log("openEditModal");
-  modal.open(EditUserInfoModal);
-}
+const isOpen = ref(false);
 </script>
+
 <template>
-  <UButton :onClick="openEditModal">Open</UButton>
-  <button @click="openEditModal">Open</button>
+  <div>
+    <UButton label="Open" @click="isOpen = true" />
+    <UModal v-model="isOpen">
+      <EditUserInfoModal />
+    </UModal>
+  </div>
 </template>
