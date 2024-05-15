@@ -4,9 +4,8 @@ import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import DiscordProvider, { DiscordProfile } from "next-auth/providers/discord";
 import { User } from "~/server/models/User";
 import bcrypt from "bcrypt";
-import { navigateTo, useFetch } from "nuxt/app";
 
-const scopes = ["identify", "email"].join(" ");
+const DiscordScopes = ["identify", "email"].join(" ");
 
 export default NuxtAuthHandler({
   secret: useRuntimeConfig().authSecret,
@@ -80,13 +79,20 @@ export default NuxtAuthHandler({
     DiscordProvider.default({
       clientId: useRuntimeConfig().DiscordClientId,
       clientSecret: useRuntimeConfig().DiscordClientSecret,
-      authorization: { params: { scope: scopes } },
+      authorization: {
+        params: {
+          scope: DiscordScopes,
+          prompt: "none",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
 
       async profile(profile: DiscordProfile) {
         console.log(profile);
         return {
           id: profile.id,
-          username: profile.username,
+          username: profile.global_name,
           name: profile.username,
           email: profile.email,
           image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}?size=1024`,
