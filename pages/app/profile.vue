@@ -23,18 +23,18 @@
     </div>
     <p>{{ data?.user }}</p>
   </div>
+  <UModal v-model="isEditOpen">
+    <EditUserInfoModal />
+  </UModal>
 </template>
 
 <script setup lang="ts">
 import { EditUserInfoModal } from "#components";
 const { data } = useAuth();
-
-const modal = useModal();
-let userInfo;
-
+if (!data) {
+  navigateTo("/login");
+}
 const isEditOpen = ref(false);
-
-console.log(userInfo);
 
 definePageMeta({
   middleware: "need-to-be-identified",

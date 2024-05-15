@@ -5,6 +5,10 @@ function handleGoogle() {
   signIn("google");
 }
 
+function handleDiscord() {
+  signIn("discord");
+}
+
 definePageMeta({
   middleware: "login",
 });
@@ -15,6 +19,9 @@ definePageMeta({
 
   <button @click="handleGoogle" class="bg-green-400">
     Register with google
+  </button>
+  <button @click="handleDiscord" class="bg-blue-400">
+    Register with discord
   </button>
   <div v-if="data">
     {{ data }}

@@ -21,19 +21,20 @@ const UserSchema = new Schema({
     trim: true,
     lowercase: true,
   },
-  name: {
+  username: {
     type: String,
     required: true,
     trim: true,
   },
-  firstName: {
-    type: String,
-  },
-  lastName: {
+  name: {
     type: String,
   },
   image: {
     type: String,
+  },
+  provider: {
+    type: String,
+    required: true,
   },
 });
 

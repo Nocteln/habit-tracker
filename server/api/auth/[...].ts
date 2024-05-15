@@ -1,9 +1,12 @@
 import { NuxtAuthHandler } from "#auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
+import DiscordProvider, { DiscordProfile } from "next-auth/providers/discord";
 import { User } from "~/server/models/User";
 import bcrypt from "bcrypt";
 import { navigateTo, useFetch } from "nuxt/app";
+
+const scopes = ["identify", "email"].join(" ");
 
 export default NuxtAuthHandler({
   secret: useRuntimeConfig().authSecret,
@@ -64,11 +67,30 @@ export default NuxtAuthHandler({
         console.log("cc", profile);
         return {
           id: profile.sub,
-          name: profile.name,
-          firstname: profile.given_name,
-          lastname: profile.family_name,
+          username: profile.name,
+          name: profile.given_name,
           email: profile.email,
           image: profile.picture,
+          provider: "google",
+        };
+      },
+    }),
+
+    // @ts-expect-error
+    DiscordProvider.default({
+      clientId: useRuntimeConfig().DiscordClientId,
+      clientSecret: useRuntimeConfig().DiscordClientSecret,
+      authorization: { params: { scope: scopes } },
+
+      async profile(profile: DiscordProfile) {
+        console.log(profile);
+        return {
+          id: profile.id,
+          username: profile.username,
+          name: profile.username,
+          email: profile.email,
+          image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}?size=1024`,
+          provider: "discord",
         };
       },
     }),
@@ -104,7 +126,10 @@ export default NuxtAuthHandler({
 
       const userExist = await User.findOne({ id: user.id });
 
-      if (account?.provider === "google" && !userExist) {
+      if (
+        (account?.provider === "google" && !userExist) ||
+        (account?.provider === "discord" && !userExist)
+      ) {
         try {
           await fetch(`${currentUrl}/api/user/create`, {
             method: "POST",

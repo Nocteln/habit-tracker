@@ -2,16 +2,27 @@
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 
+const { data } = useAuth();
+if (!data) {
+  console.log("no data");
+}
+// @ts-ignore
+const { email, username, name, google } = data.value?.user;
+
 const schema = z.object({
   email: z.string().email("Invalid email"),
-  password: z.string().min(8, "Must be at least 8 characters"),
+  name: z.string().max(24, "Your name can not be more than 24 characters"),
+  username: z
+    .string()
+    .max(24, "Your username can not be more than 24 characters"),
 });
 
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
-  email: "zdvdvfs",
-  password: undefined,
+  email,
+  name,
+  username,
 });
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -31,12 +42,24 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         class="space-y-4"
         @submit="onSubmit"
       >
-        <UFormGroup label="Email" name="email">
-          <UInput v-model="state.email" />
+        <UFormGroup
+          label="Email"
+          name="email"
+          :help="
+            google
+              ? 'You are signed in with google. You can\'t change your email!'
+              : ''
+          "
+        >
+          <UInput v-model="state.email" :disabled="google" />
         </UFormGroup>
 
-        <UFormGroup label="Password" name="password">
-          <UInput v-model="state.password" type="password" />
+        <UFormGroup label="Username" name="username">
+          <UInput v-model="state.username" type="text" />
+        </UFormGroup>
+
+        <UFormGroup label="Name" name="name">
+          <UInput v-model="state.name" type="text" />
         </UFormGroup>
 
         <UButton type="submit"> Enregistrer </UButton>

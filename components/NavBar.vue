@@ -77,7 +77,9 @@ const items = [
       >
         <UButton
           color="white"
-          :label="data?.user?.name ? data?.user?.name : 'cannot find name'"
+          :label="
+            data?.user?.username ? data?.user?.username : 'cannot find name'
+          "
           trailing-icon="i-heroicons-chevron-down-20-solid"
         >
           <template #leading
