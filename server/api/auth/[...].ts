@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import { User } from "~/server/models/User";
 import bcrypt from "bcrypt";
-import { useFetch } from "nuxt/app";
+import { navigateTo, useFetch } from "nuxt/app";
 
 export default NuxtAuthHandler({
   secret: useRuntimeConfig().authSecret,
@@ -54,11 +54,12 @@ export default NuxtAuthHandler({
       clientSecret: useRuntimeConfig().GoogleClientSecret,
       authorization: {
         params: {
-          prompt: "consent",
+          prompt: "none",
           access_type: "offline",
           response_type: "code",
         },
       },
+
       async profile(profile: GoogleProfile) {
         console.log("cc", profile);
         return {
@@ -116,7 +117,6 @@ export default NuxtAuthHandler({
           console.log(e);
         }
       }
-
       return user;
     },
   },

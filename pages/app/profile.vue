@@ -1,11 +1,11 @@
 <template>
   <div class="flex items-center justify-center flex-col pt-3">
-    <!-- <div
+    <div
       class="flex items-center justify-center m-5 p-5 border-gray-500 border-4 rounded-full"
     >
       <img
-        :src="userInfo.profilePicture"
-        :alt="`${userInfo.name}'s profile picture`"
+        :src="data?.user?.image"
+        :alt="`${data?.user?.name}'s profile picture`"
         class="rounded-full"
         width="150"
         height="150"
@@ -13,54 +13,32 @@
 
       <div class="pl-5">
         <h1 class="text-lg font-bold">
-          {{
-            //@ts-expect-error
-            $auth.user?.name ? $auth.user?.name : "user"
-          }}
+          {{ data?.user?.name ? data?.user?.name : "user" }}
         </h1>
-        <h2>{{ $auth.user?.email }}</h2>
-        <UButton @click="openEditModal" class="my-2 px-5"
+        <h2>{{ data?.user?.email }}</h2>
+        <UButton @click="isEditOpen = true" class="my-2 px-5"
           >Edit <UIcon name="i-heroicons-pencil-square"
         /></UButton>
       </div>
     </div>
-    <p>{{ $auth.user }}</p> -->
+    <p>{{ data?.user }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-// import { EditUserInfoModal } from "#components";
-// const { user } = useAuth();
+import { EditUserInfoModal } from "#components";
+const { data } = useAuth();
 
-// const modal = useModal();
-// let userInfo;
+const modal = useModal();
+let userInfo;
 
-// const isEditOpen = ref(false);
-// try {
-//   if (!user) {
-//     navigateTo("/");
-//   }
-//   const { data } = await useFetch(`/api/users/${user?.id}`, {
-//     method: "POST",
-//     //@ts-ignore
+const isEditOpen = ref(false);
 
-//     body: {
-//       user: user,
-//     },
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   });
-//   userInfo = data?.value?.user;
-// } catch (e) {
-//   console.error(e);
-// }
+console.log(userInfo);
 
-// console.log(userInfo);
-
-// definePageMeta({
-//   middleware: ["auth-logged-in"],
-// });
+definePageMeta({
+  middleware: "need-to-be-identified",
+});
 </script>
 
 <style lang="scss" scoped></style>

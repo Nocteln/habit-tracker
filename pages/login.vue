@@ -4,6 +4,10 @@ const { signIn, data } = useAuth();
 function handleGoogle() {
   signIn("google");
 }
+
+definePageMeta({
+  middleware: "login",
+});
 </script>
 
 <template>
