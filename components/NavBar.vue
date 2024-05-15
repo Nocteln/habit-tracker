@@ -1,9 +1,18 @@
 <script setup lang="ts">
-const { user } = useAuth();
+const { data, status, signOut } = useAuth();
+
+let isLogged: boolean;
+
+if (status.value === "authenticated") {
+  isLogged = true;
+} else {
+  isLogged = false;
+}
+
 const items = [
   [
     {
-      label: user?.email,
+      label: data.value?.user?.email,
       slot: "account",
       disabled: true,
     },
@@ -43,8 +52,9 @@ const items = [
     {
       label: "Sign out",
       icon: "i-heroicons-arrow-left-on-rectangle",
-      click: () => {
-        navigateTo("/api/logout", {
+      click: async () => {
+        await signOut();
+        navigateTo("/", {
           external: true,
         });
       },
@@ -58,8 +68,7 @@ const items = [
     <h1 class="font-bold text-3xl">
       <NuxtLink to="/">Habit Tracker</NuxtLink>
     </h1>
-
-    <div v-if="$auth.loggedIn">
+    <div v-if="isLogged">
       <UDropdown
         :items="items"
         :ui="{ item: { disabled: 'cursor-text select-text' } }"
@@ -68,10 +77,12 @@ const items = [
       >
         <UButton
           color="white"
-          :label="$auth.user?.name"
+          :label="data?.user?.name ? data?.user?.name : 'cannot find name'"
           trailing-icon="i-heroicons-chevron-down-20-solid"
         >
-          <template #leading><UAvatar :src="`${user?.picture}`" /> </template>
+          <template #leading
+            ><UAvatar :src="`${data?.user?.image}`" />
+          </template>
         </UButton>
 
         <template #account="{ item }">
@@ -96,10 +107,10 @@ const items = [
 
     <div v-else class="gap-5 flex items-center justify-center">
       <UButton>
-        <NuxtLink to="/api/register" external>Create an account</NuxtLink>
+        <NuxtLink to="/login">Create an account</NuxtLink>
       </UButton>
       <UButton variant="outline">
-        <NuxtLink to="/api/login" external>Log In</NuxtLink>
+        <NuxtLink to="/login">Log In</NuxtLink>
       </UButton>
     </div>
   </div>

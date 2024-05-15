@@ -1,25 +1,20 @@
 <template>
-  <div>
-    <UContainer>
-      <div class="bg-[#8ECAE6] h-full">
-        <Hero />
-        <NuxtLink to="/api/login" external> Sign in </NuxtLink>
-        <NuxtLink to="/api/logout" external> Sign out </NuxtLink>
-        <p v-if="$auth.loggedIn">I'm signed in!</p>
-        <p v-else>I'm signed out :(</p>
+  <div class="bg-[#8ECAE6] h-full">
+    <Hero />
+    <NuxtLink to="/api/login" external> Sign in </NuxtLink>
+    <NuxtLink to="/api/logout" external> Sign out </NuxtLink>
+    <!-- <p v-if="$auth.loggedIn">I'm signed in!</p> -->
+    <!-- <p v-else>I'm signed out :(</p> -->
 
-        <form action="">
-          <input type="text" name="username" placeholder="Username" />
-          <input type="password" name="password" placeholder="Password" />
-          <button type="submit">Submit</button>
-        </form>
+    <form action="">
+      <input type="text" name="username" placeholder="Username" />
+      <input type="password" name="password" placeholder="Password" />
+      <button type="submit">Submit</button>
+    </form>
 
-        <p>{{ $auth.user }}</p>
+    <!-- <p>{{ $auth.user }}</p> -->
 
-        <!-- <button @click="execute">Execute</button> -->
-      </div>
-    </UContainer>
-    <UModals />
+    <!-- <button @click="execute">Execute</button> -->
   </div>
 </template>
 

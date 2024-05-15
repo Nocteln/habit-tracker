@@ -1,9 +1,4 @@
 <script lang="ts" setup>
-// defineProps({
-//   isOpen: Boolean,
-// });
-// const props = defineProps(["isOpen"]);
-
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 

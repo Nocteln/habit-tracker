@@ -4,9 +4,7 @@
   >
     <h1>Adoptez de nouvelles habitudes!</h1>
     <UButton color="sky" size="xl"
-      ><NuxtLink to="signup">Inscrivez vous!</NuxtLink></UButton
+      ><NuxtLink to="login">Inscrivez vous!</NuxtLink></UButton
     >
   </div>
 </template>
-
-<style></style>

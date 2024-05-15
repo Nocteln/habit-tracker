@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center flex-col pt-3">
-    <div
+    <!-- <div
       class="flex items-center justify-center m-5 p-5 border-gray-500 border-4 rounded-full"
     >
       <img
@@ -24,43 +24,43 @@
         /></UButton>
       </div>
     </div>
-    <p>{{ $auth.user }}</p>
+    <p>{{ $auth.user }}</p> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { EditUserInfoModal } from "#components";
-const { user } = useAuth();
+// import { EditUserInfoModal } from "#components";
+// const { user } = useAuth();
 
-const modal = useModal();
-let userInfo;
+// const modal = useModal();
+// let userInfo;
 
-const isEditOpen = ref(false);
-try {
-  if (!user) {
-    navigateTo("/");
-  }
-  const { data } = await useFetch(`/api/users/${user?.id}`, {
-    method: "POST",
-    //@ts-ignore
+// const isEditOpen = ref(false);
+// try {
+//   if (!user) {
+//     navigateTo("/");
+//   }
+//   const { data } = await useFetch(`/api/users/${user?.id}`, {
+//     method: "POST",
+//     //@ts-ignore
 
-    body: {
-      user: user,
-    },
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  userInfo = data?.value?.user;
-} catch (e) {
-  console.error(e);
-}
+//     body: {
+//       user: user,
+//     },
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
+//   userInfo = data?.value?.user;
+// } catch (e) {
+//   console.error(e);
+// }
 
-console.log(userInfo);
+// console.log(userInfo);
 
-definePageMeta({
-  middleware: ["auth-logged-in"],
-});
+// definePageMeta({
+//   middleware: ["auth-logged-in"],
+// });
 </script>
 
 <style lang="scss" scoped></style>

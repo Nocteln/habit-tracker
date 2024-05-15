@@ -2,14 +2,29 @@
 export default defineNuxtConfig({
   ssr: true,
   devtools: { enabled: true },
-  modules: ["nuxt-mongoose", "@nuxt/ui", "@nuxtjs/kinde"], // ,
+  modules: ["@nuxt/ui", "nuxt-server-utils", "@sidebase/nuxt-auth"], // , "@nuxtjs/kinde", "nuxt-mongoose",
   runtimeConfig: {
-    GithubClient: process.env.GITHUB_CLIENT_ID,
-    GithubSecret: process.env.GITHUB_SECRET_SECRET,
+    // GithubClient: process.env.GITHUB_CLIENT_ID,
+    // GithubSecret: process.env.GITHUB_SECRET_SECRET,
     MongodbURI: process.env.MONGODB_URI,
+    authSecret: process.env.AUTH_SECRET,
+    GoogleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    GoogleClientId: process.env.GOOGLE_CLIENT_ID,
+    CurrentUrl: process.env.CURRENT_URL,
   },
   nitro: {
     plugins: ["~/server/index.ts"],
+  },
+
+  nuxtServerUtils: {
+    mongodbUri: process.env.MONGODB_URI,
+  },
+
+  auth: {
+    baseURL: process.env.AUTH_ORIGIN,
+    provider: {
+      type: "authjs",
+    },
   },
   // mongoose: {
   //   uri: "process.env.MONGODB_URI",

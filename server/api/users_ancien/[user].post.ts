@@ -2,7 +2,7 @@ import { prisma } from "../../../prisma/db";
 
 export default defineEventHandler(async (event) => {
   console.log("cc");
-  const { user: userInfo } = await readBody(event);
+  const { user: userInfo, isEditing } = await readBody(event);
   // console.log(userInfo);
 
   if (!userInfo)
