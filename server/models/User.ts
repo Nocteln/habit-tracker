@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     lowercase: true,
   },
   id: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
     trim: true,

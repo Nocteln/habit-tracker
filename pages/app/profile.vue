@@ -24,7 +24,7 @@
     <p>{{ data?.user }}</p>
   </div>
   <UModal v-model="isEditOpen">
-    <EditUserInfoModal />
+    <EditUserInfoModal @updated="handleClose" />
   </UModal>
 </template>
 
@@ -35,6 +35,11 @@ if (!data) {
   navigateTo("/login");
 }
 const isEditOpen = ref(false);
+
+function handleClose() {
+  isEditOpen.value = false;
+  console.log("close");
+}
 
 definePageMeta({
   middleware: "need-to-be-identified",

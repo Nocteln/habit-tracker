@@ -2,12 +2,15 @@
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
 
+// @ts-ignore
+const emit = defineEmits(["updated"]);
+
 const { data } = useAuth();
 if (!data) {
   console.log("no data");
 }
 // @ts-ignore
-const { email, username, name, google } = data.value?.user;
+const { email, username, name, google, id } = data.value?.user;
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
@@ -23,6 +26,7 @@ const state = reactive({
   email,
   name,
   username,
+  id,
 });
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -35,6 +39,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     },
     body: JSON.stringify(event.data),
   });
+
+  emit("updated");
 }
 </script>
 
@@ -69,7 +75,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <UInput v-model="state.name" type="text" />
         </UFormGroup>
 
-        <UButton type="submit"> Enregistrer </UButton>
+        <UButton type="submit"> Update </UButton>
       </UForm>
     </div>
   </UCard>

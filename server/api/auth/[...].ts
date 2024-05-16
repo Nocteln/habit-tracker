@@ -4,6 +4,9 @@ import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import DiscordProvider, { DiscordProfile } from "next-auth/providers/discord";
 import { User } from "~/server/models/User";
 import bcrypt from "bcrypt";
+import { v4 as uuidv4 } from "uuid";
+
+const id = uuidv4();
 
 const DiscordScopes = ["identify", "email"].join(" ");
 
@@ -11,45 +14,10 @@ export default NuxtAuthHandler({
   secret: useRuntimeConfig().authSecret,
 
   pages: {
-    signIn: "/signin",
+    signIn: "/login",
   },
 
   providers: [
-    // @ts-expect-error
-    CredentialsProvider.default({
-      name: "credentials",
-      credentials: {},
-      async authorize(credentials: { username: string; password: string }) {
-        // TODO: Fetch user from database
-
-        const user = await User.findOne({ username: credentials.username });
-
-        if (!user) {
-          throw createError({
-            statusCode: 401,
-            statusMessage: "Unauthorized",
-          });
-        }
-
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
-
-        if (!isValid) {
-          throw createError({
-            statusCode: 401,
-            statusMessage: "Unauthorized",
-          });
-        }
-
-        return {
-          ...user.toObject(),
-          password: undefined,
-        };
-      },
-    }),
-
     // @ts-expect-error
     GoogleProvider.default({
       clientId: useRuntimeConfig().GoogleClientId,
@@ -63,9 +31,8 @@ export default NuxtAuthHandler({
       },
 
       async profile(profile: GoogleProfile) {
-        console.log("cc", profile);
         return {
-          id: profile.sub,
+          id, // profile.sub,
           username: profile.name,
           name: profile.given_name,
           email: profile.email,
@@ -89,9 +56,8 @@ export default NuxtAuthHandler({
       },
 
       async profile(profile: DiscordProfile) {
-        console.log(profile);
         return {
-          id: profile.id,
+          id, //profile.id,
           username: profile.global_name,
           name: profile.username,
           email: profile.email,
