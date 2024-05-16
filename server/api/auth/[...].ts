@@ -137,7 +137,7 @@ export default NuxtAuthHandler({
         (account?.provider === "discord" && !userExist)
       ) {
         try {
-          await fetch(`${currentUrl}/api/user/create`, {
+          await $fetch(`${currentUrl}/api/user/create`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

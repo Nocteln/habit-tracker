@@ -4,7 +4,14 @@
   >
     <h1>Adoptez de nouvelles habitudes!</h1>
     <UButton color="sky" size="xl"
-      ><NuxtLink to="login">Inscrivez vous!</NuxtLink></UButton
-    >
+      ><NuxtLink to="login" v-if="status !== 'authenticated'"
+        >Inscrivez vous!</NuxtLink
+      >
+      <NuxtLink to="app" v-else>Acceder à l'application!</NuxtLink>
+    </UButton>
   </div>
 </template>
+
+<script setup>
+const { status } = useAuth();
+</script>

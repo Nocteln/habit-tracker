@@ -28,6 +28,13 @@ const state = reactive({
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Do something with data
   console.log(event.data);
+  await fetch("http://localhost:3000/api/user/edit", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(event.data),
+  });
 }
 </script>
 
