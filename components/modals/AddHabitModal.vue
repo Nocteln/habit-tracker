@@ -42,8 +42,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
   const goal = {
     ...event.data,
-    userId: data.value?.user.id,
+    userId: data.value?.user?.id,
     dateStart: formattedDate,
+    streak: 0,
+    lastActivity: formattedDate,
   };
 
   await fetch("http://localhost:3000/api/goal/create", {

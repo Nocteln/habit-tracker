@@ -5,6 +5,8 @@ export const fakeGoals = [
     dateEnd: "2024-05-22",
     dateStart: "2024-05-17",
     userId: "e63df9bb-47b7-4f7b-96ec-4d6914e958dd",
+    lastActivity: "2024-05-17",
+    streak: 0,
   },
   {
     _id: "6647981e2fe891c54d964014",
@@ -12,6 +14,8 @@ export const fakeGoals = [
     dateEnd: "2024-06-15",
     dateStart: "2024-05-20",
     userId: "e63df9bb-47b7-4f7b-96ec-4d6914e958dd",
+    lastActivity: "2024-05-17",
+    streak: 4,
   },
   {
     _id: "6647981e2fe891c54d964015",
@@ -19,6 +23,8 @@ export const fakeGoals = [
     dateEnd: "2024-07-01",
     dateStart: "2024-05-25",
     userId: "e63df9bb-47b7-4f7b-96ec-4d6914e958dd",
+    lastActivity: "2024-05-17",
+    streak: 0,
   },
   {
     _id: "6647981e2fe891c54d964016",
@@ -26,6 +32,8 @@ export const fakeGoals = [
     dateEnd: "2024-08-10",
     dateStart: "2024-06-01",
     userId: "e63df9bb-47b7-4f7b-96ec-4d6914e958dd",
+    lastActivity: "2024-05-17",
+    streak: 0,
   },
   {
     _id: "6647981e2fe891c54d964017",
@@ -33,5 +41,7 @@ export const fakeGoals = [
     dateEnd: "2024-09-05",
     dateStart: "2024-06-10",
     userId: "e63df9bb-47b7-4f7b-96ec-4d6914e958dd",
+    lastActivity: "2024-05-17",
+    streak: 3,
   },
 ];

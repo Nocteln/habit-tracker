@@ -24,6 +24,14 @@ const GoalSchema = new Schema({
     type: String,
     required: true,
   },
+  lastActivity: {
+    type: String,
+  },
+  streak: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
 });
 
 export const Goal = model("goal", GoalSchema);

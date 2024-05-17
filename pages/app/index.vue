@@ -10,14 +10,7 @@
     icon="i-heroicons-pencil-square"
     >Add a goal!</UButton
   >
-
-  <div v-for="goal in fakeGoals">
-    <Goal
-      :name="goal.name"
-      :dateStart="goal.dateStart"
-      :dateEnd="goal.dateEnd"
-    />
-  </div>
+  <Calendar />
 </template>
 
 <script setup>
@@ -25,7 +18,7 @@ import AddHabitModal from "~/components/modals/AddHabitModal.vue";
 import { fakeGoals } from "~/data/fakeGoals";
 
 const { data } = useAuth();
-console.log(fakeGoals);
+
 const idAddHabitOpen = ref(false);
 
 function handleAddClose() {
