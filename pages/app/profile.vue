@@ -17,9 +17,9 @@
         </h1>
         <h2>{{ data?.user?.email }}</h2>
         <!--
-        <UButton @click="isEditOpen = true" class="my-2 px-5"
-          >Edit <UIcon name="i-heroicons-pencil-square"
-        /></UButton>-->
+        <UButton @click="isEditOpen = true" class="my-2 px-5" 
+    icon="i-heroicons-pencil-square"
+          >Edit </UButton>-->
       </div>
     </div>
     <p>{{ data?.user }}</p>

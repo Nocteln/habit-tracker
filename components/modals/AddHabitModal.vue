@@ -21,6 +21,14 @@ const state = reactive({
   dateEnd: undefined,
 });
 
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, "0");
+const dd = String(today.getDate()).padStart(2, "0");
+const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+console.log(formattedDate);
+
 const validate = (state: any): FormError[] => {
   const errors = [];
   if (!state.name) errors.push({ path: "text", message: "Required" });
@@ -32,13 +40,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Do something with data
   console.log(event.data);
 
-  const currentDate = new Date();
-  const dateFormat = currentDate.toLocaleDateString("fr");
-
   const goal = {
     ...event.data,
     userId: data.value?.user.id,
-    dateStart: dateFormat,
+    dateStart: formattedDate,
   };
 
   await fetch("http://localhost:3000/api/goal/create", {
@@ -61,7 +66,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         :validate="validate"
         :schema="schema"
         :state="state"
-        class="space-y-4"
+        class="space-y-4 text-center"
         @submit="onSubmit"
       >
         <UFormGroup
@@ -69,18 +74,18 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           name="name"
           help="The name of the habit you want to take"
         >
-          <UInput v-model="state.name" placeholder="eat healfy" />
+          <UInput v-model="state.name" placeholder="eat healthy" />
         </UFormGroup>
 
         <UFormGroup
           label="Date goal"
           name="dateEnd"
-          help="Your goal of when you want to get the habits."
+          help="The date by which you aim to achieve this habit."
         >
-          <UInput v-model="state.dateEnd" type="date" />
+          <UInput v-model="state.dateEnd" type="date" :min="formattedDate" />
         </UFormGroup>
 
-        <UButton type="submit"> Add </UButton>
+        <UButton type="submit" class="mt-5" block size="lg"> Add </UButton>
       </UForm>
     </div>
   </UCard>
