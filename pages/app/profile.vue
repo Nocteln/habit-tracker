@@ -16,20 +16,21 @@
           {{ data?.user?.name ? data?.user?.name : "user" }}
         </h1>
         <h2>{{ data?.user?.email }}</h2>
+        <!--
         <UButton @click="isEditOpen = true" class="my-2 px-5"
           >Edit <UIcon name="i-heroicons-pencil-square"
-        /></UButton>
+        /></UButton>-->
       </div>
     </div>
     <p>{{ data?.user }}</p>
   </div>
-  <UModal v-model="isEditOpen">
+  <!--<UModal v-model="isEditOpen">
     <EditUserInfoModal @updated="handleClose" />
-  </UModal>
+  </UModal>-->
 </template>
 
 <script setup lang="ts">
-import { EditUserInfoModal } from "#components";
+// import { EditUserInfoModal } from "#components";
 const { data } = useAuth();
 if (!data) {
   navigateTo("/login");

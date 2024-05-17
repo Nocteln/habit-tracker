@@ -13,6 +13,13 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Unauthorized",
     });
   }
+  if (!body) {
+    throw createError({
+      statusCode: 400,
+      message: "Cannot find data",
+      statusMessage: "Bad Request",
+    });
+  }
 
   await User.updateOne(
     { id: body.id },
