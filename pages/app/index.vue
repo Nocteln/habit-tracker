@@ -10,14 +10,20 @@
     icon="i-heroicons-pencil-square"
     >Add a goal!</UButton
   >
-  <Calendar />
+  <GoalList v-if="!isLoading" :goals="goals" />
+  <p v-else>Loading</p>
 </template>
 
 <script setup>
 import AddHabitModal from "~/components/modals/AddHabitModal.vue";
-import { fakeGoals } from "~/data/fakeGoals";
+
+const isLoading = ref(true);
 
 const { data } = useAuth();
+
+const goals = await $fetch(`/api/goal/${data.value.user.id}`, {
+  method: "GET",
+}).then((isLoading.value = false));
 
 const idAddHabitOpen = ref(false);
 
