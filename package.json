@@ -10,16 +10,12 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@firebase/app-types": "^0.9.1",
     "@headlessui/vue": "^1.7.21",
     "@nuxt/ui": "^2.15.2",
     "@nuxtjs/tailwindcss": "^6.12.0",
-    "@prisma/client": "^5.12.1",
     "@sidebase/nuxt-auth": "^0.7.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
-    "firebase-admin": "^11.11.1",
-    "firebase-functions": "^4.9.0",
     "localtunnel": "^2.0.2",
     "mongoose": "^8.3.2",
     "next-auth": "^4.21.1",
@@ -33,7 +29,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@nuxtjs/kinde": "^0.1.10",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.12.7",
     "@types/uuid": "^9.0.8",
