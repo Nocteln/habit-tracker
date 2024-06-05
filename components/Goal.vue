@@ -1,15 +1,26 @@
 <template>
-  <tr class="border-2 m-5 p-5 justify-evenly text-black-500 text-center">
+  <tr
+    class="border-2 m-5 p-5 justify-evenly text-black-500 text-center text-white"
+  >
     <td>{{ name }}</td>
     <td>{{ dateStartFormated }}</td>
     <td>{{ currentStreak }}</td>
-    <td>
-      <UButton :disabled="isToday" @click="handleComplete">Done Today</UButton>
+    <td class="flex justify-evenly">
+      <UButton :disabled="isToday" @click="handleComplete">
+        <UIcon name="i-heroicons-document-check" /> Done Today
+      </UButton>
+      <UButton @click="handleEdit" color="blue"
+        ><UIcon name="i-heroicons-pencil-square" /> Edit</UButton
+      >
+      <UButton @click="handleDelete" color="red"
+        ><UIcon name="i-heroicons-trash" /> Delete</UButton
+      >
     </td>
-    <td>ccccccc</td>
   </tr>
 </template>
 
+material-symbols:edit material-symbols:delete-forever
+material-symbols:check-circle
 <script setup>
 const props = defineProps([
   "name",
@@ -53,8 +64,13 @@ function getNextDay(dateStr) {
   return formatDate(date);
 }
 
+const today = new Date();
+const formattedTodayDate = today.toISOString().split("T")[0];
+
+if (formattedTodayDate === props.lastActivity) isToday.value = true;
+
 const lastConnexionDate = parseDate(props.lastActivity);
-const newConnexionDate = getNextDay(props.lastActivity);
+// const newConnexionDate = getNextDay(props.lastActivity);
 
 function calculateStreak() {
   const today = new Date();
@@ -71,12 +87,13 @@ function calculateStreak() {
   }
 }
 
-const currentStreak = ref(calculateStreak());
+const currentStreak = ref(props.streak);
 
 async function handleComplete(goal) {
   console.log("complete");
 
   const newStreak = calculateStreak();
+  currentStreak.value = newStreak;
   console.log("newStreak", newStreak);
   console.log("id", props._id);
   const goalUpdated = await $fetch(`/api/goal/complete`, {
@@ -86,7 +103,7 @@ async function handleComplete(goal) {
     },
     body: JSON.stringify({
       newStreak,
-      newConnexionDate,
+      newConnexionDate: formattedTodayDate,
       id: props._id,
     }),
   });

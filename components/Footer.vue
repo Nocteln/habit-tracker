@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-0 w-full">
+  <div class="bottom-0 fixed w-full">
     <!--fixed-->
     <svg viewBox="0 0 1440 120" class="">
       <path

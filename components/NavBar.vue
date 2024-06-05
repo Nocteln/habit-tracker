@@ -33,7 +33,7 @@ const items = [
       label: "My Habits",
       icon: "i-heroicons-book-open",
       click: () => {
-        navigateTo("/app", {
+        navigateTo("/app/habits", {
           external: true,
         });
       },
