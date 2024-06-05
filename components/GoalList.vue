@@ -69,8 +69,11 @@ const today = new Date();
 const formattedTodayDate = today.toISOString().split("T")[0];
 console.log(formattedTodayDate);
 
-function handleDelete() {
+async function handleDelete(id) {
   console.log("delete");
+  await useFetch(`/api/goal/${id}`, {
+    method: "DELETE",
+  });
 }
 
 function handleEdit() {

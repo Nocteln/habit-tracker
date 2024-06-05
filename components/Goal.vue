@@ -12,7 +12,7 @@
       <UButton @click="handleEdit" color="blue"
         ><UIcon name="i-heroicons-pencil-square" /> Edit</UButton
       >
-      <UButton @click="handleDelete" color="red"
+      <UButton @click="handleDelete(props._id)" color="red"
         ><UIcon name="i-heroicons-trash" /> Delete</UButton
       >
     </td>

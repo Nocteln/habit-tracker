@@ -13,6 +13,10 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  const existUser = await User.findOne({ email: body.email });
+
+  if (existUser) return existUser;
+
   const user = await User.create(body);
 
   return user;
