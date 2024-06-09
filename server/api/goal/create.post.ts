@@ -5,8 +5,8 @@ export default defineEventHandler(async (event) => {
 
   if (!body) {
     throw createError({
-      statusCode: 400,
-      message: "Missing email or password",
+      statusCode: 404,
+      message: "Missing body for the request",
       statusMessage: "Bad Request",
     });
   }
