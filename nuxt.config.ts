@@ -12,8 +12,6 @@ export default defineNuxtConfig({
     GoogleClientId: process.env.GOOGLE_CLIENT_ID,
     DiscordClientSecret: process.env.DISCORD_CLIENT_SECRET,
     DiscordClientId: process.env.DISCORD_CLIENT_ID,
-    FacebookClientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    FacebookClientId: process.env.FACEBOOK_CLIENT_ID,
     CurrentUrl: process.env.CURRENT_URL,
   },
   nitro: {

@@ -23,6 +23,7 @@
     "nuxt-mongoose": "^1.0.5",
     "nuxt-server-utils": "^0.0.7",
     "nuxt-vuefire": "^1.0.2",
+    "unenv": "^0.4.3",
     "uuid": "^9.0.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",

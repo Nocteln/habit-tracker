@@ -31,6 +31,7 @@ export default NuxtAuthHandler({
       },
 
       async profile(profile: GoogleProfile) {
+        console.log("google");
         return {
           id, // profile.sub,
           username: profile.name,

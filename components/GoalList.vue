@@ -23,7 +23,6 @@
             :lastActivity="goal.lastActivity"
             :_id="goal._id"
             @delete="handleDelete"
-            @edit="handleEdit"
             @complete="handleComplete(goal)"
           />
         </tbody>
@@ -53,7 +52,6 @@
             :lastActivity="goal.lastActivity"
             :_id="goal._id"
             @delete="handleDelete"
-            @edit="handleEdit"
             @complete="handleComplete(goal)"
           />
         </tbody>
@@ -74,9 +72,5 @@ async function handleDelete(id) {
   await useFetch(`/api/goal/${id}`, {
     method: "DELETE",
   });
-}
-
-function handleEdit() {
-  console.log("edit");
 }
 </script>

@@ -9,9 +9,9 @@
       <UButton :disabled="isToday" @click="handleComplete">
         <UIcon name="i-heroicons-document-check" /> Done Today
       </UButton>
-      <UButton @click="handleEdit" color="blue"
+      <!-- <UButton @click="handleEdit" color="blue"
         ><UIcon name="i-heroicons-pencil-square" /> Edit</UButton
-      >
+      > -->
       <UButton @click="handleDelete(props._id)" color="red"
         ><UIcon name="i-heroicons-trash" /> Delete</UButton
       >
@@ -19,8 +19,6 @@
   </tr>
 </template>
 
-material-symbols:edit material-symbols:delete-forever
-material-symbols:check-circle
 <script setup>
 const props = defineProps([
   "name",
@@ -31,7 +29,7 @@ const props = defineProps([
   "_id",
 ]);
 
-const emits = defineEmits(["delete", "edit", "complete"]);
+const emits = defineEmits(["delete", "complete"]);
 
 const isToday = ref(false);
 

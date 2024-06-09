@@ -22,7 +22,7 @@ const isLoading = ref(true);
 const { data } = useAuth();
 
 const userId = data.value.user.id;
-const goals = await $fetch(`/api/goal/${userId}`, {
+const goals = await useFetch(`/api/goal/${userId}`, {
   method: "GET",
 }).then((isLoading.value = false));
 
