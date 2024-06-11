@@ -56,7 +56,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     body: JSON.stringify(goal),
   });
 
-  emit("added");
+  emit("added", goal);
 }
 </script>
 

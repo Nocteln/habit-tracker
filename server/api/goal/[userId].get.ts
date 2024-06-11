@@ -25,6 +25,6 @@ export default defineEventHandler(async (event) => {
   // }
 
   const goals = await Goal.find({ userId: userId });
-  console.log("go", goals);
+
   return goals;
 });

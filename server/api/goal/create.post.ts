@@ -12,6 +12,6 @@ export default defineEventHandler(async (event) => {
   }
 
   const goal = await Goal.create(body);
-  console.log(goal);
+
   return goal;
 });

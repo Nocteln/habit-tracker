@@ -13,7 +13,7 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody v-for="goal in goalsdata">
+        <tbody v-for="goal in goalsToDo">
           <Goal
             v-if="goal.lastActivity !== formattedTodayDate"
             :name="goal.name"
@@ -42,7 +42,7 @@
             <th class="max-w-[30vw]">Actions</th>
           </tr>
         </thead>
-        <tbody v-for="goal in goalsdata">
+        <tbody v-for="goal in goalsDone">
           <Goal
             v-if="goal.lastActivity == formattedTodayDate"
             :name="goal.name"
@@ -54,9 +54,6 @@
             @delete="handleDelete"
             @complete="handleComplete(goal)"
           />
-          {{
-            goal.name
-          }}
         </tbody>
       </table>
     </div>
@@ -64,17 +61,14 @@
 </template>
 
 <script setup>
-const { goals } = defineProps(["goals"]);
-const goalsdata = goals.data;
-console.log("goals", goalsdata.value);
+const { goals } = defineProps(["goals", "goalsToDo", "goalsDone"]);
 
 const today = new Date();
 const formattedTodayDate = today.toISOString().split("T")[0];
-console.log(formattedTodayDate);
 
 async function handleDelete(id) {
   console.log("delete");
-  await useFetch(`/api/goal/${id}`, {
+  await $fetch(`/api/goal/${id}`, {
     method: "DELETE",
   });
 }

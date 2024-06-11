@@ -33,7 +33,7 @@ export default NuxtAuthHandler({
       async profile(profile: GoogleProfile) {
         console.log("google");
         return {
-          id, // profile.sub,
+          id: profile.sub, //id
           username: profile.name,
           name: profile.given_name,
           email: profile.email,
@@ -58,7 +58,7 @@ export default NuxtAuthHandler({
 
       async profile(profile: DiscordProfile) {
         return {
-          id, //profile.id,
+          id: profile.id, //id
           username: profile.global_name,
           name: profile.username,
           email: profile.email,
