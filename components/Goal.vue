@@ -45,6 +45,7 @@ const dateStartFormated = new Date(props.dateStart).toLocaleDateString(
 );
 
 function parseDate(dateStr) {
+  console.log("date", dateStr);
   const [year, month, day] = dateStr.split("-").map(Number);
   return new Date(year, month - 1, day); // Les mois sont indexés à partir de 0 en JavaScript
 }
@@ -66,7 +67,7 @@ const today = new Date();
 const formattedTodayDate = today.toISOString().split("T")[0];
 
 if (formattedTodayDate === props.lastActivity) isToday.value = true;
-
+console.log("props", props);
 const lastConnexionDate = parseDate(props.lastActivity);
 // const newConnexionDate = getNextDay(props.lastActivity);
 

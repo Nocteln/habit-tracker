@@ -13,7 +13,7 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody v-for="goal in goals">
+        <tbody v-for="goal in goalsdata">
           <Goal
             v-if="goal.lastActivity !== formattedTodayDate"
             :name="goal.name"
@@ -42,7 +42,7 @@
             <th class="max-w-[30vw]">Actions</th>
           </tr>
         </thead>
-        <tbody v-for="goal in goals">
+        <tbody v-for="goal in goalsdata">
           <Goal
             v-if="goal.lastActivity == formattedTodayDate"
             :name="goal.name"
@@ -54,6 +54,9 @@
             @delete="handleDelete"
             @complete="handleComplete(goal)"
           />
+          {{
+            goal.name
+          }}
         </tbody>
       </table>
     </div>
@@ -62,6 +65,8 @@
 
 <script setup>
 const { goals } = defineProps(["goals"]);
+const goalsdata = goals.data;
+console.log("goals", goalsdata.value);
 
 const today = new Date();
 const formattedTodayDate = today.toISOString().split("T")[0];

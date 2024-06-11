@@ -10,6 +10,7 @@
     icon="i-heroicons-pencil-square"
     >Add a goal!</UButton
   >
+  {{ goals }}
   <GoalList v-if="!isLoading" :goals="goals" />
   <p v-else>Loading</p>
 </template>
@@ -25,6 +26,8 @@ const userId = data.value.user.id;
 const goals = await useFetch(`/api/goal/${userId}`, {
   method: "GET",
 }).then((isLoading.value = false));
+
+// console.log("goalssss", goals);
 
 const idAddHabitOpen = ref(false);
 
