@@ -14,7 +14,6 @@ const PostSchema = new Schema({
   userId: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
     lowercase: true,
   },
