@@ -2,10 +2,13 @@ import { Goal } from "~/server/models/Goal";
 import { getServerSession } from "#auth";
 
 export default defineEventHandler(async (event) => {
-  const userId = getRouterParam(event, "userId");
+  console.log("slt");
+  // console.log(event);
+  // const userId = getRouterParam(event, "userId");
+  const id = event?.context?.params?.id;
   const session = await getServerSession(event);
 
-  // console.log(userId);
+  console.log("user", id);
   // console.log("session", session);
 
   // if (!session) {
@@ -16,15 +19,15 @@ export default defineEventHandler(async (event) => {
   //   });
   // }
 
-  // if (!userId) {
-  //   throw createError({
-  //     statusCode: 400,
-  //     message: "Missing userId",
-  //     statusMessage: "Bad Request",
-  //   });
-  // }
+  if (!id) {
+    throw createError({
+      statusCode: 400,
+      message: "Missing userId",
+      statusMessage: "Bad Request",
+    });
+  }
 
-  const goals = await Goal.find({ userId: userId });
+  const goals = await Goal.find({ userId: id });
 
   return goals;
 });

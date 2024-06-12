@@ -61,15 +61,44 @@
 </template>
 
 <script setup>
-const { goals } = defineProps(["goals", "goalsToDo", "goalsDone"]);
+const { goals } = defineProps(["goals"]);
+
+const goalsToDo = ref([]);
+const goalsDone = ref([]);
 
 const today = new Date();
 const formattedTodayDate = today.toISOString().split("T")[0];
 
+// function handleComplete(updatedGoal) {
+//   // Retirer l'objectif de la liste "goalsToDo"
+//   const index = goalsToDo.value.findIndex(
+//     (goal) => goal._id === updatedGoal._id
+//   );
+//   if (index > -1) {
+//     goalsToDo.value.splice(index, 1);
+//   }
+
+//   // Ajouter l'objectif à la liste "goalsDone"
+//   goalsDone.value.push(updatedGoal);
+//}
+
+try {
+  for (let i = 0; i < goals.data.value.length; i++) {
+    if (goals.data.value[i].lastActivity !== formattedTodayDate) {
+      goalsToDo.value.push(goals.data.value[i]);
+    } else {
+      goalsDone.value.push(goals.data.value[i]);
+    }
+  }
+} catch (e) {}
+
 async function handleDelete(id) {
   console.log("delete");
-  await $fetch(`/api/goal/${id}`, {
+  await $fetch(`http://localhost:3000/api/goal/${id}`, {
     method: "DELETE",
   });
+
+  goalsToDo.value = goalsToDo.value.filter((goal) => goal._id !== id);
+  goalsDone.value = goalsDone.value.filter((goal) => goal._id !== id);
 }
 </script>

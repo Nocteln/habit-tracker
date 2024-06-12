@@ -11,7 +11,7 @@
     >Add a goal!</UButton
   >
   {{ goals }}
-  <GoalList v-if="!isLoading" :goalsToDo="goalsToDo" :goalsDone="goalsDone" />
+  <GoalList v-if="!isLoading" :goals="goals" />
   <p v-else>Loading</p>
 </template>
 
@@ -19,26 +19,14 @@
 import AddHabitModal from "~/components/modals/AddHabitModal.vue";
 
 const isLoading = ref(true);
-const goalsToDo = ref([]);
-const goalsDone = ref([]);
 
 const { data } = useAuth();
 
 const userId = data.value.user.id;
+console.log("userid", userId);
 const goals = await useFetch(`/api/goal/${userId}`, {
   method: "GET",
 }).then((isLoading.value = false));
-
-const today = new Date();
-const formattedTodayDate = today.toISOString().split("T")[0];
-
-for (let i = 0; i < goals.data.value.length; i++) {
-  if (goals.data.value[i].lastActivity !== formattedTodayDate) {
-    goalsToDo.value.push(goals.data.value[i]);
-  } else {
-    goalsDone.value.push(goals.data.value[i]);
-  }
-}
 
 // console.log("goalssss", goals);
 
@@ -56,5 +44,3 @@ definePageMeta({
   middleware: "need-to-be-identified",
 });
 </script>
-
-<style lang="scss" scoped></style>

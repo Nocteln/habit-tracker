@@ -107,6 +107,12 @@ async function handleComplete(goal) {
   });
 
   console.log("updated", goalUpdated);
+
+  emits("complete", {
+    ...props,
+    lastActivity: formattedTodayDate,
+    streak: newStreak,
+  });
 }
 
 function handleDelete(id) {
