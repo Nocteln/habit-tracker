@@ -1,17 +1,21 @@
 <template>
   <h1>hey {{ data?.user?.name }}</h1>
-  <UModal v-model="idAddHabitOpen">
+  <UModal v-model="AddHabitOpen">
     <AddHabitModal @added="handleAddClose" />
   </UModal>
 
   <UButton
-    @click="idAddHabitOpen = true"
+    @click="AddHabitOpen = true"
     class="my-2 px-5"
     icon="i-heroicons-pencil-square"
     >Add a goal!</UButton
   >
-  {{ goals }}
-  <GoalList v-if="!isLoading" :goals="goals" />
+  <GoalList
+    v-if="!isLoading"
+    :goals="goals"
+    :goalsToDo="goalsToDo"
+    :goalsDone="goalsDone"
+  />
   <p v-else>Loading</p>
 </template>
 
@@ -19,21 +23,22 @@
 import AddHabitModal from "~/components/modals/AddHabitModal.vue";
 
 const isLoading = ref(true);
+const goalsToDo = ref([]);
+const goalsDone = ref([]);
 
 const { data } = useAuth();
 
 const userId = data.value.user.id;
-console.log("userid", userId);
+
 const goals = await useFetch(`/api/goal/${userId}`, {
   method: "GET",
 }).then((isLoading.value = false));
 
-// console.log("goalssss", goals);
-
-const idAddHabitOpen = ref(false);
+const AddHabitOpen = ref(false);
 
 function handleAddClose(e) {
-  idAddHabitOpen.value = false;
+  console.log("e", e);
+  AddHabitOpen.value = false;
   // console.log("ajt", e);
   goalsToDo.value.push(e);
   console.log(goalsToDo.value);

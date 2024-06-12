@@ -26,6 +26,9 @@ const yyyy = today.getFullYear();
 const mm = String(today.getMonth() + 1).padStart(2, "0");
 const dd = String(today.getDate()).padStart(2, "0");
 const formattedDate = `${yyyy}-${mm}-${dd}`;
+const oneDayBefore = `${yyyy}-${dd - 1 > 0 ? mm : mm - 1}-${
+  dd - 1 > 0 ? dd - 1 : dd
+}`;
 
 console.log(formattedDate);
 
@@ -44,8 +47,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     ...event.data,
     userId: data.value?.user?.id,
     dateStart: formattedDate,
-    streak: 0,
-    lastActivity: formattedDate,
+    streak: 1,
+    lastActivity: oneDayBefore,
   };
 
   await fetch("http://localhost:3000/api/goal/create", {
