@@ -2,7 +2,7 @@
   <div class="flex flex-col justify-center items-center">
     <div>Hello from /app</div>
     <AddPost />
-    <NuxtImg src="./uploads\\20210703_150421.jpg" alt="cc" />
+    <!-- <NuxtImg src="./uploads\\20210703_150421.jpg" alt="cc" /> -->
     <div v-for="post in posts.data.value">
       <!-- <h1>{{ post }}</h1> -->
       <Post
@@ -11,6 +11,7 @@
         :content="post.content"
       />
     </div>
+    <UNotifications />
   </div>
 </template>
 

@@ -1,8 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: true,
-  devtools: { enabled: true },
-  modules: ["@nuxt/ui", "nuxt-server-utils", "@sidebase/nuxt-auth", "@nuxt/image"], // , "@nuxtjs/kinde", "nuxt-mongoose",
+  devtools: { enabled: false },
+  modules: [
+    "@nuxt/ui",
+    "nuxt-server-utils",
+    "@sidebase/nuxt-auth",
+    "@nuxt/image",
+  ], // , "@nuxtjs/kinde", "nuxt-mongoose",
   runtimeConfig: {
     // GithubClient: process.env.GITHUB_CLIENT_ID,
     // GithubSecret: process.env.GITHUB_SECRET_SECRET,
@@ -26,6 +31,13 @@ export default defineNuxtConfig({
     baseURL: process.env.AUTH_ORIGIN,
     provider: {
       type: "authjs",
+    },
+  },
+
+  ui: {
+    notifications: {
+      // Show toasts at the top right of the screen
+      position: "top-0 bottom-auto",
     },
   },
   // mongoose: {
