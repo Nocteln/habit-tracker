@@ -14,6 +14,15 @@
         <UTextarea v-model="state.content" />
       </UFormGroup>
 
+      <UFormGroup label="Image" name="image">
+        <UInput
+          type="file"
+          size="sm"
+          icon="i-heroicons-folder"
+          v-model="state.image"
+        />
+      </UFormGroup>
+
       <UButton type="submit" class="w-full flex justify-center mt-5">
         Publish
       </UButton>
@@ -37,16 +46,42 @@ type Schema = z.output<typeof schema>;
 const state = reactive({
   subject: undefined,
   content: undefined,
+  image: undefined,
 });
+
+// const handleImageChange = (e) => {
+//   state.image = e.target.files[0];
+// };
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   //@ts-ignore
   const post = { ...event.data, userId: data.value?.user.id };
+  console.log(state.image);
 
-  await $fetch(`/api/posts/create`, {
+  const formData = new FormData();
+  formData.append("image", state.image);
+
+  const response = await fetch("/api/posts/upload", {
     method: "POST",
-    body: post,
+    body: formData,
   });
+
+  if (response.ok) {
+    console.log("Image uploaded successfully");
+  }
+
+  // await $fetch("/api/posts/upload", {
+  //   method: "POST",
+  //   body: state.image,
+  //   headers: {
+  //     "Content-Type": "multipart/form-data",
+  //   },
+  // });
+
+  // await $fetch(`/api/posts/create`, {
+  //   method: "POST",
+  //   body: post,
+  // });
 }
 
 // definePageMeta({

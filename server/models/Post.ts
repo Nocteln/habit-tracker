@@ -21,6 +21,9 @@ const PostSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+  },
 });
 
 export const Post = model("post", PostSchema);
