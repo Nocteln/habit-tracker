@@ -1,19 +1,24 @@
 import path from "path";
 import fs from "fs";
+import { randomUUID } from "crypto";
 
 export default defineEventHandler(async (event) => {
   let res: string[] = [];
   const files = await readMultipartFormData(event);
-  console.log(files);
+
   files?.forEach((file) => {
-    console.log("1");
-    const relativePath = path.join("uploads", file.filename as string);
+    // Generate a unique filename with the same extension as the original file
+    const fileExtension = path.extname(file.filename as string);
+    const uniqueFilename = `${randomUUID()}${fileExtension}`;
+    const relativePath = path.join("uploads", uniqueFilename);
     const filePath = path.join(process.cwd(), "public", relativePath);
-    console.log("2");
-    res.push(`./${relativePath}`);
+
+    // Save the file with the new unique filename
     fs.writeFileSync(filePath, file.data);
-    console.log("3");
+
+    // Store the relative path in the response array
+    res.push(`./${relativePath}`);
   });
-  console.log("r", res);
+
   return res;
 });

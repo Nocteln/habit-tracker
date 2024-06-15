@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center">
+  <div class="flex items-center justify-center pt-5">
     <UForm
       :schema="schema"
       :state="state"
@@ -25,11 +25,12 @@
             :class="state.images ? 'p-2' : 'p-5'"
           >
             <UIcon
-              name="i-heroicons-photo"
+              :name="loading ? 'i-heroicons-arrow-path' : 'i-heroicons-photo'"
               class="text-5xl"
-              :class="state.images ? 'hidden' : ''"
+              :class="state.images ? 'hidden' : loading ? 'animate-spin' : ''"
             />
-            <p>Add pictures</p>
+            <p v-if="!loading">Add pictures</p>
+            <p v-else>Loading</p>
           </label>
           <input
             type="file"
@@ -37,29 +38,18 @@
             @change="handleFileChange"
             multiple
             class="hidden"
+            :disabled="loading"
           />
           <div v-if="state.images" class="p-2 max-h-64 overflow-auto mt-3">
             <div v-for="image in state.images" :key="image" class="relative">
               <UIcon
-                :name="loading ? 'i-heroicons-arrow-path' : 'i-heroicons-trash'"
+                name="i-heroicons-trash"
                 class="absolute h-20 w-20 right-2 top-2 text-red-700"
-                :class="loading ? 'animate-spin' : ''"
                 @click="handleDeleteFile(image)"
               />
               <img :src="image" class="p-2" />
             </div>
           </div>
-          <!-- <div class="p-2 max-h-64 overflow-auto mt-3">
-            <div class="relative">
-              <UIcon
-                name="i-heroicons-trash"
-                class="absolute h-20 w-20 right-2 top-2 text-red-700"
-              />
-              <img src="../public/uploads/20220429_132438.jpg" class="p-2" />
-            </div>
-            <img src="../public/uploads/20220429_132438.jpg" class="p-2" />
-          </div> -->
-          <p v-if="loading" class="text-white">loading</p>
         </UFormGroup>
       </div>
       <UButton type="submit" class="w-full flex justify-center mt-5">
@@ -86,7 +76,9 @@ const files = ref<FileList | null>(null);
 const loading = ref(false);
 
 function handleDeleteFile(img) {
-  state.images = state.images.filter((image) => image !== img);
+  if (!state.images) return;
+  state.images = state?.images.filter((image) => image !== img);
+  if (state.images.length < 0) state.images = undefined;
 }
 
 const handleFileChange = async (event) => {
@@ -144,13 +136,21 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   const post = {
     ...event.data,
     userId: data.value?.user.id,
-    timestamp: Date.now(),
   };
 
   await $fetch(`/api/posts/create`, {
     method: "POST",
     body: post,
   });
+
+  toast.add({
+    id: "success",
+    title: "Success",
+    description: "Your post has been published!",
+  });
+  state.subject = undefined;
+  state.content = undefined;
+  state.images = undefined;
 }
 
 // definePageMeta({
