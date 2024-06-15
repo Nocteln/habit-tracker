@@ -14,13 +14,17 @@
       <UIcon
         name="i-heroicons-chevron-left"
         @click="changePage('previous')"
-        :class="arrowValue.previous ? 'text-white' : ''"
+        :class="pagination.currentPage <= 1 ? 'text-slate-600' : ''"
       />
       <p>{{ pagination.currentPage }}</p>
       <UIcon
         name="i-heroicons-chevron-right"
         @click="changePage('next')"
-        :class="arrowValue.next ? 'text-white' : ''"
+        :class="
+          pagination.currentPage >= pagination.totalPages
+            ? 'text-slate-600'
+            : ''
+        "
       />
     </div>
 
@@ -31,22 +35,17 @@
 <script setup>
 const posts = ref([]);
 const pagination = ref([]);
-const arrowValue = ref({
-  previous: false,
-  next: true,
-});
 const toast = useToast();
 
 async function fetchData(page) {
   try {
-    console.log("v", posts.value);
     const result = await useFetch(`/api/posts/list?limit=2&page=${page}`, {
       method: "GET",
     });
     posts.value = result.data.value.posts;
     pagination.value = result.data.value.pagination;
+    console.log(pagination.value);
   } catch (e) {
-    console.log("e", e);
     toast.add({
       id: "Cannot fetch",
       title: "Cannot fetch",
@@ -58,18 +57,10 @@ async function fetchData(page) {
 function changePage(direction) {
   const currentPage = pagination.value.currentPage;
   if (direction === "next") {
-    if (currentPage >= pagination.value.totalPages) {
-      arrowValue.value.previous = true;
-      arrowValue.value.next = false;
-      return;
-    }
+    if (currentPage >= pagination.value.totalPages) return;
     fetchData(currentPage + 1);
   } else {
-    if (currentPage <= 1) {
-      arrowValue.value.previous = false;
-      arrowValue.value.next = true;
-      return;
-    }
+    if (currentPage <= 1) return;
     fetchData(currentPage - 1);
   }
 }
