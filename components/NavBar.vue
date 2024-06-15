@@ -66,7 +66,7 @@ const items = [
 <template>
   <div class="flex justify-around shadow-sm p-5 bg-[#219EBC]">
     <h1 class="font-bold text-3xl">
-      <NuxtLink to="/">Habit Tracker</NuxtLink>
+      <NuxtLink :to="isLogged ? '/app' : '/'">Habit Tracker</NuxtLink>
     </h1>
     <div v-if="isLogged">
       <UDropdown

@@ -24,9 +24,10 @@ export default NuxtAuthHandler({
       clientSecret: useRuntimeConfig().GoogleClientSecret,
       authorization: {
         params: {
-          prompt: "none",
+          // prompt: "none",
           access_type: "offline",
           response_type: "code",
+          scope: "openid email profile",
         },
       },
 
