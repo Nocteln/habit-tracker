@@ -3,7 +3,7 @@
     <div class="text-center">
       <h1 class="font-bold text-3xl underline pb-5">Goals to do</h1>
       <table
-        class="table-fixed text-black-500 bg-black w-full border-2 text-white fixed"
+        class="table-fixed text-black-500 bg-black w-full border-2 text-white"
       >
         <thead>
           <tr class="border-2">
