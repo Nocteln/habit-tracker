@@ -21,7 +21,6 @@
     "localtunnel": "^2.0.2",
     "mongoose": "^8.3.2",
     "next-auth": "^4.21.1",
-    "nuxt": "^3.11.2",
     "nuxt-mongoose": "^1.0.5",
     "nuxt-server-utils": "^0.0.7",
     "nuxt-vuefire": "^1.0.2",
@@ -35,6 +34,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.12.7",
     "@types/uuid": "^9.0.8",
+    "nuxt": "^3.12.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }

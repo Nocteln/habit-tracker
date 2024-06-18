@@ -2,12 +2,38 @@
 const { data, status, signOut } = useAuth();
 
 let isLogged: boolean;
+const loading = ref(false);
+const selected = ref();
+
+async function searchUsers(query: string) {
+  loading.value = true;
+  const users = await $fetch(`/api/user/list?${query}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  loading.value = false;
+  return users;
+}
 
 if (status.value === "authenticated") {
   isLogged = true;
 } else {
   isLogged = false;
 }
+/*:options="[
+'Wade Cooper',
+'Arlene Mccoy',
+'Devon Webb',
+'Tom Cook',
+'Tanya Fox',
+'Hellen Schmidt',
+'Caroline Schultz',
+'Mason Heaney',
+'Claudie Smitham',
+'Emil Schaefer',
+]"*/
 
 const items = [
   [
@@ -64,10 +90,21 @@ const items = [
 </script>
 
 <template>
-  <div class="flex justify-around shadow-sm p-5 bg-[#219EBC]">
+  <div class="flex justify-around shadow-sm p-5 bg-[#219EBC] items-center">
     <h1 class="font-bold text-3xl">
       <NuxtLink :to="isLogged ? '/app' : '/'">Habit Tracker</NuxtLink>
     </h1>
+    <UInputMenu
+      trailing-icon="i-heroicons-chevron-up-down-20-solid"
+      class="w-full lg:w-[40vh]"
+      placeholder="Search peoples"
+      icon="i-heroicons-magnifying-glass-20-solid"
+      v-model="selected"
+      :search="searchUsers"
+      :loading="loading"
+      option-attribute="name"
+      trailing
+    />
     <div v-if="isLogged">
       <UDropdown
         :items="items"
