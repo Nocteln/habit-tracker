@@ -20,8 +20,5 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Unothorized",
     });
   }
-  console.log("body", body);
   const post = await Post.create(body);
-
-  console.log("post", post);
 });

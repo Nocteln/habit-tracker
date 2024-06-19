@@ -1,39 +1,31 @@
-<script setup lang="ts">
+<script setup>
 const { data, status, signOut } = useAuth();
 
-let isLogged: boolean;
+let isLogged;
 const loading = ref(false);
 const selected = ref();
 
-async function searchUsers(query: string) {
+async function searchUsers(query) {
   loading.value = true;
-  const users = await $fetch(`/api/user/list?${query}`, {
+  const { users } = await $fetch(`/api/user/list?${query}`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
   loading.value = false;
+
   return users;
 }
+
+watch(selected, (newValue) => {
+  if (newValue) {
+    navigateTo(`/app/user/${newValue.id}`);
+  }
+});
 
 if (status.value === "authenticated") {
   isLogged = true;
 } else {
   isLogged = false;
 }
-/*:options="[
-'Wade Cooper',
-'Arlene Mccoy',
-'Devon Webb',
-'Tom Cook',
-'Tanya Fox',
-'Hellen Schmidt',
-'Caroline Schultz',
-'Mason Heaney',
-'Claudie Smitham',
-'Emil Schaefer',
-]"*/
 
 const items = [
   [
@@ -102,7 +94,7 @@ const items = [
       v-model="selected"
       :search="searchUsers"
       :loading="loading"
-      option-attribute="name"
+      option-attribute="username"
       trailing
     />
     <div v-if="isLogged">

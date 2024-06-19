@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
   const users = await User.find({ username: regex });
 
-  console.log("userssss", users);
+  // console.log("userssss", users);
 
   return {
     users,
