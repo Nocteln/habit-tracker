@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
   // console.log(event);
   // const userId = getRouterParam(event, "userId");
   const id = event?.context?.params?.id;
+
   const session = await getServerSession(event);
 
   // if (!session) {
