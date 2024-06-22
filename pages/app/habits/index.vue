@@ -1,55 +1,54 @@
 <template>
-  <div class="flex flex-col items-center">
-    <UModal v-model="AddHabitOpen">
-      <AddHabitModal @added="handleAddClose" />
-    </UModal>
-
-    <UButton
-      @click="AddHabitOpen = true"
-      class="my-5 px-32 py-5 text-2xl"
-      icon="i-heroicons-pencil-square"
-      >Add a goal!</UButton
-    >
-    <GoalList
-      v-if="!isLoading"
-      :goals="goals"
-      :goalsToDo="goalsToDo"
-      :goalsDone="goalsDone"
-    />
-    <p v-else class="h-64">Loading</p>
+  <div
+    v-for="goal in goals"
+    :key="goal.name"
+    class="flex flex-col justify-center items-center"
+  >
+    <Goal :goal="goal" />
   </div>
 </template>
 
 <script setup>
-import AddHabitModal from "~/components/modals/AddHabitModal.vue";
-
-const isLoading = ref(true);
-const goalsToDo = ref([]);
-const goalsDone = ref([]);
-
-const { data } = useAuth();
-const toast = useToast();
-
-const userId = data.value.user.id;
-
-const goals = await useFetch(`/api/goal/${userId}`, {
-  method: "GET",
-}).then((isLoading.value = false));
-
-const AddHabitOpen = ref(false);
-
-function handleAddClose(e) {
-  AddHabitOpen.value = false;
-  goalsToDo.value.push(e);
-
-  toast.add({
-    id: "ajout goal",
-    title: "Succes",
-    description: `The goal ${e.name} has successfully been added`,
-  });
-}
-
-definePageMeta({
-  middleware: "need-to-be-identified",
-});
+const goals = [
+  {
+    name: "appeler mamie",
+    description: "Rappeler mamie à 10h",
+    icon: "i-heroicons-phone",
+    streak: 3,
+    completed: false,
+    color: "text-blue-400",
+  },
+  {
+    name: "faire du sport",
+    description: "Courir 5 km",
+    icon: "i-heroicons-paper-airplane",
+    streak: 7,
+    completed: true,
+    color: "text-green-400",
+  },
+  {
+    name: "apprendre React",
+    description: "Suivre un cours sur React pendant 1h",
+    icon: "i-heroicons-academic-cap",
+    streak: 5,
+    completed: false,
+    color: "text-purple-400",
+  },
+  {
+    name: "pratiquer le piano",
+    description: "Jouer du piano pendant 30 minutes",
+    icon: "i-heroicons-musical-note",
+    streak: 2,
+    completed: false,
+    color: "text-red-400",
+  },
+  {
+    name: "étudier les maths",
+    description: "Réviser les chapitres sur les dérivées",
+    icon: "i-heroicons-book-open",
+    streak: 4,
+    completed: true,
+    color: "text-orange-400",
+  },
+];
 </script>

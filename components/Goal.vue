@@ -1,121 +1,26 @@
 <template>
-  <tr
-    class="border-2 m-5 p-5 justify-evenly text-black-500 text-center text-white"
+  <div
+    class="m-5 p-5 bg-black w-[80vw] sm:w-full rounded-lg items-center justify-between flex flex-col sm:flex-row"
   >
-    <td>{{ name }}</td>
-    <td>{{ dateStartFormated }}</td>
-    <td>{{ currentStreak }}</td>
-    <td class="flex justify-evenly">
-      <UButton :disabled="isToday" @click="handleComplete">
-        <UIcon name="i-heroicons-document-check" /> Done Today
-      </UButton>
-      <!-- <UButton @click="handleEdit" color="blue"
-        ><UIcon name="i-heroicons-pencil-square" /> Edit</UButton
-      > -->
-      <UButton @click="handleDelete(props._id)" color="red"
-        ><UIcon name="i-heroicons-trash" /> Delete</UButton
-      >
-    </td>
-  </tr>
+    <div
+      class="flex items-center justify-center sm:justify-start space-x-4 sm:ml-5"
+    >
+      <UIcon :name="goal.icon" class="text-3xl" :class="goal.color" />
+      <div class="flex items-center">
+        <UIcon name="i-heroicons-fire" class="text-2xl text-orange-400 mr-1" />
+        <h1 class="text-lg">{{ goal.streak }}</h1>
+      </div>
+    </div>
+    <div class="text-center flex-1 mx-4">
+      <h1 class="font-bold text-2xl truncate">{{ goal.name }}</h1>
+      <p class="truncate">{{ goal.description }}</p>
+    </div>
+    <div class="flex items-center space-x-4 pt-3 sm:pt-0 md:mr-5">
+      <UButton class="px-10 font-bold md:px-10">Fait</UButton>
+    </div>
+  </div>
 </template>
 
 <script setup>
-const props = defineProps([
-  "name",
-  "dateEnd",
-  "dateStart",
-  "lastActivity",
-  "streak",
-  "_id",
-]);
-
-const emits = defineEmits(["delete", "complete"]);
-
-const isToday = ref(false);
-
-const options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-const dateStartFormated = new Date(props.dateStart).toLocaleDateString(
-  "en-EN",
-  options
-);
-
-function parseDate(dateStr) {
-  const [year, month, day] = dateStr.split("-").map(Number);
-  return new Date(year, month - 1, day); // Les mois sont indexés à partir de 0 en JavaScript
-}
-
-function formatDate(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // Les mois sont indexés à partir de 0
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
-
-function getNextDay(dateStr) {
-  const date = parseDate(dateStr);
-  date.setDate(date.getDate() + 1); // Ajouter un jour
-  return formatDate(date);
-}
-
-const today = new Date();
-const formattedTodayDate = today.toISOString().split("T")[0];
-
-if (formattedTodayDate === props.lastActivity) isToday.value = true;
-
-const lastConnexionDate = parseDate(props.lastActivity);
-// const newConnexionDate = getNextDay(props.lastActivity);
-
-function calculateStreak() {
-  const today = new Date();
-  const oneDay = 24 * 60 * 60 * 1000;
-
-  const diffDays = Math.round((today - lastConnexionDate) / oneDay);
-  if (diffDays === 1) {
-    return props.streak + 1;
-  } else if (diffDays === 0) {
-    isToday.value = true;
-    return props.streak; // Connexion le même jour
-  } else {
-    return 1; // Streak cassée
-  }
-}
-
-const currentStreak = ref(props.streak);
-
-async function handleComplete(goal) {
-  console.log("complete");
-
-  const newStreak = calculateStreak();
-  currentStreak.value = newStreak;
-  console.log("newStreak", newStreak);
-  console.log("id", props._id);
-  const goalUpdated = await $fetch(`/api/goal/complete`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      newStreak,
-      newConnexionDate: formattedTodayDate,
-      id: props._id,
-    }),
-  });
-
-  console.log("updated", goalUpdated);
-  emits("complete", goalUpdated);
-  // emits("complete", {
-  //   ...props,
-  //   lastActivity: formattedTodayDate,
-  //   streak: newStreak,
-  // });
-}
-
-function handleDelete(id) {
-  emits("delete", id);
-}
+const { goal } = defineProps(["goal"]);
 </script>

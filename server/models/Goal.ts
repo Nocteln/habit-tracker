@@ -13,11 +13,9 @@ const GoalSchema = new Schema({
     type: String,
     required: true,
   },
-  dateEnd: {
-    type: String,
-  },
   dateStart: {
-    type: String,
+    type: Date,
+    default: Date.now(),
     required: true,
   },
   userId: {
@@ -25,12 +23,19 @@ const GoalSchema = new Schema({
     required: true,
   },
   lastActivity: {
-    type: String,
+    type: Date,
+    default: Date.now(),
   },
   streak: {
     type: Number,
     default: 0,
     required: true,
+  },
+  description: {
+    type: String,
+  },
+  icone: {
+    type: String,
   },
 });
 
