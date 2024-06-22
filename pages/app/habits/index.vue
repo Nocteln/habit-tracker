@@ -1,14 +1,29 @@
 <template>
-  <div
-    v-for="goal in goals"
-    :key="goal.name"
-    class="flex flex-col justify-center items-center"
-  >
-    <Goal :goal="goal" />
+  <div class="text-center">
+    <UModal v-model="AddHabitOpen">
+      <AddHabitModal @added="handleAddClose" />
+    </UModal>
+
+    <UButton
+      @click="AddHabitOpen = true"
+      class="my-5 px-32 py-5 text-2xl"
+      icon="i-heroicons-pencil-square"
+      >Add a goal!</UButton
+    >
+    <div
+      v-for="goal in goals"
+      :key="goal.name"
+      class="flex flex-col justify-center items-center"
+    >
+      <Goal :goal="goal" />
+    </div>
   </div>
 </template>
 
 <script setup>
+import AddHabitModal from "~/components/modals/AddHabitModal.vue";
+
+const AddHabitOpen = ref(false);
 const goals = [
   {
     name: "appeler mamie",

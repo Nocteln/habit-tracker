@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "nuxt-server-utils",
     "@sidebase/nuxt-auth",
     "@nuxt/image",
+    "@nuxt/icon"
   ], // , "@nuxtjs/kinde", "nuxt-mongoose",
   runtimeConfig: {
     // GithubClient: process.env.GITHUB_CLIENT_ID,

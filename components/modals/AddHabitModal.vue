@@ -18,24 +18,14 @@ type Schema = z.output<typeof schema>;
 
 const state = reactive({
   name: undefined,
-  dateEnd: undefined,
+  description: undefined,
+  icone: undefined,
+  iconColor: undefined,
 });
-
-const today = new Date();
-const yyyy = today.getFullYear();
-const mm = String(today.getMonth() + 1).padStart(2, "0");
-const dd = String(today.getDate()).padStart(2, "0");
-const formattedDate = `${yyyy}-${mm}-${dd}`;
-const oneDayBefore = `${yyyy}-${dd - 1 > 0 ? mm : mm - 1}-${
-  dd - 1 > 0 ? dd - 1 : dd
-}`;
-
-console.log(formattedDate);
 
 const validate = (state: any): FormError[] => {
   const errors = [];
   if (!state.name) errors.push({ path: "text", message: "Required" });
-  if (!state.dateEnd) errors.push({ path: "date", message: "Required" });
   return errors;
 };
 
@@ -46,9 +36,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   const goal = {
     ...event.data,
     userId: data.value?.user?.id,
-    dateStart: formattedDate,
     streak: 1,
-    lastActivity: oneDayBefore,
   };
 
   await fetch("http://localhost:3000/api/goal/create", {
@@ -60,6 +48,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   });
 
   emit("added", goal);
+}
+
+function changeIcon(icon) {
+  console.log(`Icon selected: ${icon}`);
 }
 </script>
 
@@ -81,14 +73,28 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         >
           <UInput v-model="state.name" placeholder="eat healthy" />
         </UFormGroup>
-
         <UFormGroup
-          label="Date goal"
-          name="dateEnd"
-          help="The date by which you aim to achieve this habit."
+          label="Description"
+          name="description"
+          help="The description of the habit you want to take"
         >
-          <UInput v-model="state.dateEnd" type="date" :min="formattedDate" />
+          <UInput
+            v-model="state.description"
+            placeholder="eat 5 fruits and vegetables"
+          />
         </UFormGroup>
+
+        <UPopover :popper="{ placeholder: 'bottom-start' }">
+          <UButton
+            color="white"
+            label="Select an icon"
+            trailing-icon="i-heroicons-chevron-down-20-solid"
+          />
+
+          <template #panel>
+            <IconSelector @changeIcon="changeIcon" />
+          </template>
+        </UPopover>
 
         <UButton type="submit" class="mt-5" block size="lg"> Add </UButton>
       </UForm>
