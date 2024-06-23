@@ -34,8 +34,15 @@ const GoalSchema = new Schema({
   description: {
     type: String,
   },
-  icone: {
+  icon: {
     type: String,
+    required: true,
+    default: "check",
+  },
+  iconColor: {
+    type: String,
+    required: true,
+    default: "white",
   },
 });
 

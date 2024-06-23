@@ -11,7 +11,11 @@ if (!data) {
 }
 const schema = z.object({
   name: z.string().max(24, "Your new habit can not be more than 24 characters"),
-  dateEnd: z.string(),
+  description: z
+    .string()
+    .max(200, "Your new habit description can not be more than 200 characters"),
+  icon: z.string(),
+  iconColor: z.string(),
 });
 
 type Schema = z.output<typeof schema>;
@@ -19,18 +23,11 @@ type Schema = z.output<typeof schema>;
 const state = reactive({
   name: undefined,
   description: undefined,
-  icone: undefined,
-  iconColor: undefined,
+  icon: "check",
+  iconColor: "blue-400",
 });
 
-const validate = (state: any): FormError[] => {
-  const errors = [];
-  if (!state.name) errors.push({ path: "text", message: "Required" });
-  return errors;
-};
-
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  // Do something with data
   console.log(event.data);
 
   const goal = {
@@ -50,8 +47,12 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   emit("added", goal);
 }
 
-function changeIcon(icon) {
-  console.log(`Icon selected: ${icon}`);
+function changeIcon(icon: string) {
+  state.icon = icon;
+}
+
+function changeColor(color: string) {
+  state.iconColor = color;
 }
 </script>
 
@@ -60,7 +61,6 @@ function changeIcon(icon) {
     <div class="space-y-2">
       <h1>Add an habit :</h1>
       <UForm
-        :validate="validate"
         :schema="schema"
         :state="state"
         class="space-y-4 text-center"
@@ -84,17 +84,30 @@ function changeIcon(icon) {
           />
         </UFormGroup>
 
-        <UPopover :popper="{ placeholder: 'bottom-start' }">
-          <UButton
-            color="white"
-            label="Select an icon"
-            trailing-icon="i-heroicons-chevron-down-20-solid"
-          />
+        <div class="flex items-center justify-center">
+          <UPopover :popper="{ placeholder: 'bottom-start' }">
+            <UButton
+              color="white"
+              label="Select an icon"
+              trailing-icon="i-heroicons-chevron-down-20-solid"
+              class="w-full"
+            />
 
-          <template #panel>
-            <IconSelector @changeIcon="changeIcon" />
-          </template>
-        </UPopover>
+            <template #panel>
+              <IconSelector
+                @changeIcon="changeIcon"
+                @changeColor="changeColor"
+                :icon="state.icon"
+                :iconColor="state.iconColor"
+              />
+            </template>
+          </UPopover>
+          <Icon
+            :name="`i-heroicons-${state.icon}`"
+            :class="`text-${state.iconColor}`"
+            size="24"
+          />
+        </div>
 
         <UButton type="submit" class="mt-5" block size="lg"> Add </UButton>
       </UForm>

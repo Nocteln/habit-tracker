@@ -5,7 +5,11 @@
     <div
       class="flex items-center justify-center sm:justify-start space-x-4 sm:ml-5"
     >
-      <UIcon :name="goal.icon" class="text-3xl" :class="goal.color" />
+      <Icon
+        :name="`i-heroicons-${goal.icon}`"
+        class="text-3xl"
+        :class="`text-${goal.iconColor}`"
+      />
       <div class="flex items-center">
         <UIcon name="i-heroicons-fire" class="text-2xl text-orange-400 mr-1" />
         <h1 class="text-lg">{{ goal.streak }}</h1>
@@ -22,5 +26,12 @@
 </template>
 
 <script setup>
-const { goal } = defineProps(["goal"]);
+const { name, description, icon, iconColor, goal } = defineProps([
+  "name",
+  "description",
+  "icon",
+  "iconColor",
+  "goal",
+]);
+// console.log(goal);
 </script>

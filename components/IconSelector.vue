@@ -1,8 +1,8 @@
 <template>
-  <UCard class="max-w-[25vw]">
+  <UCard class="md:max-w-[35vw] max-w-[75vw] flex md:block">
     <!-- <template #header> Search Icons </template> -->
     <div
-      class="flex flex-wrap items-center justify-center max-h-32 overflow-auto"
+      class="flex flex-wrap items-center justify-center max-h-64 md:max-h-32 overflow-auto"
     >
       <div
         v-for="icon in icons"
@@ -22,9 +22,9 @@
     </div>
     <template #footer>
       <!-- <UInput type="color" @change="changeColor" /> -->
-      <div class="flex items-center justify-around">
-        <div v-for="color in colors" :key="color">
-          <div :class="`w-8 h-8 bg-${color} rounded-xl`" />
+      <div class="flex items-center justify-around flex-wrap h-full">
+        <div v-for="color in colors" :key="color" @click="changeColor(color)">
+          <div :class="`w-10 h-8 bg-${color} rounded-xl`" />
         </div>
       </div>
     </template>
@@ -32,9 +32,11 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["changeIcon"]);
+const emit = defineEmits(["changeIcon", "changeColor"]);
+const { icon, iconColor } = defineProps(["icon", "iconColor"]);
 
-const color = ref("text-white");
+const color = ref(iconColor);
+const selectedIcon = ref(icon);
 
 const colors = [
   "red-400",
@@ -43,9 +45,11 @@ const colors = [
   "purple-400",
   "pink-400",
   "yellow-400",
+  "white",
 ];
 
 const icons = [
+  "check",
   "academic-cap",
   "archive-box",
   "arrow-left-end-on-rectangle",
@@ -75,8 +79,6 @@ const icons = [
   "wrench-screwdriver",
 ];
 
-const selectedIcon = ref(null);
-
 function changeIcon(icon) {
   selectedIcon.value = icon;
   emit("changeIcon", icon);
@@ -84,6 +86,6 @@ function changeIcon(icon) {
 
 function changeColor(event) {
   color.value = event;
-  console.log(event);
+  emit("changeColor", event);
 }
 </script>
