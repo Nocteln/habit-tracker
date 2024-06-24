@@ -8,6 +8,9 @@ export interface GoalDocument extends Document {
   userId: string;
 }
 
+let today = new Date();
+today.setDate(today.getDate() - 1);
+
 const GoalSchema = new Schema({
   name: {
     type: String,
@@ -24,7 +27,7 @@ const GoalSchema = new Schema({
   },
   lastActivity: {
     type: Date,
-    default: Date.now(),
+    default: today,
   },
   streak: {
     type: Number,

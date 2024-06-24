@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
-    <UModal v-model="AddHabitOpen">
-      <AddHabitModal @added="handleAddClose" />
+    <UModal v-model="AddHabitOpen" :prevent-close="preventClosing">
+      <AddHabitModal @added="handleAddClose" @adding="preventClosing = true" />
     </UModal>
 
     <UButton
@@ -10,18 +10,35 @@
       icon="i-heroicons-pencil-square"
       >Add a goal!</UButton
     >
+
+    <div v-if="noGoals" class="flex flex-col items-center">
+      <img src="/notFound.png" alt="No Goals" />
+      <h1 class="text-slate-900 font-bold text-3xl">
+        No goals found ?? Try
+        <span @click="AddHabitOpen = true" class="text-green-500 cursor-pointer"
+          >adding</span
+        >
+        some
+      </h1>
+    </div>
+
+    <div v-if="isLoading" class="flex justify-center items-center text-center">
+      <Icon name="i-heroicons-arrow-path" class="animate-spin" size="50" />
+    </div>
     <div
       v-for="goal in goalsData"
       :key="goal.name"
       class="flex flex-col justify-center items-center"
     >
-      <Goal
-        :name="goal.name"
-        :description="goal.description"
-        :icon="goal.icon"
-        :iconColor="goal.iconColor"
-        :goal="goal"
-      />
+      <Goal :goal="goal" @updateGoal="updatedGoal" />
+    </div>
+
+    <div
+      v-for="goal in goalsDone"
+      :key="goal.name"
+      class="flex flex-col justify-center items-center"
+    >
+      <Goal :goal="goal" />
     </div>
   </div>
 </template>
@@ -33,66 +50,57 @@ const AddHabitOpen = ref(false);
 
 const { data } = useAuth();
 const toast = useToast();
+const isLoading = ref(true);
+const goalsDone = ref([]);
+const preventClosing = ref(false);
+
+const noGoals = ref(true);
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
 const userId = data.value.user.id;
 
 const goals = await useFetch(`/api/goal/list?userId=${userId}`, {
   method: "GET",
-});
-// // .then((isLoading.value = false))
+}).then((isLoading.value = false));
 
-// console.log(goals.data.value);
-const goalsData = goals.data.value;
+const goalsData = ref(goals.data.value);
+
+for (let i = 0; i < goalsData.value.length; i++) {
+  const lastActivity = new Date(goalsData.value[i].lastActivity);
+  lastActivity.setHours(0, 0, 0, 0);
+
+  if (today.getTime() === lastActivity.getTime()) {
+    goalsDone.value.push(goalsData.value[i]);
+  }
+
+  noGoals.value = false;
+}
+
+goalsData.value = goalsData.value.filter((goal) => {
+  const lastActivity = new Date(goal.lastActivity);
+  lastActivity.setHours(0, 0, 0, 0);
+  return today.getTime() !== lastActivity.getTime();
+});
+
 function handleAddClose(e) {
   AddHabitOpen.value = false;
+
+  goalsData.value.push(e);
+
+  noGoals.value = false;
 
   toast.add({
     id: "ajout goal",
     title: "Succes",
     description: `The goal ${e.name} has successfully been added`,
   });
+  preventClosing.value = false;
 }
 
-// const goals = [
-//   {
-//     name: "appeler mamie",
-//     description: "Rappeler mamie à 10h",
-//     icon: "i-heroicons-phone",
-//     streak: 3,
-//     completed: false,
-//     color: "text-blue-400",
-//   },
-//   {
-//     name: "faire du sport",
-//     description: "Courir 5 km",
-//     icon: "i-heroicons-paper-airplane",
-//     streak: 7,
-//     completed: true,
-//     color: "text-green-400",
-//   },
-//   {
-//     name: "apprendre React",
-//     description: "Suivre un cours sur React pendant 1h",
-//     icon: "i-heroicons-academic-cap",
-//     streak: 5,
-//     completed: false,
-//     color: "text-purple-400",
-//   },
-//   {
-//     name: "pratiquer le piano",
-//     description: "Jouer du piano pendant 30 minutes",
-//     icon: "i-heroicons-musical-note",
-//     streak: 2,
-//     completed: false,
-//     color: "text-red-400",
-//   },
-//   {
-//     name: "étudier les maths",
-//     description: "Réviser les chapitres sur les dérivées",
-//     icon: "i-heroicons-book-open",
-//     streak: 4,
-//     completed: true,
-//     color: "text-orange-400",
-//   },
-// ];
+function updatedGoal(goal) {
+  goalsDone.value.push(goal);
+  goalsData.value = goalsData.value.filter((g) => g._id !== goal._id);
+}
 </script>

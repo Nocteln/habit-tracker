@@ -3,7 +3,9 @@ import { z } from "zod";
 import type { FormError, FormSubmitEvent } from "#ui/types";
 
 // @ts-ignore
-const emit = defineEmits(["added"]);
+const emit = defineEmits(["added", "adding"]);
+
+const loading = ref(false);
 
 const { data } = useAuth();
 if (!data) {
@@ -29,6 +31,8 @@ const state = reactive({
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data);
+  loading.value = true;
+  emit("adding")
 
   const goal = {
     ...event.data,
@@ -43,7 +47,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     },
     body: JSON.stringify(goal),
   });
-
+  loading.value = false;
   emit("added", goal);
 }
 
@@ -58,7 +62,7 @@ function changeColor(color: string) {
 
 <template>
   <UCard>
-    <div class="space-y-2">
+    <div class="space-y-2" v-if="!loading">
       <h1>Add an habit :</h1>
       <UForm
         :schema="schema"
@@ -111,6 +115,9 @@ function changeColor(color: string) {
 
         <UButton type="submit" class="mt-5" block size="lg"> Add </UButton>
       </UForm>
+    </div>
+    <div v-else class="flex items-center text-center justify-center">
+      <Icon name="i-heroicons-arrow-path" size="50" class="animate-spin" />
     </div>
   </UCard>
 </template>

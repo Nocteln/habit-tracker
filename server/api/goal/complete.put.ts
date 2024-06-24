@@ -28,10 +28,9 @@ export default defineEventHandler(async (event) => {
       _id: body.id,
     },
     {
-      $set: { streak: body.newStreak, lastActivity: body.newConnexionDate },
+      $set: { streak: body.streak, lastActivity: body.lastActivity },
     }
   );
-  console.log("goal", updatedGoal);
 
   if (updatedGoal.matchedCount === 0) {
     throw createError({
@@ -41,5 +40,5 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  return "updated";
+  return updatedGoal;
 });
