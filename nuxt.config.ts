@@ -2,12 +2,7 @@
 export default defineNuxtConfig({
   ssr: true,
   devtools: { enabled: true },
-  modules: [
-    "@nuxt/ui",
-    "nuxt-server-utils",
-    "@sidebase/nuxt-auth",
-    "@nuxt/icon",
-  ], // , "@nuxtjs/kinde", "nuxt-mongoose",
+  modules: ["@nuxt/ui", "nuxt-server-utils", "@sidebase/nuxt-auth"], // , "@nuxtjs/kinde", "nuxt-mongoose",
   runtimeConfig: {
     // GithubClient: process.env.GITHUB_CLIENT_ID,
     // GithubSecret: process.env.GITHUB_SECRET_SECRET,

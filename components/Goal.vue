@@ -5,9 +5,10 @@
     <div
       class="flex items-center justify-center sm:justify-start space-x-4 sm:ml-5"
     >
-      <Icon
+      <UIcon
         :name="`i-heroicons-${goal.icon}`"
         class="text-3xl"
+        dynamic
         :class="`text-${goal.iconColor}`"
       />
       <div class="flex items-center">
@@ -66,7 +67,7 @@ const doneToday = async () => {
 
   AlreadyDone.value = true;
   streak.value = goal.streak + 1;
-  emit("updateGoal", newGoal);
+  emit("updateGoal", goal);
   toast.add({
     id: goal._id,
     title: "Congratulations!",

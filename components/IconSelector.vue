@@ -13,10 +13,10 @@
         "
         @click="changeIcon(icon)"
       >
-        <Icon
+        <UIcon
           :name="`i-heroicons-${icon}`"
-          size="24"
-          :class="`text-${color}`"
+          dynamic
+          :class="`text-${color} text-3xl`"
         />
       </div>
     </div>

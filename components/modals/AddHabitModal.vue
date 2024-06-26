@@ -32,7 +32,7 @@ const state = reactive({
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data);
   loading.value = true;
-  emit("adding")
+  emit("adding");
 
   const goal = {
     ...event.data,
@@ -40,7 +40,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     streak: 1,
   };
 
-  await fetch("http://localhost:3000/api/goal/create", {
+  const goalComplete = await fetch("http://localhost:3000/api/goal/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,7 +48,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     body: JSON.stringify(goal),
   });
   loading.value = false;
-  emit("added", goal);
+  emit("added", goalComplete);
 }
 
 function changeIcon(icon: string) {

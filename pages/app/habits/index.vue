@@ -23,7 +23,11 @@
     </div>
 
     <div v-if="isLoading" class="flex justify-center items-center text-center">
-      <Icon name="i-heroicons-arrow-path" class="animate-spin" size="50" />
+      <UIcon
+        name="i-heroicons-arrow-path"
+        dynamic
+        class="animate-spin text-5xl"
+      />
     </div>
     <div
       v-for="goal in goalsData"
