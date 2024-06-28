@@ -40,7 +40,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     streak: 1,
   };
 
-  const goalComplete = await fetch("http://localhost:3000/api/goal/create", {
+  const goalComplete = await $fetch("/api/goal/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,6 +48,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     body: JSON.stringify(goal),
   });
   loading.value = false;
+  console.log("all", goalComplete);
   emit("added", goalComplete);
 }
 

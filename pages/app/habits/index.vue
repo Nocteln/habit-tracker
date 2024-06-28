@@ -91,7 +91,7 @@ goalsData.value = goalsData.value.filter((goal) => {
 function handleAddClose(e) {
   AddHabitOpen.value = false;
 
-  goalsData.value.push(e);
+  goalsData.value.unshift(e);
 
   noGoals.value = false;
 

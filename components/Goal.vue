@@ -26,8 +26,13 @@
         :disabled="AlreadyDone"
         @click="doneToday"
       >
-        Done</UButton
-      >
+        <span v-if="!loadingComplete">Done</span>
+        <UIcon
+          name="i-heroicons-arrow-path"
+          class="animate-spin text-xl text-slate-800"
+          v-else
+        />
+      </UButton>
     </div>
   </div>
 </template>
@@ -40,6 +45,7 @@ const emit = defineEmits(["updateGoal"]);
 
 const AlreadyDone = ref(false);
 const streak = ref(goal.streak);
+const loadingComplete = ref(false);
 
 const today = new Date();
 today.setHours(0, 0, 0, 0); // Réinitialise l'heure à minuit pour comparer uniquement la date
@@ -49,11 +55,18 @@ lastActivity.setHours(0, 0, 0, 0); // Réinitialise aussi l'heure à minuit
 if (today.getTime() === lastActivity.getTime()) {
   AlreadyDone.value = true;
 }
+const daysDiff = Math.floor(
+  (today.getTime() - lastActivity.getTime()) / (1000 * 3600 * 24)
+);
+if (daysDiff > 1) {
+  streak.value = 0; // Réinitialise la streak si plus d'un jour s'est écoulé
+}
 
 const doneToday = async () => {
+  loadingComplete.value = true;
   const newGoal = {
     lastActivity: new Date().toISOString(),
-    streak: goal.streak + 1,
+    streak: streak.value + 1,
     id: goal._id,
   };
 
@@ -73,6 +86,7 @@ const doneToday = async () => {
     title: "Congratulations!",
     description: `Congrats for completing ${goal.name}`,
   });
+  loadingComplete.value = false;
 };
 
 // console.log(goal);
