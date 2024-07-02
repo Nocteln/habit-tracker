@@ -2,11 +2,16 @@
   <div class="bg-black text-white m-5 p-5 w-[50vw] rounded-2xl">
     <div class="flex flex-col">
       <div class="flex items-center p-2 relative">
-        <UAvatar
-          :src="poster.image"
-          :alt="`Profile picture of ${poster.username}`"
-        />
-        <h1 class="pl-3 text-lg">{{ poster.username }}</h1>
+        <NuxtLink
+          :to="`app/user/${userId}`"
+          class="flex items-center hover:underline p-3"
+        >
+          <UAvatar
+            :src="poster.image"
+            :alt="`Profile picture of ${poster.username}`"
+          />
+          <h1 class="pl-3 text-lg">{{ poster.username }}</h1>
+        </NuxtLink>
         <h3 class="pl-5 absolute text-xs italic right-0">
           {{ date }}
         </h3>

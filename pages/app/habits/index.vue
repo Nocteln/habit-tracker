@@ -1,48 +1,59 @@
 <template>
-  <div class="text-center">
-    <UModal v-model="AddHabitOpen" :prevent-close="preventClosing">
-      <AddHabitModal @added="handleAddClose" @adding="preventClosing = true" />
-    </UModal>
+  <div class="text-center flex flex-col items-center">
+    <GoalsNav />
+    <div class="text-center">
+      <UModal v-model="AddHabitOpen" :prevent-close="preventClosing">
+        <AddHabitModal
+          @added="handleAddClose"
+          @adding="preventClosing = true"
+        />
+      </UModal>
 
-    <UButton
-      @click="AddHabitOpen = true"
-      class="my-5 px-32 py-5 text-2xl"
-      icon="i-heroicons-pencil-square"
-      >Add a goal!</UButton
-    >
+      <UButton
+        @click="AddHabitOpen = true"
+        class="my-5 px-32 py-5 text-2xl"
+        icon="i-heroicons-pencil-square"
+        >Add a goal!</UButton
+      >
 
-    <div v-if="noGoals" class="flex flex-col items-center">
-      <img src="/notFound.png" alt="No Goals" />
-      <h1 class="text-slate-900 font-bold text-3xl">
-        No goals found ?? Try
-        <span @click="AddHabitOpen = true" class="text-green-500 cursor-pointer"
-          >adding</span
-        >
-        some
-      </h1>
-    </div>
+      <div v-if="noGoals" class="flex flex-col items-center">
+        <img src="/notFound.png" alt="No Goals" />
+        <h1 class="text-slate-900 font-bold text-3xl">
+          No goals found ?? Try
+          <span
+            @click="AddHabitOpen = true"
+            class="text-green-500 cursor-pointer"
+            >adding</span
+          >
+          some
+        </h1>
+      </div>
 
-    <div v-if="isLoading" class="flex justify-center items-center text-center">
-      <UIcon
-        name="i-heroicons-arrow-path"
-        dynamic
-        class="animate-spin text-5xl"
-      />
-    </div>
-    <div
-      v-for="goal in goalsData"
-      :key="goal.name"
-      class="flex flex-col justify-center items-center"
-    >
-      <Goal :goal="goal" @updateGoal="updatedGoal" />
-    </div>
+      <div
+        v-if="isLoading"
+        class="flex justify-center items-center text-center"
+      >
+        <UIcon
+          name="i-heroicons-arrow-path"
+          dynamic
+          class="animate-spin text-5xl"
+        />
+      </div>
+      <div
+        v-for="goal in goalsData"
+        :key="goal.name"
+        class="flex flex-col justify-center items-center"
+      >
+        <Goal :goal="goal" @updateGoal="updatedGoal" />
+      </div>
 
-    <div
-      v-for="goal in goalsDone"
-      :key="goal.name"
-      class="flex flex-col justify-center items-center"
-    >
-      <Goal :goal="goal" />
+      <div
+        v-for="goal in goalsDone"
+        :key="goal.name"
+        class="flex flex-col justify-center items-center"
+      >
+        <Goal :goal="goal" />
+      </div>
     </div>
   </div>
 </template>
