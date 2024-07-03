@@ -45,6 +45,7 @@ const emit = defineEmits(["updateGoal"]);
 
 const AlreadyDone = ref(false);
 const streak = ref(goal.streak);
+
 const loadingComplete = ref(false);
 
 const today = new Date();
@@ -61,6 +62,17 @@ const daysDiff = Math.floor(
 if (daysDiff > 1) {
   streak.value = 0; // Réinitialise la streak si plus d'un jour s'est écoulé
 }
+await $fetch("/api/goal/update", {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    id: goal._id,
+    streak: streak.value,
+  }),
+});
+// lastActivity: new Date().toISOString(),
 
 const doneToday = async () => {
   loadingComplete.value = true;

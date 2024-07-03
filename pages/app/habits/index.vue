@@ -1,6 +1,6 @@
 <template>
   <div class="text-center flex flex-col items-center">
-    <GoalsNav />
+    <GoalsNav @sort="sort" @search="searchGoal" />
     <div class="text-center">
       <UModal v-model="AddHabitOpen" :prevent-close="preventClosing">
         <AddHabitModal
@@ -8,7 +8,6 @@
           @adding="preventClosing = true"
         />
       </UModal>
-
       <UButton
         @click="AddHabitOpen = true"
         class="my-5 px-32 py-5 text-2xl"
@@ -39,20 +38,13 @@
           class="animate-spin text-5xl"
         />
       </div>
+
       <div
-        v-for="goal in goalsData"
+        v-for="goal in filteredGoals"
         :key="goal.name"
         class="flex flex-col justify-center items-center"
       >
         <Goal :goal="goal" @updateGoal="updatedGoal" />
-      </div>
-
-      <div
-        v-for="goal in goalsDone"
-        :key="goal.name"
-        class="flex flex-col justify-center items-center"
-      >
-        <Goal :goal="goal" />
       </div>
     </div>
   </div>
@@ -62,14 +54,12 @@
 import AddHabitModal from "~/components/modals/AddHabitModal.vue";
 
 const AddHabitOpen = ref(false);
-
 const { data } = useAuth();
 const toast = useToast();
 const isLoading = ref(true);
-const goalsDone = ref([]);
 const preventClosing = ref(false);
-
 const noGoals = ref(true);
+const searchQuery = ref("");
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -80,32 +70,51 @@ const goals = await useFetch(`/api/goal/list?userId=${userId}`, {
   method: "GET",
 }).then((isLoading.value = false));
 
-const goalsData = ref(goals.data.value);
+const allGoals = ref([...goals.data.value]);
 
-for (let i = 0; i < goalsData.value.length; i++) {
-  const lastActivity = new Date(goalsData.value[i].lastActivity);
+for (let i = 0; i < allGoals.value.length; i++) {
+  const lastActivity = new Date(allGoals.value[i].lastActivity);
   lastActivity.setHours(0, 0, 0, 0);
-
-  if (today.getTime() === lastActivity.getTime()) {
-    goalsDone.value.push(goalsData.value[i]);
-  }
-
   noGoals.value = false;
 }
 
-goalsData.value = goalsData.value.filter((goal) => {
-  const lastActivity = new Date(goal.lastActivity);
-  lastActivity.setHours(0, 0, 0, 0);
-  return today.getTime() !== lastActivity.getTime();
+const filteredGoals = computed(() => {
+  let goals = allGoals.value;
+  if (searchQuery.value) {
+    goals = goals.filter((goal) =>
+      goal.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    );
+  }
+  return goals.sort((a, b) => {
+    const lastActivityA = new Date(a.lastActivity);
+    const lastActivityB = new Date(b.lastActivity);
+    lastActivityA.setHours(0, 0, 0, 0);
+    lastActivityB.setHours(0, 0, 0, 0);
+
+    if (
+      lastActivityA.getTime() === today.getTime() &&
+      lastActivityB.getTime() !== today.getTime()
+    ) {
+      return 1; // A est fait aujourd'hui, B ne l'est pas
+    }
+    if (
+      lastActivityA.getTime() !== today.getTime() &&
+      lastActivityB.getTime() === today.getTime()
+    ) {
+      return -1; // B est fait aujourd'hui, A ne l'est pas
+    }
+    return 0;
+  });
 });
+
+function searchGoal(e) {
+  searchQuery.value = e;
+}
 
 function handleAddClose(e) {
   AddHabitOpen.value = false;
-
-  goalsData.value.unshift(e);
-
+  allGoals.value.unshift(e);
   noGoals.value = false;
-
   toast.add({
     id: "ajout goal",
     title: "Succes",
@@ -114,8 +123,27 @@ function handleAddClose(e) {
   preventClosing.value = false;
 }
 
-function updatedGoal(goal) {
-  goalsDone.value.push(goal);
-  goalsData.value = goalsData.value.filter((g) => g._id !== goal._id);
+function updatedGoal(updatedGoal) {
+  const index = allGoals.value.findIndex((g) => g._id === updatedGoal._id);
+  if (index !== -1) {
+    allGoals.value[index] = updatedGoal;
+  }
+}
+
+function sort(event) {
+  allGoals.value.sort((a, b) => {
+    switch (event) {
+      case "aToz":
+        return a.name.localeCompare(b.name);
+      case "zToa":
+        return b.name.localeCompare(a.name);
+      case "date":
+        return new Date(b.lastActivity) - new Date(a.lastActivity);
+      case "streak":
+        return b.streak - a.streak;
+      default:
+        return a.name.localeCompare(b.name);
+    }
+  });
 }
 </script>
