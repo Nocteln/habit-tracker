@@ -1,6 +1,5 @@
 <template>
   <div class="text-center flex flex-col items-center">
-    <GoalsNav @sort="sort" @search="searchGoal" />
     <div class="text-center">
       <UModal v-model="AddHabitOpen" :prevent-close="preventClosing">
         <AddHabitModal
@@ -12,8 +11,10 @@
         @click="AddHabitOpen = true"
         class="my-5 px-32 py-5 text-2xl"
         icon="i-heroicons-pencil-square"
-        >Add a goal!</UButton
       >
+        Add a goal!
+      </UButton>
+      <GoalsNav @sort="sort" @search="searchGoal" />
 
       <div v-if="noGoals" class="flex flex-col items-center">
         <img src="/notFound.png" alt="No Goals" />
@@ -60,6 +61,8 @@ const isLoading = ref(true);
 const preventClosing = ref(false);
 const noGoals = ref(true);
 const searchQuery = ref("");
+const showOnlyDoneToday = ref(false);
+const sortingKey = ref("nothing");
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -68,43 +71,69 @@ const userId = data.value.user.id;
 
 const goals = await useFetch(`/api/goal/list?userId=${userId}`, {
   method: "GET",
-}).then((isLoading.value = false));
+}).then((response) => {
+  isLoading.value = false;
+  return response;
+});
 
 const allGoals = ref([...goals.data.value]);
 
-for (let i = 0; i < allGoals.value.length; i++) {
-  const lastActivity = new Date(allGoals.value[i].lastActivity);
-  lastActivity.setHours(0, 0, 0, 0);
+if (allGoals.value.length > 0) {
   noGoals.value = false;
 }
-
 const filteredGoals = computed(() => {
   let goals = allGoals.value;
+
   if (searchQuery.value) {
     goals = goals.filter((goal) =>
       goal.name.toLowerCase().includes(searchQuery.value.toLowerCase())
     );
   }
-  return goals.sort((a, b) => {
-    const lastActivityA = new Date(a.lastActivity);
-    const lastActivityB = new Date(b.lastActivity);
-    lastActivityA.setHours(0, 0, 0, 0);
-    lastActivityB.setHours(0, 0, 0, 0);
 
-    if (
-      lastActivityA.getTime() === today.getTime() &&
-      lastActivityB.getTime() !== today.getTime()
-    ) {
-      return 1; // A est fait aujourd'hui, B ne l'est pas
+  if (showOnlyDoneToday.value) {
+    return goals.filter((goal) => {
+      const lastActivity = new Date(goal.lastActivity);
+      lastActivity.setHours(0, 0, 0, 0);
+      return lastActivity.getTime() === today.getTime();
+    });
+  }
+
+  goals = goals.sort((a, b) => {
+    if (sortingKey.value === "nothing") {
+      const lastActivityA = new Date(a.lastActivity);
+      const lastActivityB = new Date(b.lastActivity);
+      lastActivityA.setHours(0, 0, 0, 0);
+      lastActivityB.setHours(0, 0, 0, 0);
+
+      if (
+        lastActivityA.getTime() === today.getTime() &&
+        lastActivityB.getTime() !== today.getTime()
+      ) {
+        return 1; // A est fait aujourd'hui, B ne l'est pas
+      }
+      if (
+        lastActivityA.getTime() !== today.getTime() &&
+        lastActivityB.getTime() === today.getTime()
+      ) {
+        return -1; // B est fait aujourd'hui, A ne l'est pas
+      }
     }
-    if (
-      lastActivityA.getTime() !== today.getTime() &&
-      lastActivityB.getTime() === today.getTime()
-    ) {
-      return -1; // B est fait aujourd'hui, A ne l'est pas
+
+    switch (sortingKey.value) {
+      case "aToz":
+        return a.name.localeCompare(b.name);
+      case "zToa":
+        return b.name.localeCompare(a.name);
+      case "date":
+        return new Date(b.lastActivity) - new Date(a.lastActivity);
+      case "streak":
+        return b.streak - a.streak;
+      default:
+        return 0;
     }
-    return 0;
   });
+
+  return goals;
 });
 
 function searchGoal(e) {
@@ -131,19 +160,7 @@ function updatedGoal(updatedGoal) {
 }
 
 function sort(event) {
-  allGoals.value.sort((a, b) => {
-    switch (event) {
-      case "aToz":
-        return a.name.localeCompare(b.name);
-      case "zToa":
-        return b.name.localeCompare(a.name);
-      case "date":
-        return new Date(b.lastActivity) - new Date(a.lastActivity);
-      case "streak":
-        return b.streak - a.streak;
-      default:
-        return a.name.localeCompare(b.name);
-    }
-  });
+  sortingKey.value = event;
+  showOnlyDoneToday.value = event === "doneToday";
 }
 </script>
