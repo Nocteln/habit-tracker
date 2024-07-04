@@ -1,6 +1,10 @@
 <template>
-  <div class="text-center flex flex-col items-center">
-    <div class="text-center">
+  <div class="text-center flex flex-col md:flex-row">
+    <!-- GoalsNav component placed in a column to the left on larger screens -->
+    <div class="md:w-1/6 mr-32">
+      <GoalsNav @sort="sort" @search="searchGoal" />
+    </div>
+    <div class="md:w-5/6 flex flex-col items-center">
       <UModal v-model="AddHabitOpen" :prevent-close="preventClosing">
         <AddHabitModal
           @added="handleAddClose"
@@ -14,7 +18,6 @@
       >
         Add a goal!
       </UButton>
-      <GoalsNav @sort="sort" @search="searchGoal" />
 
       <div v-if="noGoals" class="flex flex-col items-center">
         <img src="/notFound.png" alt="No Goals" />
@@ -23,8 +26,9 @@
           <span
             @click="AddHabitOpen = true"
             class="text-green-500 cursor-pointer"
-            >adding</span
           >
+            adding
+          </span>
           some
         </h1>
       </div>
@@ -40,12 +44,22 @@
         />
       </div>
 
+      <div v-if="!doneTodaySorting">
+        <div
+          v-for="goal in filteredGoals"
+          :key="goal.name"
+          class="flex flex-col justify-center items-center"
+        >
+          <Goal :goal="goal" @updateGoal="updatedGoal" />
+        </div>
+      </div>
+
       <div
-        v-for="goal in filteredGoals"
+        v-for="goal in goalsDone"
         :key="goal.name"
         class="flex flex-col justify-center items-center"
       >
-        <Goal :goal="goal" @updateGoal="updatedGoal" />
+        <Goal :goal="goal" />
       </div>
     </div>
   </div>

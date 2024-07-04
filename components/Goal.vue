@@ -18,7 +18,7 @@
     </div>
     <div class="text-center flex-1 mx-4">
       <h1 class="font-bold text-2xl truncate">{{ goal.name }}</h1>
-      <p class="truncate">{{ goal.description }}</p>
+      <p class="p-2">{{ goal.description }}</p>
     </div>
     <div class="flex items-center space-x-4 pt-3 sm:pt-0 md:mr-5">
       <UButton

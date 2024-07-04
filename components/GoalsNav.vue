@@ -1,13 +1,13 @@
 <template>
   <div
-    class="m-5 p-5 bg-black w-[80vw] sm:w-full rounded-lg sm:rounded-none items-center justify-between flex flex-col sm:flex-row"
+    class="m-5 p-5 bg-black rounded-lg items-center justify-between flex flex-col h-[85vh] fixed md:justify-start"
   >
     <UInput
       v-model="searchQuery"
       placeholder="Your habit"
       icon="i-heroicons-magnifying-glass"
     />
-    <div class="grid grid-cols-2 gap-5 pt-5">
+    <div class="grid grid-cols-2 gap-5 pt-5 md:flex md:flex-col">
       <UCheckbox
         v-for="(value, key) in searchParams"
         :key="key"
