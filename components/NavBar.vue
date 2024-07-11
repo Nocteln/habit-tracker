@@ -71,10 +71,7 @@ const items = [
       label: "Sign out",
       icon: "i-heroicons-arrow-left-on-rectangle",
       click: async () => {
-        await signOut();
-        navigateTo("/", {
-          external: true,
-        });
+        await signOut({ callbackUrl: "/", redirect: true });
       },
     },
   ],

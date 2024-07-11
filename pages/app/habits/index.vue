@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center flex flex-col md:flex-row">
+  <div class="text-center flex items-center flex-col md:flex-row">
     <!-- GoalsNav component placed in a column to the left on larger screens -->
-    <div class="md:w-1/6 mr-32">
+    <div class="w-[90vw] md:w-1/6 md:mr-32">
       <GoalsNav @sort="sort" @search="searchGoal" />
     </div>
     <div class="md:w-5/6 flex flex-col items-center">
@@ -44,22 +44,12 @@
         />
       </div>
 
-      <div v-if="!doneTodaySorting">
-        <div
-          v-for="goal in filteredGoals"
-          :key="goal.name"
-          class="flex flex-col justify-center items-center"
-        >
-          <Goal :goal="goal" @updateGoal="updatedGoal" />
-        </div>
-      </div>
-
       <div
-        v-for="goal in goalsDone"
+        v-for="goal in filteredGoals"
         :key="goal.name"
         class="flex flex-col justify-center items-center"
       >
-        <Goal :goal="goal" />
+        <Goal :goal="goal" @updateGoal="updatedGoal" />
       </div>
     </div>
   </div>

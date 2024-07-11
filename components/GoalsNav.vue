@@ -1,6 +1,6 @@
 <template>
   <div
-    class="m-5 p-5 bg-black rounded-lg items-center justify-between flex flex-col h-[85vh] fixed md:justify-start"
+    class="m-5 p-5 bg-black rounded-lg flex flex-col md:h-[85vh] md:fixed md:justify-start"
   >
     <UInput
       v-model="searchQuery"

@@ -36,6 +36,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  followList: {
+    type: Array,
+    default: [],
+  },
 });
 
 export const User = model("user", UserSchema);
