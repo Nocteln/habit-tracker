@@ -40,6 +40,11 @@ const UserSchema = new Schema({
     type: Array,
     default: [],
   },
+  xp: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
 });
 
 export const User = model("user", UserSchema);

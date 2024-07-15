@@ -1,11 +1,11 @@
 import { Goal } from "~/server/models/Goal";
 import { getServerSession } from "#auth";
+import { User } from "~/server/models/User";
+import { randomInt } from "crypto";
 
 export default defineEventHandler(async (event) => {
-  console.log("complete back");
   const body = await readBody(event);
   const session = await getServerSession(event);
-
   if (!session) {
     throw createError({
       statusCode: 401,
@@ -13,6 +13,14 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Unauthorized",
     });
   }
+  if (!session.user.id) {
+    throw createError({
+      statusCode: 400,
+      message: "Missing user id",
+      statusMessage: "Bad request",
+    });
+  }
+
   if (!body) {
     throw createError({
       statusCode: 400,
@@ -21,14 +29,19 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  console.log(body.id);
-
   const updatedGoal = await Goal.updateOne(
     {
       _id: body.id,
     },
     {
       $set: { streak: body.streak, lastActivity: body.lastActivity },
+    }
+  );
+
+  await User.updateOne(
+    { id: session?.user?.id },
+    {
+      $inc: { xp: randomInt(10, 30) },
     }
   );
 

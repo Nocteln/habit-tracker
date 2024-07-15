@@ -79,67 +79,84 @@ const items = [
 </script>
 
 <template>
-  <div class="flex justify-around shadow-sm p-5 bg-[#219EBC] items-center">
-    <h1 class="font-bold text-3xl">
+  <div
+    class="flex flex-col sm:flex-row justify-around shadow-sm p-5 bg-[#219EBC] items-center"
+  >
+    <h1 class="font-bold text-3xl w-[45vw]">
       <NuxtLink :to="isLogged ? '/app' : '/'">Habit Tracker</NuxtLink>
     </h1>
-    <UInputMenu
-      trailing-icon="i-heroicons-chevron-up-down-20-solid"
-      class="w-full lg:w-[40vh]"
-      placeholder="Search peoples"
-      icon="i-heroicons-magnifying-glass-20-solid"
-      v-model="selected"
-      :search="searchUsers"
-      :loading="loading"
-      option-attribute="username"
-      trailing
-    />
-    <div v-if="isLogged">
-      <UDropdown
-        :items="items"
-        :ui="{ item: { disabled: 'cursor-text select-text' } }"
-        :popper="{ placement: 'bottom-start' }"
-        class="flex items-center justify-center gap-5"
-      >
-        <UButton
-          color="white"
-          :label="
-            data?.user?.username ? data?.user?.username : 'cannot find name'
-          "
-          trailing-icon="i-heroicons-chevron-down-20-solid"
+    <div
+      class="flex items-center justify-evenly sm:items-end w-full pt-5 sm:pt-0"
+    >
+      <UInputMenu
+        trailing-icon="i-heroicons-chevron-up-down-20-solid"
+        class="w-[60vw] lg:w-[40vh]"
+        size="lg"
+        placeholder="Search peoples"
+        icon="i-heroicons-magnifying-glass-20-solid"
+        v-model="selected"
+        :search="searchUsers"
+        :loading="loading"
+        option-attribute="username"
+        trailing
+      />
+      <div v-if="isLogged">
+        <UDropdown
+          :items="items"
+          :ui="{ item: { disabled: 'cursor-text select-text' } }"
+          :popper="{ placement: 'bottom-start' }"
+          class="flex items-center justify-center gap-5"
         >
-          <template #leading
-            ><UAvatar :src="`${data?.user?.image}`" />
+          <UButton
+            color="white"
+            :label="
+              data?.user?.username ? data?.user?.username : 'cannot find name'
+            "
+            trailing-icon="i-heroicons-chevron-down-20-solid"
+            class="hidden sm:flex items-center"
+          >
+            <template #leading
+              ><UAvatar :src="`${data?.user?.image}`" />
+            </template>
+          </UButton>
+          <UButton
+            color="white"
+            trailing-icon="i-heroicons-chevron-down-20-solid"
+            class="flex sm:hidden"
+          >
+            <template #leading
+              ><UAvatar :src="`${data?.user?.image}`" />
+            </template>
+          </UButton>
+
+          <template #account="{ item }">
+            <div class="text-left">
+              <p>Signed in as</p>
+              <p class="truncate font-medium text-gray-900 dark:text-white">
+                {{ item.label }}
+              </p>
+            </div>
           </template>
+
+          <template #item="{ item }">
+            <span class="truncate">{{ item.label }}</span>
+
+            <UIcon
+              :name="item.icon"
+              class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"
+            />
+          </template>
+        </UDropdown>
+      </div>
+
+      <div v-else class="gap-5 flex items-center justify-center">
+        <UButton>
+          <NuxtLink to="/login">Create an account</NuxtLink>
         </UButton>
-
-        <template #account="{ item }">
-          <div class="text-left">
-            <p>Signed in as</p>
-            <p class="truncate font-medium text-gray-900 dark:text-white">
-              {{ item.label }}
-            </p>
-          </div>
-        </template>
-
-        <template #item="{ item }">
-          <span class="truncate">{{ item.label }}</span>
-
-          <UIcon
-            :name="item.icon"
-            class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"
-          />
-        </template>
-      </UDropdown>
-    </div>
-
-    <div v-else class="gap-5 flex items-center justify-center">
-      <UButton>
-        <NuxtLink to="/login">Create an account</NuxtLink>
-      </UButton>
-      <UButton variant="outline">
-        <NuxtLink to="/login">Log In</NuxtLink>
-      </UButton>
+        <UButton variant="outline">
+          <NuxtLink to="/login">Log In</NuxtLink>
+        </UButton>
+      </div>
     </div>
   </div>
 </template>
