@@ -18,7 +18,7 @@
           }}
         </h1>
       </div>
-      <UButton @click="followUser">{{
+      <UButton @click="followUser" v-if="searchedUserId !== userId">{{
         isFollowing ? "Unfollow" : "Follow"
       }}</UButton>
     </div>

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="m-5 p-5 bg-black rounded-lg flex flex-col md:h-[85vh] md:fixed md:justify-start"
-  >
+  <div class="m-5 p-5 bg-black rounded-lg flex flex-col md:h-[85vh]">
     <UInput
       v-model="searchQuery"
       placeholder="Your habit"
@@ -17,11 +15,16 @@
         @change="updateSelection(key)"
       />
     </div>
+    <div class="hidden md:block">
+      <UButton @click="$emit('addGoal')" class="mt-5" size="xl"
+        >Add a Goal</UButton
+      >
+    </div>
   </div>
 </template>
 
 <script setup>
-const emit = defineEmits(["sort", "search"]);
+const emit = defineEmits(["sort", "search", "addGoal"]);
 
 const searchQuery = ref("");
 

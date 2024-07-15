@@ -1,23 +1,31 @@
 <template>
-  <div class="text-center flex items-center flex-col md:flex-row">
+  <div
+    class="text-center flex items-center md:items-start flex-col md:flex-row"
+  >
     <!-- GoalsNav component placed in a column to the left on larger screens -->
-    <div class="w-[90vw] md:w-1/6 md:mr-32">
-      <GoalsNav @sort="sort" @search="searchGoal" />
+    <div class="w-[90vw] md:w-1/6 md:sticky top-0">
+      <GoalsNav
+        @sort="sort"
+        @search="searchGoal"
+        @addGoal="AddHabitOpen = true"
+      />
     </div>
-    <div class="md:w-5/6 flex flex-col items-center">
-      <UModal v-model="AddHabitOpen" :prevent-close="preventClosing">
-        <AddHabitModal
-          @added="handleAddClose"
-          @adding="preventClosing = true"
-        />
-      </UModal>
-      <UButton
-        @click="AddHabitOpen = true"
-        class="my-5 px-32 py-5 text-2xl"
-        icon="i-heroicons-pencil-square"
-      >
-        Add a goal!
-      </UButton>
+    <div class="md:w-5/6 flex flex-col">
+      <div class="items-center">
+        <UModal v-model="AddHabitOpen" :prevent-close="preventClosing">
+          <AddHabitModal
+            @added="handleAddClose"
+            @adding="preventClosing = true"
+          />
+        </UModal>
+        <UButton
+          @click="AddHabitOpen = true"
+          class="my-5 px-32 py-5 text-2xl"
+          icon="i-heroicons-pencil-square"
+        >
+          Add a goal!
+        </UButton>
+      </div>
 
       <div v-if="noGoals" class="flex flex-col items-center">
         <img src="/notFound.png" alt="No Goals" />
