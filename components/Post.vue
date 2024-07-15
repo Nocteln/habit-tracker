@@ -37,7 +37,7 @@ const { subject, userId, content, images, createdAt } = defineProps([
   "createdAt",
 ]);
 
-const poster = await $fetch(`http://localhost:3000/api/user/${userId}`, {
+const poster = await $fetch(`/api/user/${userId}`, {
   method: "GET",
 });
 

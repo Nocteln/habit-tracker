@@ -22,7 +22,8 @@
         isFollowing ? "Unfollow" : "Follow"
       }}</UButton>
     </div>
-    {{ data }}
+    <Level :userId="searchedUserId" />
+    <!-- {{ data }} -->
   </div>
 </template>
 <script setup>

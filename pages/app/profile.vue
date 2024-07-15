@@ -4,7 +4,7 @@
       class="flex items-center justify-center m-5 p-5 border-gray-500 border-4 rounded-full"
     >
       <img
-        :src="data?.user?.image"
+        :src="data?.user?.image ? data?.user?.image : ''"
         :alt="`${data?.user?.name}'s profile picture`"
         class="rounded-full"
         width="150"
@@ -22,7 +22,8 @@
           >Edit </UButton>-->
       </div>
     </div>
-    <p>{{ data?.user }}</p>
+    <Level :userId="data?.user?.id" />
+    <!-- <p>{{ data?.user }}</p> -->
   </div>
   <!--<UModal v-model="isEditOpen">
     <EditUserInfoModal @updated="handleClose" />
