@@ -38,10 +38,10 @@
 </template>
 
 <script setup>
-const { goal } = defineProps(["goal"]);
+const { goal, userXp } = defineProps(["goal", "userXp"]);
 const toast = useToast();
 
-const emit = defineEmits(["updateGoal"]);
+const emit = defineEmits(["updateGoal", "isNewLevel"]);
 
 const AlreadyDone = ref(false);
 const streak = ref(goal.streak);
@@ -82,16 +82,23 @@ const doneToday = async () => {
     id: goal._id,
   };
 
-  const res = await $fetch("/api/goal/complete", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newGoal),
-  });
+  // const res = await $fetch("/api/goal/complete", {
+  //   method: "PUT",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(newGoal),
+  // });
+
+  const isNewLevel = await addXp(userXp, Math.floor(Math.random() * 30) + 1);
+
+  if (isNewLevel) {
+    emit("isNewLevel", isNewLevel);
+  }
 
   AlreadyDone.value = true;
   streak.value = goal.streak + 1;
+
   emit("updateGoal", goal);
   toast.add({
     id: goal._id,

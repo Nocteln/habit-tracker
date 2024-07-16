@@ -57,7 +57,12 @@
         :key="goal.name"
         class="flex flex-col justify-center items-center"
       >
-        <Goal :goal="goal" @updateGoal="updatedGoal" />
+        <Goal
+          :goal="goal"
+          @updateGoal="updatedGoal"
+          @isNewLevel="newLevel"
+          :userXp="userXp"
+        />
       </div>
     </div>
   </div>
@@ -80,6 +85,9 @@ const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 const userId = data.value.user.id;
+const user = await $fetch(`/api/user/${userId}`);
+
+const userXp = ref(user.xp);
 
 const goals = await useFetch(`/api/goal/list?userId=${userId}`, {
   method: "GET",
@@ -174,5 +182,13 @@ function updatedGoal(updatedGoal) {
 function sort(event) {
   sortingKey.value = event;
   showOnlyDoneToday.value = event === "doneToday";
+}
+
+function newLevel(level) {
+  toast.add({
+    id: "nouveau level",
+    title: "Nouveau niveau",
+    description: `Congratulations! You reached level ${level}!`,
+  });
 }
 </script>

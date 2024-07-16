@@ -1,12 +1,18 @@
-import { Goal } from "~/server/models/Goal";
 import { getServerSession } from "#auth";
 import { User } from "~/server/models/User";
-import { randomInt } from "crypto";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const session = await getServerSession(event);
   if (!session) {
+    throw createError({
+      statusCode: 401,
+      message: "Unauthorized",
+      statusMessage: "Unauthorized",
+    });
+  }
+
+  if (!session?.user?.id) {
     throw createError({
       statusCode: 401,
       message: "Unauthorized",
@@ -22,16 +28,14 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const updatedGoal = await Goal.updateOne(
+  const updatedUser = await User.updateOne(
+    { id: session?.user?.id },
     {
-      _id: body.id,
-    },
-    {
-      $set: { streak: body.streak, lastActivity: body.lastActivity },
+      $inc: { xp: body.xp },
     }
   );
 
-  if (updatedGoal.matchedCount === 0) {
+  if (updatedUser.matchedCount === 0) {
     throw createError({
       statusCode: 404,
       message: "Cannot find goal",
@@ -39,5 +43,5 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  return updatedGoal;
+  return updatedUser;
 });

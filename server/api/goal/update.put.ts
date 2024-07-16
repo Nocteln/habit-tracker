@@ -30,5 +30,5 @@ export default defineEventHandler(async (event) => {
     }
   );
 
-  return "user updated";
+  return "goal updated";
 });

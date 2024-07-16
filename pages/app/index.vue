@@ -27,15 +27,21 @@
         "
       />
     </div>
-
+    <h1>{{ user.username }}</h1>
     <UNotifications />
   </div>
 </template>
 
 <script setup>
+import { useUserStore } from "~/store/user";
+
 const posts = ref([]);
 const pagination = ref([]);
 const toast = useToast();
+
+const user = useUserStore();
+
+await callOnce(user.fetch);
 
 async function fetchData(page) {
   try {
