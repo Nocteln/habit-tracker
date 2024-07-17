@@ -45,6 +45,10 @@ const UserSchema = new Schema({
     default: 0,
     required: true,
   },
+  challenges: {
+    type: Array,
+    default: [],
+  },
 });
 
 export const User = model("user", UserSchema);

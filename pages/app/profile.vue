@@ -23,6 +23,7 @@
       </div>
     </div>
     <Level :userId="data?.user?.id" />
+    <Challenges />
     <!-- <p>{{ data?.user }}</p> -->
   </div>
   <!--<UModal v-model="isEditOpen">

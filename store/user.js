@@ -12,7 +12,9 @@ export const useUserStore = defineStore("userStore", {
     async fetch() {
       const { data } = useAuth();
 
-      const infos = await $fetch(`/api/user/${data.value.user.id}`);
+      const id = data.value.user.id;
+
+      const infos = await $fetch(`/api/user/${id}`);
       this.username = infos.username;
       this.email = infos.email;
       this.id = id;
@@ -20,9 +22,13 @@ export const useUserStore = defineStore("userStore", {
       this.name = infos.name;
       this.followList = infos.followList;
       this.image = infos.image;
+      this.challenges = infos.challenges;
     },
     addXp(xpToAdd) {
       this.xp += xpToAdd;
+    },
+    completeChallenge(challengeId) {
+      this.challenges.push(challengeId);
     },
   },
 });
