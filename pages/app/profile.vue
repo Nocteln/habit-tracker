@@ -34,9 +34,15 @@
 <script setup lang="ts">
 // import { EditUserInfoModal } from "#components";
 const { data } = useAuth();
+import { useUserStore } from "~/store/user";
+
 if (!data) {
   navigateTo("/login");
 }
+
+const user = useUserStore();
+await callOnce(user.fetch);
+
 const isEditOpen = ref(false);
 
 function handleClose() {

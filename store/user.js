@@ -1,3 +1,5 @@
+import { _0 } from "#tailwind-config/theme/backdropBlur";
+
 export const useUserStore = defineStore("userStore", {
   state: () => ({
     username: "",
@@ -7,6 +9,7 @@ export const useUserStore = defineStore("userStore", {
     name: "",
     followList: [],
     image: "",
+    challenges: [],
   }),
   actions: {
     async fetch() {
@@ -24,11 +27,23 @@ export const useUserStore = defineStore("userStore", {
       this.image = infos.image;
       this.challenges = infos.challenges;
     },
-    addXp(xpToAdd) {
+    addXpToUser(xpToAdd) {
+      console.log("slt", xpToAdd);
       this.xp += xpToAdd;
+      addXp(this.xp, xpToAdd);
     },
-    completeChallenge(challengeId) {
-      this.challenges.push(challengeId);
+    async completeChallenge(challenge) {
+      // await $fetch("/api/challenges/complete", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ challengeId: challenge.id, userId: this.id }),
+      // });
+      console.log(challenge);
+      this.addXpToUser(challenge.xp);
+
+      this.challenges.push(challenge.id);
     },
   },
 });

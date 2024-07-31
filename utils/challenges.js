@@ -1,10 +1,11 @@
 export const challenges = [
   {
-    id: 2,
+    id: 1,
     title: "Complete your first goal",
     description: "Mark your first goal as completed",
     difficulty: "easy",
     xp: 100,
+    image: "/badges/1_habit.png",
   },
   {
     id: 3,
@@ -12,6 +13,7 @@ export const challenges = [
     description: "Add 5 habits to your list",
     difficulty: "easy",
     xp: 100,
+    image: "/badges/5_habits.png",
   },
   {
     id: 4,
@@ -19,6 +21,7 @@ export const challenges = [
     description: "Add a new habit to track",
     difficulty: "medium",
     xp: 200,
+    image: "/badges/starting_1_habit.png",
   },
   {
     id: 5,
@@ -26,6 +29,7 @@ export const challenges = [
     description: "Track any habit every day for a week",
     difficulty: "medium",
     xp: 300,
+    image: "/badges/1_week.png",
   },
   {
     id: 6,
@@ -33,6 +37,7 @@ export const challenges = [
     description: "Track any habit every day for a month",
     difficulty: "hard",
     xp: 500,
+    image: "/badges/1_month.png",
   },
   {
     id: 7,
@@ -40,6 +45,7 @@ export const challenges = [
     description: "Share your progress with a post",
     difficulty: "medium",
     xp: 200,
+    image: "/badges/share_progress.png",
   },
   {
     id: 8,
@@ -47,6 +53,14 @@ export const challenges = [
     description: "Update your profile with a photo and bio",
     difficulty: "easy",
     xp: 100,
+  },
+  {
+    id: 9,
+    title: "Complete 50 habits",
+    description: "Complete any habits 50 times",
+    difficulty: "hard",
+    xp: 600,
+    image: "/badges/50_habits.png",
   },
   // {
   //     id: 9,

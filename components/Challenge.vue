@@ -4,7 +4,7 @@
       challenge.difficulty
     )}`"
   >
-    <img src="/badge_temp.jpg" alt="cc" class="h-32" />
+    <img :src="challenge.image" alt="cc" class="h-32" />
     <div class="p-5">
       <h2 class="text-xl font-bold pb-5">{{ challenge.title }}</h2>
       <p>{{ challenge.description }}</p>
@@ -15,6 +15,7 @@
     </div>
     <div
       class="absolute border-2 w-full h-full bg-opacity-50 bg-white top-0 flex items-center justify-center"
+      v-if="isCompleted"
     >
       <h1 class="text-green-500 font-bold text-3xl text-center rotate-12">
         COMPLETED
@@ -24,7 +25,7 @@
 </template>
 
 <script setup>
-const { challenge } = defineProps(["challenge"]);
+const { challenge, isCompleted } = defineProps(["challenge", "isCompleted"]);
 
 function calculateColor(difficulty) {
   switch (difficulty) {

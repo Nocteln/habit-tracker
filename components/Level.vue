@@ -19,9 +19,9 @@ const { userId } = defineProps(["userId"]);
 
 const userLevel = ref(1);
 
-const user = await $fetch(`/api/user/${userId}`, {
-  method: "GET",
-});
+import { useUserStore } from "~/store/user";
+
+const user = useUserStore();
 
 userLevel.value = calculateLevel(user.xp);
 </script>
