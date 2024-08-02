@@ -14,7 +14,7 @@
       </p>
     </div>
     <div
-      class="absolute border-2 w-full h-full bg-opacity-50 bg-white top-0 flex items-center justify-center"
+      class="absolute rounded-md w-full h-full bg-opacity-50 bg-white top-0 flex items-center justify-center"
       v-if="isCompleted"
     >
       <h1 class="text-green-500 font-bold text-3xl text-center rotate-12">

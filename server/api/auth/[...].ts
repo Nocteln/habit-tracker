@@ -5,6 +5,7 @@ import DiscordProvider, { DiscordProfile } from "next-auth/providers/discord";
 import { User } from "~/server/models/User";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
+import { challenges } from "~/utils/challenges";
 
 const id = uuidv4();
 

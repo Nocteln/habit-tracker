@@ -1,5 +1,3 @@
-import { _0 } from "#tailwind-config/theme/backdropBlur";
-
 export const useUserStore = defineStore("userStore", {
   state: () => ({
     username: "",
@@ -32,18 +30,18 @@ export const useUserStore = defineStore("userStore", {
       this.xp += xpToAdd;
       addXp(this.xp, xpToAdd);
     },
-    async completeChallenge(challenge) {
-      // await $fetch("/api/challenges/complete", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ challengeId: challenge.id, userId: this.id }),
-      // });
-      console.log(challenge);
-      this.addXpToUser(challenge.xp);
+    // async completeChallenge(challenge) {
+    //   await $fetch("/api/challenges/complete", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ challengeId: challenge.id, userId: this.id }),
+    //   });
+    //   console.log(challenge);
+    //   this.addXpToUser(challenge.xp);
 
-      this.challenges.push(challenge.id);
-    },
+    //   this.challenges.push(challenge.id);
+    // },
   },
 });

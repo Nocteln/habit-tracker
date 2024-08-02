@@ -6,6 +6,9 @@ export const challenges = [
     difficulty: "easy",
     xp: 100,
     image: "/badges/1_habit.png",
+    count: 0, // Nombre d'actions accomplies
+    completed: false, // Statut du challenge
+    goal: 1, // Objectif à atteindre
   },
   {
     id: 3,
@@ -14,6 +17,9 @@ export const challenges = [
     difficulty: "easy",
     xp: 100,
     image: "/badges/5_habits.png",
+    count: 0,
+    completed: false,
+    goal: 5,
   },
   {
     id: 4,
@@ -22,6 +28,9 @@ export const challenges = [
     difficulty: "medium",
     xp: 200,
     image: "/badges/starting_1_habit.png",
+    count: 0,
+    completed: false,
+    goal: 1,
   },
   {
     id: 5,
@@ -30,6 +39,9 @@ export const challenges = [
     difficulty: "medium",
     xp: 300,
     image: "/badges/1_week.png",
+    count: 0,
+    completed: false,
+    goal: 7, // Suivi quotidien pendant une semaine
   },
   {
     id: 6,
@@ -38,6 +50,9 @@ export const challenges = [
     difficulty: "hard",
     xp: 500,
     image: "/badges/1_month.png",
+    count: 0,
+    completed: false,
+    goal: 30, // Suivi quotidien pendant un mois
   },
   {
     id: 7,
@@ -46,13 +61,9 @@ export const challenges = [
     difficulty: "medium",
     xp: 200,
     image: "/badges/share_progress.png",
-  },
-  {
-    id: 8,
-    title: "Customize your profile",
-    description: "Update your profile with a photo and bio",
-    difficulty: "easy",
-    xp: 100,
+    count: 0,
+    completed: false,
+    goal: 1,
   },
   {
     id: 9,
@@ -61,12 +72,8 @@ export const challenges = [
     difficulty: "hard",
     xp: 600,
     image: "/badges/50_habits.png",
+    count: 0,
+    completed: false,
+    goal: 50,
   },
-  // {
-  //     id: 9,
-  //     title: "Join a group challenge",
-  //     description: "Participate in a group challenge",
-  //     difficulty: "medium",
-  //     xp: 300
-  // },
 ];
