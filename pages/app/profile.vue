@@ -35,6 +35,7 @@
 // import { EditUserInfoModal } from "#components";
 const { data } = useAuth();
 import { useUserStore } from "~/store/user";
+import { useChallengeStore } from "~/store/challenges";
 
 if (!data) {
   navigateTo("/login");
@@ -42,6 +43,9 @@ if (!data) {
 
 const user = useUserStore();
 await callOnce(user.fetch);
+
+const challengesStore = useChallengeStore();
+await challengesStore.fetchChallenges(user.id);
 
 const isEditOpen = ref(false);
 

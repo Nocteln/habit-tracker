@@ -17,10 +17,8 @@ export const useChallengeStore = defineStore("challenges", {
         }
       }
     },
-    async fetchChallenges() {
-      const data = await $fetch(
-        "/api/challenges/list?userId=104237058315501057178"
-      );
+    async fetchChallenges(userId) {
+      const data = await $fetch(`/api/challenges/list?userId=${userId}`);
 
       this.challenges = data;
     },

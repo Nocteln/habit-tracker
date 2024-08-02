@@ -15,7 +15,7 @@
     </div>
     <div
       class="absolute rounded-md w-full h-full bg-opacity-50 bg-white top-0 flex items-center justify-center"
-      v-if="isCompleted"
+      v-if="challenge.completed"
     >
       <h1 class="text-green-500 font-bold text-3xl text-center rotate-12">
         COMPLETED
@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-const { challenge, isCompleted } = defineProps(["challenge", "isCompleted"]);
+const { challenge } = defineProps(["challenge"]);
 
 function calculateColor(difficulty) {
   switch (difficulty) {

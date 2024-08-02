@@ -61,7 +61,7 @@ const UserSchema = new Schema({
         goal: 1, // Objectif à atteindre
       },
       {
-        id: 3,
+        id: 2,
         title: "Get 5 habits",
         description: "Add 5 habits to your list",
         difficulty: "easy",
@@ -72,7 +72,7 @@ const UserSchema = new Schema({
         goal: 5,
       },
       {
-        id: 4,
+        id: 3,
         title: "Add a new habit",
         description: "Add a new habit to track",
         difficulty: "medium",
@@ -83,7 +83,7 @@ const UserSchema = new Schema({
         goal: 1,
       },
       {
-        id: 5,
+        id: 4,
         title: "Track a habit for a week",
         description: "Track any habit every day for a week",
         difficulty: "medium",
@@ -95,6 +95,17 @@ const UserSchema = new Schema({
       },
       {
         id: 6,
+        title: "Share your progress",
+        description: "Share your progress with a post",
+        difficulty: "medium",
+        xp: 200,
+        image: "/badges/share_progress.png",
+        count: 0,
+        completed: false,
+        goal: 1,
+      },
+      {
+        id: 5,
         title: "Track a habit for a month",
         description: "Track any habit every day for a month",
         difficulty: "hard",
@@ -106,17 +117,6 @@ const UserSchema = new Schema({
       },
       {
         id: 7,
-        title: "Share your progress",
-        description: "Share your progress with a post",
-        difficulty: "medium",
-        xp: 200,
-        image: "/badges/share_progress.png",
-        count: 0,
-        completed: false,
-        goal: 1,
-      },
-      {
-        id: 9,
         title: "Complete 50 habits",
         description: "Complete any habits 50 times",
         difficulty: "hard",
