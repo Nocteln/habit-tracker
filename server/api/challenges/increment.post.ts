@@ -3,15 +3,15 @@ import { User } from "~/server/models/User";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const session = await getServerSession();
-
-  if (!session) {
-    throw createError({
-      statusCode: 401,
-      message: "Unauthorized",
-      statusMessage: "Unauthorized",
-    });
-  }
+  // const session = await getServerSession(event);
+  // console.log("cc1");
+  // if (!session) {
+  //   throw createError({
+  //     statusCode: 401,
+  //     message: "Unauthorized",
+  //     statusMessage: "Unauthorized",
+  //   });
+  // }
 
   if (!body) {
     throw createError({
@@ -20,10 +20,11 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Bad Request",
     });
   }
-  console.log(body.challengeId);
+
+  // TODO: faire que l'id soit reactif
   const updatedUser = await User.updateOne(
     {
-      id: session?.user?.id,
+      id: "562693590514532362",
       "challenges.id": body.challengeId,
     },
     {

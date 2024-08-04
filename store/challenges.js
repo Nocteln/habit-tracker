@@ -1,6 +1,6 @@
 // store/challenges.js
 import { defineStore } from "pinia";
-
+// TODO: retirer le fichier challenge et tout mettre dans le userStore sa sera plus simple
 export const useChallengeStore = defineStore("challenges", {
   state: () => ({
     challenges: [],
@@ -8,12 +8,12 @@ export const useChallengeStore = defineStore("challenges", {
   actions: {
     async incrementCount(challengeId) {
       const challenge = this.challenges.find((c) => c.id === challengeId);
-      console.log(challenge);
+
       if (challenge && !challenge.completed) {
         challenge.count++;
         if (challenge.count >= challenge.goal) {
           console.log("challenge completed");
-          const t = await $fetch(`/api/challenges/complete`, {
+          await $fetch(`/api/challenges/complete`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -21,8 +21,7 @@ export const useChallengeStore = defineStore("challenges", {
             body: JSON.stringify({ challengeId: challenge.id }),
           });
           challenge.completed = true;
-          console.log("server");
-          // Notifier l'utilisateur
+          return;
         }
         $fetch(`/api/challenges/increment`, {
           method: "POST",

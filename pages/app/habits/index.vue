@@ -93,9 +93,6 @@ today.setHours(0, 0, 0, 0);
 const userId = data.value.user.id;
 const user = await $fetch(`/api/user/${userId}`);
 
-console.log("user", user.id);
-console.log("user", userId);
-
 userStore.fetch(userId);
 challengesStore.fetchChallenges(userId);
 
