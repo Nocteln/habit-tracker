@@ -24,6 +24,13 @@ export const useChallengeStore = defineStore("challenges", {
           console.log("server");
           // Notifier l'utilisateur
         }
+        $fetch(`/api/challenges/increment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ challengeId: challenge.id }),
+        });
       }
     },
     async fetchChallenges(userId) {
