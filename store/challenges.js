@@ -6,13 +6,22 @@ export const useChallengeStore = defineStore("challenges", {
     challenges: [],
   }),
   actions: {
-    incrementCount(challengeId) {
+    async incrementCount(challengeId) {
       const challenge = this.challenges.find((c) => c.id === challengeId);
+      console.log(challenge);
       if (challenge && !challenge.completed) {
         challenge.count++;
         if (challenge.count >= challenge.goal) {
           console.log("challenge completed");
+          const t = await $fetch(`/api/challenges/complete`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ challengeId: challenge.id }),
+          });
           challenge.completed = true;
+          console.log("server");
           // Notifier l'utilisateur
         }
       }

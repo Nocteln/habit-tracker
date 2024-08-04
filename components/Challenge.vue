@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`flex p-5 m-5 items-center justify-evenly rounded-md  w-[45vw] md:w-[30vw] relative ${calculateColor(
+    :class="`flex p-5 m-5 items-center justify-evenly rounded-md w-[90vw] md:w-[30vw] md:h-[25vh] h-[20vh] relative ${calculateColor(
       challenge.difficulty
     )}`"
   >

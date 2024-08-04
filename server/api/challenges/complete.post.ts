@@ -3,6 +3,7 @@ import { getServerSession } from "#auth";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const session = await getServerSession(event);
+
   if (!session) {
     throw createError({
       statusCode: 401,
@@ -19,11 +20,18 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  console.log("salutation");
+
   const updatedUser = await User.updateOne(
     {
-      id: body.userId,
+      id: session?.user?.id,
+      "challenges.id": 1,
     },
-    { $push: { challenges: body.challengeId } }
+    {
+      $set: {
+        "challenges.$.completed": true,
+      },
+    }
   );
 
   if (updatedUser.matchedCount === 0) {
@@ -33,4 +41,6 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Bad Request",
     });
   }
+
+  console.log(updatedUser);
 });

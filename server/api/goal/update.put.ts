@@ -29,6 +29,5 @@ export default defineEventHandler(async (event) => {
       $set: { streak: body.streak },
     }
   );
-
   return "goal updated";
 });
