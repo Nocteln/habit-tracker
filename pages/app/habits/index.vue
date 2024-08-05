@@ -71,11 +71,11 @@
 <script setup>
 import AddHabitModal from "~/components/modals/AddHabitModal.vue";
 import { useUserStore } from "~/store/user";
-import { useChallengeStore } from "~/store/challenges";
+// import { useChallengeStore } from "~/store/challenges";
 
 const userStore = useUserStore();
 
-const challengesStore = useChallengeStore();
+// const challengesStore = useChallengeStore();
 
 const AddHabitOpen = ref(false);
 const { data } = useAuth();
@@ -94,7 +94,7 @@ const userId = data.value.user.id;
 const user = await $fetch(`/api/user/${userId}`);
 
 userStore.fetch(userId);
-challengesStore.fetchChallenges(userId);
+// challengesStore.fetchChallenges(userId);
 
 const userXp = ref(user.xp);
 

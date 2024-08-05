@@ -38,11 +38,11 @@
 </template>
 
 <script setup>
-import { useChallengeStore } from "~/store/challenges";
+import { useUserStore } from "~/store/user";
 const { goal, userXp } = defineProps(["goal", "userXp"]);
 const toast = useToast();
 
-const challengesStore = useChallengeStore();
+const userStore = useUserStore();
 
 const emit = defineEmits(["updateGoal", "isNewLevel"]);
 
@@ -85,8 +85,8 @@ const doneToday = async () => {
     id: goal._id,
   };
 
-  challengesStore.incrementCount(1);
-  challengesStore.incrementCount(7);
+  userStore.incrementChallengeCount(1);
+  userStore.incrementChallengeCount(7);
 
   // const res = await $fetch("/api/goal/complete", {
   //   method: "PUT",

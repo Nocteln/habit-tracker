@@ -43,5 +43,32 @@ export const useUserStore = defineStore("userStore", {
 
     //   this.challenges.push(challenge.id);
     // },
+
+    async incrementChallengeCount(challengeId) {
+      const challenge = this.challenges.find((c) => c.id === challengeId);
+      console.log("cc");
+      if (challenge && !challenge.completed) {
+        challenge.count++;
+        $fetch(`/api/challenges/increment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ challengeId: challenge.id }),
+        });
+        if (challenge.count >= challenge.goal) {
+          console.log("challenge completed");
+          await $fetch(`/api/challenges/complete`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ challengeId: challenge.id }),
+          });
+          challenge.completed = true;
+          return;
+        }
+      }
+    },
   },
 });
