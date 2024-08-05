@@ -21,10 +21,9 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // TODO: faire que l'id soit reactif
   const updatedUser = await User.updateOne(
     {
-      id: "562693590514532362",
+      id: body.userId,
       "challenges.id": body.challengeId,
     },
     {
@@ -33,4 +32,14 @@ export default defineEventHandler(async (event) => {
       },
     }
   );
+
+  if (updatedUser.matchedCount === 0) {
+    throw createError({
+      statusCode: 404,
+      message: "Cannot find user",
+      statusMessage: "Bad Request",
+    });
+  }
+
+  return "updated count";
 });

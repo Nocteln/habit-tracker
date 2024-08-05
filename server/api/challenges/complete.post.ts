@@ -1,5 +1,6 @@
 import { User } from "~/server/models/User";
 import { getServerSession } from "#auth";
+import { Post } from "~/server/models/Post";
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const session = await getServerSession(event);

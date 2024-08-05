@@ -54,7 +54,7 @@ export const useUserStore = defineStore("userStore", {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ challengeId: challenge.id }),
+          body: JSON.stringify({ challengeId: challenge.id, userId: this.id }),
         });
         if (challenge.count >= challenge.goal) {
           console.log("challenge completed");
@@ -64,6 +64,18 @@ export const useUserStore = defineStore("userStore", {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ challengeId: challenge.id }),
+          });
+
+          await $fetch(`/api/posts/create`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: this.id,
+              subject: `✨${this.username} has completed a challenge ✨`,
+              content: `🎉Congratulations, ${this.username} completed the challenge "${challenge.title}"!`,
+            }),
           });
           challenge.completed = true;
           return;
