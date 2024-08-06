@@ -1,12 +1,10 @@
 <template>
-  <div class="bg-[#8ECAE6] h-full">
+  <div class="bg-[#8ECAE6]">
     <NavBar />
     <slot />
 
-    <!-- <Footer /> -->
+    <Footer />
     <UNotifications />
   </div>
 </template>
-<script setup>
-// TODO: remettre le footer
-</script>
+<script setup></script>

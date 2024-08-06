@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col justify-center items-center bg-[#8ECAE6]">
     <AddPost />
-    <div v-for="post in posts">
+    <div v-for="post in posts" :key="post._id">
       <Post
         :subject="post.subject"
         :userId="post.userId"
@@ -44,13 +44,14 @@ await callOnce(user.fetch);
 
 async function fetchData(page) {
   try {
-    const result = await useFetch(`/api/posts/list?limit=2&page=${page}`, {
+    const result = await useFetch(`/api/posts/list?limit=10&page=${page}`, {
       method: "GET",
     });
     posts.value = result.data.value.posts;
     pagination.value = result.data.value.pagination;
     console.log(pagination.value);
   } catch (e) {
+    console.error(e);
     toast.add({
       id: "Cannot fetch",
       title: "Cannot fetch",
@@ -58,6 +59,8 @@ async function fetchData(page) {
     });
   }
 }
+
+fetchData(1);
 
 function changePage(direction) {
   const currentPage = pagination.value.currentPage;
@@ -69,6 +72,4 @@ function changePage(direction) {
     fetchData(currentPage - 1);
   }
 }
-
-fetchData(1);
 </script>

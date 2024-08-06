@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap items-center text-center">
+  <div class="flex flex-wrap items-center text-center justify-center">
     <div v-for="challenge in user.challenges" :key="challenge.id">
       <Challenge :challenge="challenge" />
     </div>

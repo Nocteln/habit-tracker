@@ -23,6 +23,9 @@
       </div>
     </div>
     <Level :userId="data?.user?.id" />
+
+    <h1 class="text-3xl font-bold py-12">Your Main Habits :</h1>
+
     <Challenges />
     <!-- <p>{{ data?.user }}</p> -->
   </div>

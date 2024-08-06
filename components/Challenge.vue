@@ -1,12 +1,12 @@
 <template>
   <div
-    :class="`flex p-5 m-5 items-center justify-evenly rounded-md w-[90vw] md:w-[30vw] md:h-[25vh] h-[20vh] relative ${calculateColor(
+    :class="`flex p-5 m-5 items-center justify-evenly rounded-md w-[90vw] md:w-[45vw] lg:w-[40vw] md:h-[25vh] h-[20vh] relative ${calculateColor(
       challenge.difficulty
     )}`"
   >
-    <img :src="challenge.image" alt="cc" class="h-32" />
-    <div class="p-5">
-      <h2 class="text-xl font-bold pb-5">{{ challenge.title }}</h2>
+    <img :src="challenge.image" alt="cc" class="h-24 md:h-32" />
+    <div class="p-2 md:pb-5">
+      <h2 class="text-xl font-bold pb-2 md:pb-5">{{ challenge.title }}</h2>
       <p>{{ challenge.description }}</p>
       <p class="pt-2 text-xs italic">
         Won <span class="font-bold">{{ challenge.xp }}</span

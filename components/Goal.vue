@@ -33,6 +33,10 @@
           v-else
         />
       </UButton>
+      <UButton class="px-10 font-bold md:px-10" @click="deleteGoal" color="red">
+        <span v-if="!AskDeleteConfirmation">Delete</span>
+        <span v-else>Are you sure?</span>
+      </UButton>
     </div>
   </div>
 </template>
@@ -50,6 +54,8 @@ const AlreadyDone = ref(false);
 const streak = ref(goal.streak);
 
 const loadingComplete = ref(false);
+
+const AskDeleteConfirmation = ref(false);
 
 const today = new Date();
 today.setHours(0, 0, 0, 0); // Réinitialise l'heure à minuit pour comparer uniquement la date
@@ -115,6 +121,26 @@ const doneToday = async () => {
   });
   loadingComplete.value = false;
 };
+
+async function deleteGoal() {
+  if (!AskDeleteConfirmation.value) {
+    AskDeleteConfirmation.value = true;
+    return;
+  }
+
+  loadingComplete.value = true;
+  // await $fetch(`/api/goal/${goal._id}`, {
+  //   method: "DELETE",
+  // });
+  emit("removeGoal", goal._id);
+  toast.add({
+    id: goal._id,
+    title: "Goal deleted",
+    description: `The goal "${goal.name}" has been deleted`,
+  });
+  AskDeleteConfirmation.value = false;
+  loadingComplete.value = false;
+}
 
 // console.log(goal);
 </script>

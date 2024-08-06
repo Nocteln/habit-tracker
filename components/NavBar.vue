@@ -58,9 +58,9 @@ const items = [
     },
     {
       label: "My Friends",
-      icon: "i-heroicons-megaphone",
+      icon: "i-heroicons-users",
       click: () => {
-        navigateTo("/app", {
+        navigateTo("/app/friends", {
           external: true,
         });
       },

@@ -61,6 +61,7 @@
           :goal="goal"
           @updateGoal="updatedGoal"
           @isNewLevel="newLevel"
+          @removeGoal="removeGoal"
           :userXp="userXp"
         />
       </div>
@@ -188,6 +189,16 @@ function updatedGoal(updatedGoal) {
   const index = allGoals.value.findIndex((g) => g._id === updatedGoal._id);
   if (index !== -1) {
     allGoals.value[index] = updatedGoal;
+  }
+}
+
+function removeGoal(goalId) {
+  const index = allGoals.value.findIndex((g) => g._id === goalId);
+  if (index !== -1) {
+    allGoals.value.splice(index, 1);
+    if (allGoals.value.length === 0) {
+      noGoals.value = true;
+    }
   }
 }
 

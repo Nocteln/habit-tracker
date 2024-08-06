@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-0 fixed w-full">
+  <div class="bottom-0 w-full">
     <!--fixed-->
     <svg viewBox="0 0 1440 120" class="">
       <path
@@ -14,13 +14,15 @@
       </h1>
       <div>
         <ul>
-          <li>My Profile</li>
-          <li>link</li>
-          <li>link</li>
-          <li>link</li>
+          <li><NuxtLink to="/app/habits">My habits</NuxtLink></li>
+          <li><NuxtLink to="/app/profile">My profile</NuxtLink></li>
+          <li><NuxtLink to="/app/friends">My friends</NuxtLink></li>
+          <li><NuxtLink to="/app">Home</NuxtLink></li>
         </ul>
       </div>
     </div>
-    <h5 class="bg-[#3f849671] text-sm text-center">Made with ❤️ by Nocteln</h5>
+    <h5 class="bg-[#3f849671] text-sm text-center">
+      Made with ❤️ by <a href="https://nocteln.fr" target="_blank">Nocteln</a>
+    </h5>
   </div>
 </template>
