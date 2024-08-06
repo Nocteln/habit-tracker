@@ -85,16 +85,18 @@ const doneToday = async () => {
     id: goal._id,
   };
 
+  userStore.incrementChallengeCountStreak(4, streak.value + 1);
+  userStore.incrementChallengeCountStreak(5, streak.value + 1);
   userStore.incrementChallengeCount(1);
   userStore.incrementChallengeCount(7);
 
-  // const res = await $fetch("/api/goal/complete", {
-  //   method: "PUT",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(newGoal),
-  // });
+  const res = await $fetch("/api/goal/complete", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newGoal),
+  });
 
   const isNewLevel = await addXp(userXp, Math.floor(Math.random() * 30) + 1);
 
@@ -109,7 +111,7 @@ const doneToday = async () => {
   toast.add({
     id: goal._id,
     title: "Congratulations!",
-    description: `Congrats for completing ${goal.name}`,
+    description: `Congrats for completing ${goal.name} today!`,
   });
   loadingComplete.value = false;
 };

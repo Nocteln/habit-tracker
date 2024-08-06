@@ -62,6 +62,7 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
+import { useUserStore } from "~/store/user";
 
 const { data } = useAuth();
 const toast = useToast();
@@ -151,6 +152,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   state.subject = undefined;
   state.content = undefined;
   state.images = undefined;
+
+  const userStore = useUserStore();
+  userStore.incrementChallengeCount(6);
 }
 
 // definePageMeta({

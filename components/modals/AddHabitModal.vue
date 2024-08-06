@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { z } from "zod";
 import type { FormError, FormSubmitEvent } from "#ui/types";
+import { useUserStore } from "~/store/user";
 
 // @ts-ignore
 const emit = defineEmits(["added", "adding"]);
@@ -49,6 +50,12 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   });
   loading.value = false;
   console.log("all", goalComplete);
+
+  const userStore = useUserStore();
+
+  userStore.incrementChallengeCount(2);
+  userStore.incrementChallengeCount(3);
+
   emit("added", goalComplete);
 }
 

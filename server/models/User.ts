@@ -60,27 +60,28 @@ const UserSchema = new Schema({
         completed: false, // Statut du challenge
         goal: 1, // Objectif à atteindre
       },
+
       {
         id: 2,
-        title: "Get 5 habits",
-        description: "Add 5 habits to your list",
-        difficulty: "easy",
-        xp: 100,
-        image: "/badges/5_habits.png",
-        count: 0,
-        completed: false,
-        goal: 5,
-      },
-      {
-        id: 3,
         title: "Add a new habit",
         description: "Add a new habit to track",
-        difficulty: "medium",
-        xp: 200,
+        difficulty: "easy",
+        xp: 100,
         image: "/badges/starting_1_habit.png",
         count: 0,
         completed: false,
         goal: 1,
+      },
+      {
+        id: 3,
+        title: "Get 5 habits",
+        description: "Add 5 habits to your list",
+        difficulty: "medium",
+        xp: 200,
+        image: "/badges/5_habits.png",
+        count: 0,
+        completed: false,
+        goal: 5,
       },
       {
         id: 4,

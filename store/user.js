@@ -44,6 +44,25 @@ export const useUserStore = defineStore("userStore", {
     //   this.challenges.push(challenge.id);
     // },
 
+    async incrementChallengeCountStreak(challengeId, streak) {
+      const challenge = this.challenges.find((c) => c.id === challengeId);
+      console.log(challengeId, streak);
+      if (challenge && !challenge.completed) {
+        if (streak >= challenge.goal) {
+          await $fetch(`/api/challenges/complete`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              challengeId: challenge.id,
+              xp: challenge.xp,
+            }),
+          });
+        }
+      }
+    },
+
     async incrementChallengeCount(challengeId) {
       const challenge = this.challenges.find((c) => c.id === challengeId);
       console.log("cc");
@@ -63,7 +82,10 @@ export const useUserStore = defineStore("userStore", {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ challengeId: challenge.id }),
+            body: JSON.stringify({
+              challengeId: challenge.id,
+              xp: challenge.xp,
+            }),
           });
 
           await $fetch(`/api/posts/create`, {

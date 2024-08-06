@@ -1,6 +1,6 @@
 import { User } from "~/server/models/User";
 import { getServerSession } from "#auth";
-import { Post } from "~/server/models/Post";
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const session = await getServerSession(event);
@@ -26,11 +26,12 @@ export default defineEventHandler(async (event) => {
   const updatedUser = await User.updateOne(
     {
       id: session?.user?.id,
-      "challenges.id": 1,
+      "challenges.id": body.challengeId,
     },
     {
       $set: {
         "challenges.$.completed": true,
+        xp: body.xp,
       },
     }
   );
