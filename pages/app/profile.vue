@@ -22,11 +22,14 @@
           >Edit </UButton>-->
       </div>
     </div>
-    <Level :userId="data?.user?.id" />
+    <Level :propsUser="data?.user?.id" :isAProfileDisplay="false" />
 
-    <h1 class="text-3xl font-bold py-12">Your Main Habits :</h1>
+    <UButton class="mt-10" icon="i-heroicons-user-circle">
+      <NuxtLink :to="`/app/user/${data?.user.id}`"
+        >Access to your public profile</NuxtLink
+      >
+    </UButton>
 
-    <Challenges />
     <!-- <p>{{ data?.user }}</p> -->
   </div>
   <!--<UModal v-model="isEditOpen">
