@@ -80,17 +80,18 @@ const items = [
 
 <template>
   <div
-    class="flex flex-col sm:flex-row justify-around shadow-sm p-5 bg-[#219EBC] items-center"
+    class="flex flex-col md:flex-row items-center justify-between p-5 bg-[#219EBC]"
   >
-    <h1 class="font-bold text-3xl w-[45vw]">
-      <NuxtLink :to="isLogged ? '/app' : '/'">Habit Tracker</NuxtLink>
-    </h1>
-    <div
-      class="flex items-center justify-evenly sm:items-end w-full pt-5 sm:pt-0"
-    >
+    <div class="flex items-center justify-between mb-4 w-full">
+      <h1 class="text-3xl mr-4">
+        <NuxtLink :to="isLogged ? '/app' : '/'"
+          ><span class="font-bold">My</span>
+          <span class="underline"> Daily Tracking</span></NuxtLink
+        >
+      </h1>
       <UInputMenu
         trailing-icon="i-heroicons-chevron-up-down-20-solid"
-        class="w-[60vw] lg:w-[40vh]"
+        class="hidden md:block mr-4"
         size="lg"
         placeholder="Search peoples"
         icon="i-heroicons-magnifying-glass-20-solid"
@@ -99,57 +100,57 @@ const items = [
         :loading="loading"
         option-attribute="username"
         trailing
+        v-if="isLogged"
       />
-      <div v-if="isLogged">
-        <UDropdown
-          :items="items"
-          :ui="{ item: { disabled: 'cursor-text select-text' } }"
-          :popper="{ placement: 'bottom-start' }"
-          class="flex items-center justify-center gap-5"
+      <UDropdown
+        :items="items"
+        :ui="{ item: { disabled: 'cursor-text select-text' } }"
+        :popper="{ placement: 'bottom-start' }"
+        class="flex items-center justify-center gap-5"
+        v-if="isLogged"
+      >
+        <UButton
+          color="white"
+          :label="
+            data?.user?.username ? data?.user?.username : 'cannot find name'
+          "
+          trailing-icon="i-heroicons-chevron-down-20-solid"
+          class="hidden sm:flex items-center"
         >
-          <UButton
-            color="white"
-            :label="
-              data?.user?.username ? data?.user?.username : 'cannot find name'
-            "
-            trailing-icon="i-heroicons-chevron-down-20-solid"
-            class="hidden sm:flex items-center"
-          >
-            <template #leading
-              ><UAvatar :src="`${data?.user?.image}`" />
-            </template>
-          </UButton>
-          <UButton
-            color="white"
-            trailing-icon="i-heroicons-chevron-down-20-solid"
-            class="flex sm:hidden"
-          >
-            <template #leading
-              ><UAvatar :src="`${data?.user?.image}`" />
-            </template>
-          </UButton>
-
-          <template #account="{ item }">
-            <div class="text-left">
-              <p>Signed in as</p>
-              <p class="truncate font-medium text-gray-900 dark:text-white">
-                {{ item.label }}
-              </p>
-            </div>
+          <template #leading
+            ><UAvatar :src="`${data?.user?.image}`" />
           </template>
-
-          <template #item="{ item }">
-            <span class="truncate">{{ item.label }}</span>
-
-            <UIcon
-              :name="item.icon"
-              class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"
-            />
+        </UButton>
+        <UButton
+          color="white"
+          trailing-icon="i-heroicons-chevron-down-20-solid"
+          class="flex sm:hidden"
+        >
+          <template #leading
+            ><UAvatar :src="`${data?.user?.image}`" />
           </template>
-        </UDropdown>
-      </div>
+        </UButton>
 
-      <div v-else class="gap-5 flex items-center justify-center">
+        <template #account="{ item }">
+          <div class="text-left">
+            <p>Signed in as</p>
+            <p class="truncate font-medium text-gray-900 dark:text-white">
+              {{ item.label }}
+            </p>
+          </div>
+        </template>
+
+        <template #item="{ item }">
+          <span class="truncate">{{ item.label }}</span>
+
+          <UIcon
+            :name="item.icon"
+            class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"
+          />
+        </template>
+      </UDropdown>
+
+      <div v-else class="gap-5 flex items-center justify-center flex-wrap">
         <UButton>
           <NuxtLink to="/login">Create an account</NuxtLink>
         </UButton>
@@ -158,5 +159,18 @@ const items = [
         </UButton>
       </div>
     </div>
+    <UInputMenu
+      trailing-icon="i-heroicons-chevron-up-down-20-solid"
+      class="md:hidden w-full mt-4"
+      size="lg"
+      placeholder="Search peoples"
+      icon="i-heroicons-magnifying-glass-20-solid"
+      v-model="selected"
+      :search="searchUsers"
+      :loading="loading"
+      option-attribute="username"
+      trailing
+      v-if="isLogged"
+    />
   </div>
 </template>

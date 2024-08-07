@@ -6,7 +6,7 @@
       <img
         :src="userSearched.image"
         :alt="`${userSearched.username}'s profile picture`"
-        class="rounded-full"
+        class="rounded-md"
         width="150"
         height="150"
       />
@@ -40,7 +40,10 @@
       </div>
     </div>
 
-    <div class="pt-10 text-2xl font-bold text-center">
+    <div
+      class="pt-10 text-2xl font-bold text-center"
+      v-if="challenges.length > 0"
+    >
       <h1>{{ userSearched.name }}'s challenges achieved :</h1>
       <div class="flex flex-wrap items-center text-center justify-center">
         <div v-for="chall in challenges" :key="chall._id">
@@ -82,7 +85,7 @@ let challenges = await useFetch(
 );
 // console.log(chall)
 challenges = challenges.data.value.filter((chall) => chall.completed);
-
+console.log(challenges);
 const isAProfileDisplay = ref(false);
 
 const date = new Date(userSearched.createdAt);

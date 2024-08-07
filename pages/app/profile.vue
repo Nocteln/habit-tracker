@@ -1,12 +1,10 @@
 <template>
   <div class="flex items-center justify-center flex-col pt-3">
-    <div
-      class="flex items-center justify-center m-5 p-5 border-gray-500 border-4 rounded-full"
-    >
+    <div class="flex items-center justify-center m-5 p-5">
       <img
         :src="data?.user?.image ? data?.user?.image : ''"
         :alt="`${data?.user?.name}'s profile picture`"
-        class="rounded-full"
+        class="rounded-md"
         width="150"
         height="150"
       />
@@ -24,12 +22,12 @@
     </div>
     <Level :propsUser="data?.user?.id" :isAProfileDisplay="false" />
 
-    <UButton class="mt-10" icon="i-heroicons-user-circle">
+    <UButton class="my-10 p-5" icon="i-heroicons-user-circle">
       <NuxtLink :to="`/app/user/${data?.user.id}`"
-        >Access to your public profile</NuxtLink
+        >Check your public profile</NuxtLink
       >
     </UButton>
-
+    <Challenges />
     <!-- <p>{{ data?.user }}</p> -->
   </div>
   <!--<UModal v-model="isEditOpen">
