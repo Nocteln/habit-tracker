@@ -23,16 +23,27 @@
       }}</UButton> -->
     </div>
     <Level :userId="searchedUserId" />
-    <h1 class="pt-10 text-2xl font-bold" v-if="isAProfileDisplay">
-      {{ userSearched.data.value.name }}'s favorite habits :
-    </h1>
     <div>
-      <div v-for="goal in goals.data.value" :key="goal._id">
-        <Goal
-          :goal="goal"
-          :isAProfileDisplay="true"
-          v-if="goal.displayedOnProfile"
-        />
+      <h1 class="pt-10 text-2xl font-bold text-center" v-if="isAProfileDisplay">
+        {{ userSearched.data.value.name }}'s favorite habits :
+      </h1>
+      <div class="flex flex-wrap items-center text-center justify-center gap-5">
+        <div v-for="goal in goals.data.value" :key="goal._id">
+          <Goal
+            :goal="goal"
+            :isAProfileDisplay="true"
+            v-if="goal.displayedOnProfile"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-10 text-2xl font-bold text-center">
+      <h1>{{ userSearched.data.value.name }}'s challenges achieved :</h1>
+      <div class="flex flex-wrap items-center text-center justify-center">
+        <div v-for="chall in challenges" :key="chall._id">
+          <Challenge :challenge="chall" :isAProfileDisplay="true" />
+        </div>
       </div>
     </div>
     <!-- {{ data }} -->
@@ -59,6 +70,15 @@ const userSearched = await useFetch(`/api/user/${searchedUserId}`, {
 const goals = await useFetch(`/api/goal/list?userId=${searchedUserId}`, {
   method: "GET",
 });
+
+let challenges = await useFetch(
+  `/api/challenges/list?userId=${searchedUserId}`,
+  {
+    method: "GET",
+  }
+);
+// console.log(chall)
+challenges = challenges.data.value.filter((chall) => chall.completed);
 
 const isAProfileDisplay = ref(false);
 
