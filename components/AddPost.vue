@@ -39,6 +39,7 @@
             multiple
             class="hidden"
             :disabled="loading"
+            accept="image/png, image/jpeg"
           />
           <div v-if="state.images" class="p-2 max-h-64 overflow-auto mt-3">
             <div v-for="image in state.images" :key="image" class="relative">
