@@ -18,11 +18,23 @@
           }}
         </h1>
       </div>
-      <UButton @click="followUser" v-if="searchedUserId !== userId">{{
+      <!-- <UButton @click="followUser" v-if="searchedUserId !== userId">{{
         isFollowing ? "Unfollow" : "Follow"
-      }}</UButton>
+      }}</UButton> -->
     </div>
     <Level :userId="searchedUserId" />
+    <h1 class="pt-10 text-2xl font-bold" v-if="isAProfileDisplay">
+      {{ userSearched.data.value.name }}'s favorite habits :
+    </h1>
+    <div>
+      <div v-for="goal in goals.data.value" :key="goal._id">
+        <Goal
+          :goal="goal"
+          :isAProfileDisplay="true"
+          v-if="goal.displayedOnProfile"
+        />
+      </div>
+    </div>
     <!-- {{ data }} -->
   </div>
 </template>
@@ -43,6 +55,19 @@ const isFollowingBack = await useFetch(
 const userSearched = await useFetch(`/api/user/${searchedUserId}`, {
   method: "GET",
 });
+
+const goals = await useFetch(`/api/goal/list?userId=${searchedUserId}`, {
+  method: "GET",
+});
+
+const isAProfileDisplay = ref(false);
+
+for (const goal of goals.data.value) {
+  if (goal.displayedOnProfile) {
+    isAProfileDisplay.value = true;
+  }
+}
+
 const isFollowing = ref(isFollowingBack.data.value === searchedUserId);
 async function followUser() {
   await fetch(`/api/user/follow/`, {

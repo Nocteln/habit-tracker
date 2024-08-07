@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import { z } from "zod";
-import type { FormError, FormSubmitEvent } from "#ui/types";
-import { useUserStore } from "~/store/user";
 
 // @ts-ignore
 const emit = defineEmits(["added", "adding"]);
@@ -21,8 +19,7 @@ const schema = z.object({
   icon: z.string(),
   iconColor: z.string(),
 });
-console.log(goal._id);
-const goalId = goal._id;
+
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
@@ -32,32 +29,30 @@ const state = reactive({
   iconColor: goal.iconColor,
 });
 
-async function onSubmitEdit(event: FormSubmitEvent<Schema>) {
-  console.log(event.data);
+const IsDisplayedOnProfile = ref(goal.displayedOnProfile);
+
+async function onSubmit() {
   loading.value = true;
   emit("adding");
 
   const newgoal = {
-    ...event.data,
+    ...state,
     userId: data.value?.user?.id,
     streak: 1,
     id: goal._id,
+    displayed: IsDisplayedOnProfile.value,
   };
 
-  const goalComplete = await $fetch(
-    `/api/goal/edit?id=${"66b34b72623f8c203dd55f1a"}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ goal: newgoal }),
-    }
-  );
+  const goalComplete = await $fetch(`/api/goal/edit`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ goal: newgoal }),
+  });
   loading.value = false;
-  console.log("all", goalComplete);
 
-  //   emit("added", goalComplete);
+  emit("added", goalComplete);
 }
 
 function changeIcon(icon: string) {
@@ -71,14 +66,14 @@ function changeColor(color: string) {
 
 <template>
   <UCard>
-    <div v-if="!loading" class="flex justify-evenly">
+    <div v-if="!loading" class="flex flex-col md:flex-row justify-evenly">
       <div class="space-y-2">
         <h1>Edit your habit :</h1>
         <UForm
           :schema="schema"
           :state="state"
           class="space-y-4 text-center"
-          @submit="onSubmitEdit"
+          @submit="onSubmit"
         >
           <UFormGroup label="Name" name="name">
             <UInput v-model="state.name" placeholder="eat healthy" />
@@ -114,14 +109,19 @@ function changeColor(color: string) {
               size="24"
             />
           </div>
-          <UButton type="submit" class="mt-5" block size="lg"> Edit </UButton>
         </UForm>
       </div>
       <div>
-        <h1>Settings</h1>
+        <h1 class="pb-5 pt-5 md:pt-0">Settings</h1>
+        <UCheckbox
+          v-model="IsDisplayedOnProfile"
+          label="display on your profile"
+        />
+        <p class="text-sm pt-5 font-light italic">More comming soon</p>
       </div>
     </div>
-    <div v-else class="flex items-center text-center justify-center">
+    <UButton @click="onSubmit" class="mt-5" block size="lg"> Save </UButton>
+    <div v-if="loading" class="flex items-center text-center justify-center">
       <Icon name="i-heroicons-arrow-path" size="50" class="animate-spin" />
     </div>
   </UCard>

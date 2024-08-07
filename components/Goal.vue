@@ -1,6 +1,7 @@
 <template>
   <div
-    class="m-5 p-5 md:rounded-r-none bg-black w-[80vw] sm:w-full rounded-lg items-center justify-between flex flex-col sm:flex-row"
+    class="mt-5 p-5 bg-black w-[80vw] sm:w-full rounded-lg items-center justify-between flex flex-col sm:flex-row"
+    :class="`${isAProfileDisplay ? 'rounded-lg' : 'md:rounded-r-none'}`"
   >
     <div
       class="flex items-center justify-center sm:justify-start space-x-4 sm:ml-5"
@@ -20,7 +21,10 @@
       <h1 class="font-bold text-2xl truncate">{{ goal.name }}</h1>
       <p class="p-2">{{ goal.description }}</p>
     </div>
-    <div class="flex items-center space-x-4 pt-3 sm:pt-0 md:mr-5">
+    <div
+      class="flex flex-wrap gap-3 items-center justify-center md:space-x-4 pt-3 sm:pt-0 md:mr-5"
+      v-if="!isAProfileDisplay"
+    >
       <UButton
         class="px-10 font-bold md:px-10"
         :disabled="AlreadyDone"
@@ -46,7 +50,11 @@
       </UButton>
     </div>
     <UModal v-model="MoreModalOpen" :prevent-close="preventClosing">
-      <MoreHabitModal @adding="preventClosing = true" :goal="goal" />
+      <MoreHabitModal
+        @adding="preventClosing = true"
+        @added="preventClosing = false"
+        :goal="goal"
+      />
     </UModal>
   </div>
 </template>
@@ -55,7 +63,11 @@
 import { useUserStore } from "~/store/user";
 import MoreHabitModal from "./modals/MoreHabitModal.vue";
 
-const { goal, userXp } = defineProps(["goal", "userXp"]);
+const { goal, userXp, isAProfileDisplay } = defineProps([
+  "goal",
+  "userXp",
+  "isAProfileDisplay",
+]);
 const toast = useToast();
 
 const userStore = useUserStore();
@@ -69,7 +81,6 @@ const loadingComplete = ref(false);
 
 const AskDeleteConfirmation = ref(false);
 
-const displayedOnProfile = ref(goal.displayedOnProfile);
 const MoreModalOpen = ref(false);
 const preventClosing = ref(false);
 
