@@ -70,7 +70,7 @@
 </template>
 
 <script setup>
-// TODO: ajouter les boutons : delete et edit
+// TODO: ajouter les boutons : edit
 // TODO: ajouter le fait que l'on puisse afficher certains objectifs sur le profile
 
 import AddHabitModal from "~/components/modals/AddHabitModal.vue";

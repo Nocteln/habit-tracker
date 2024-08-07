@@ -37,12 +37,24 @@
         <span v-if="!AskDeleteConfirmation">Delete</span>
         <span v-else>Are you sure?</span>
       </UButton>
+      <UButton
+        color="blue"
+        class="px-10 font-bold md:px-10"
+        @click="MoreModalOpen = true"
+      >
+        <span>More</span>
+      </UButton>
     </div>
+    <UModal v-model="MoreModalOpen" :prevent-close="preventClosing">
+      <MoreHabitModal @adding="preventClosing = true" :goal="goal" />
+    </UModal>
   </div>
 </template>
 
 <script setup>
 import { useUserStore } from "~/store/user";
+import MoreHabitModal from "./modals/MoreHabitModal.vue";
+
 const { goal, userXp } = defineProps(["goal", "userXp"]);
 const toast = useToast();
 
@@ -56,6 +68,10 @@ const streak = ref(goal.streak);
 const loadingComplete = ref(false);
 
 const AskDeleteConfirmation = ref(false);
+
+const displayedOnProfile = ref(goal.displayedOnProfile);
+const MoreModalOpen = ref(false);
+const preventClosing = ref(false);
 
 const today = new Date();
 today.setHours(0, 0, 0, 0); // Réinitialise l'heure à minuit pour comparer uniquement la date

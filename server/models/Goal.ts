@@ -47,6 +47,11 @@ const GoalSchema = new Schema({
     required: true,
     default: "white",
   },
+  displayedOnProfile: {
+    type: Boolean,
+    require: true,
+    default: false,
+  },
 });
 
 export const Goal = model("goal", GoalSchema);
