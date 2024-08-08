@@ -9,9 +9,9 @@ const easterEgg = ref(false);
 
 watch(phrase, (newValue, oldValue) => {
   console.log("change");
-  if (newValue === "I want to reset my data") {
+  if (newValue.toLocaleLowerCase() === "i want to reset my data") {
     isPhraseNotComplete.value = false;
-  } else if (newValue === "Un donut sucré au sucre") {
+  } else if (newValue.toLocaleLowerCase() === "nope") {
     easterEgg.value = true;
     isPhraseNotComplete.value = false;
   } else {
@@ -58,7 +58,11 @@ async function reset() {
         </h2>
         <div class="space-y-4 text-center">
           <UFormGroup label="" name="phrase">
-            <UInput v-model="phrase" placeholder="I want to reset my data" />
+            <UInput
+              color="red"
+              v-model="phrase"
+              placeholder="I want to reset my data"
+            />
           </UFormGroup>
         </div>
       </div>
