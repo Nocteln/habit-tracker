@@ -4,7 +4,7 @@
       :schema="schema"
       :state="state"
       @submit="onSubmit"
-      class="w-[50vw] bg-black p-5 rounded-xl"
+      class="w-[90vw] md:w-[50vw] bg-black p-5 rounded-xl"
     >
       <!-- <div :class="state.images ? 'flex justify-center items-center' : ''"> -->
       <div class="flex justify-center items-center">

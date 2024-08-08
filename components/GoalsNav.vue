@@ -1,5 +1,5 @@
 <template>
-  <div class="m-5 p-5 bg-black rounded-lg flex flex-col md:h-[85vh]">
+  <div class="m-5 p-5 bg-[#023047] rounded-lg flex flex-col md:h-[85vh]">
     <UInput
       v-model="searchQuery"
       placeholder="Your habit"

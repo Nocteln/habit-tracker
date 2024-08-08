@@ -37,7 +37,7 @@ const items = [
   ],
   [
     {
-      label: "Profile",
+      label: "My Profile",
       icon: "i-heroicons-user-circle",
       click: () => {
         navigateTo("/app/profile", {
@@ -45,8 +45,6 @@ const items = [
         });
       },
     },
-  ],
-  [
     {
       label: "My Habits",
       icon: "i-heroicons-book-open",
@@ -61,6 +59,26 @@ const items = [
       icon: "i-heroicons-users",
       click: () => {
         navigateTo("/app/friends", {
+          external: true,
+        });
+      },
+    },
+    {
+      label: "My Settings",
+      icon: "i-heroicons-cog-6-tooth",
+      click: () => {
+        navigateTo("/app/settings", {
+          external: true,
+        });
+      },
+    },
+  ],
+  [
+    {
+      label: "Leaderboard",
+      icon: "i-heroicons-trophy",
+      click: () => {
+        navigateTo("/app/leaderboard", {
           external: true,
         });
       },

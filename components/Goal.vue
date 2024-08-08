@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mt-5 p-5 bg-black w-[80vw] sm:w-full rounded-lg items-center justify-between flex flex-col sm:flex-row"
+    class="mt-5 p-5 bg-[#023047] w-[80vw] sm:w-full rounded-lg items-center justify-between flex flex-col sm:flex-row"
     :class="`${isAProfileDisplay ? 'rounded-lg' : 'md:rounded-r-none'}`"
   >
     <div
@@ -37,7 +37,11 @@
           v-else
         />
       </UButton>
-      <UButton class="px-10 font-bold md:px-10" @click="deleteGoal" color="red">
+      <UButton
+        class="px-10 font-bold md:px-10"
+        @click="deleteGoal"
+        color="orange"
+      >
         <span v-if="!AskDeleteConfirmation">Delete</span>
         <span v-else>Are you sure?</span>
       </UButton>

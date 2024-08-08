@@ -10,7 +10,7 @@
     </svg>
     <div class="flex justify-around items-center bg-[#219EBC] text-center p-2">
       <h1 class="font-bold text-2xl">
-        <NuxtLink to="/">Habit Tracker</NuxtLink>
+        <NuxtLink to="/">MyDailyTracking</NuxtLink>
       </h1>
       <div>
         <ul>

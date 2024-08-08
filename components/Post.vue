@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black text-white m-5 p-5 w-[50vw] rounded-2xl">
+  <div class="bg-black text-white m-5 p-5 w-[90vw] md:w-[50vw] rounded-2xl">
     <div class="flex flex-col">
       <div class="flex items-center p-2 relative">
         <NuxtLink
