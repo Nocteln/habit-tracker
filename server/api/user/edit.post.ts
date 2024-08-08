@@ -24,9 +24,12 @@ export default defineEventHandler(async (event) => {
   await User.updateOne(
     { id: body.id },
     {
-      $set: { name: body.name, email: body.email, username: body.username },
+      $set: {
+        name: body.name,
+        username: body.username,
+        settings: { notifications: body.notifications },
+      },
     }
   );
-
   return "user updated";
 });

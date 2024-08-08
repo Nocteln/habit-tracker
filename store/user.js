@@ -8,6 +8,7 @@ export const useUserStore = defineStore("userStore", {
     followList: [],
     image: "",
     challenges: [],
+    settings: {},
   }),
   actions: {
     async fetch() {
@@ -24,6 +25,7 @@ export const useUserStore = defineStore("userStore", {
       this.followList = infos.followList;
       this.image = infos.image;
       this.challenges = infos.challenges;
+      this.settings = infos.settings;
     },
     addXpToUser(xpToAdd) {
       console.log("slt", xpToAdd);
@@ -57,6 +59,7 @@ export const useUserStore = defineStore("userStore", {
             body: JSON.stringify({
               challengeId: challenge.id,
               xp: challenge.xp,
+              notifications: this.notifications,
             }),
           });
         }
@@ -87,18 +90,19 @@ export const useUserStore = defineStore("userStore", {
               xp: challenge.xp,
             }),
           });
-
-          await $fetch(`/api/posts/create`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              userId: this.id,
-              subject: `✨${this.username} has completed a challenge ✨`,
-              content: `🎉Congratulations, ${this.username} completed the challenge "${challenge.title}"!`,
-            }),
-          });
+          if (this.settings.notifications) {
+            await $fetch(`/api/posts/create`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userId: this.id,
+                subject: `✨${this.username} has completed a challenge ✨`,
+                content: `🎉Congratulations, ${this.username} completed the challenge "${challenge.title}"!`,
+              }),
+            });
+          }
           challenge.completed = true;
           return;
         }

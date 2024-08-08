@@ -47,6 +47,13 @@ const UserSchema = new Schema(
       default: 0,
       required: true,
     },
+    settings: {
+      type: Object,
+      default: {
+        notifications: true,
+      },
+      required: true,
+    },
     challenges: {
       type: Array,
       default: [
