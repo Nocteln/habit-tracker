@@ -1,13 +1,16 @@
 <template>
   <div
-    class="h-[50vh] flex flex-col justify-center items-center text-5xl gap-5"
+    class="h-[85vh] sm:h-[90vh] flex flex-col justify-center items-center text-5xl gap-5"
   >
-    <h1>Adoptez de nouvelles habitudes!</h1>
-    <UButton color="sky" size="xl"
+    <h1 class="font-bold">Master Your Routine, One Day at a Time!</h1>
+    <h3 class="text-xl w-[70vw]">
+      Join a community of habit builders and track your progress daily.
+    </h3>
+    <UButton size="xl" class="w-[40vw] h-[7vh] justify-center font-bold text-xl"
       ><NuxtLink to="login" v-if="status !== 'authenticated'"
-        >Inscrivez vous!</NuxtLink
+        >Join US !</NuxtLink
       >
-      <NuxtLink to="app" v-else>Acceder à l'application!</NuxtLink>
+      <NuxtLink to="app" v-else>Go to the app!</NuxtLink>
     </UButton>
   </div>
 </template>

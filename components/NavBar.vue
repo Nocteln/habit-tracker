@@ -98,7 +98,7 @@ const items = [
 
 <template>
   <div
-    class="flex flex-col md:flex-row items-center justify-between p-5 bg-[#219EBC]"
+    class="flex flex-col md:flex-row items-center justify-between p-5 bg-[#219EBC] h-[15vh] sm:h-[10vh]"
   >
     <div class="flex items-center justify-between mb-4 w-full">
       <h1 class="text-3xl mr-4">
