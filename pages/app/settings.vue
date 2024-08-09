@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center text-[#023047] min-h-[70vh]">
     <h1 class="text-2xl font-bold m-7">personal informations</h1>
     <UForm
       :schema="schema"
@@ -7,14 +7,25 @@
       class="space-y-4 md:space-y-0 flex flex-col gap-4 items-center max-w-[90vw] md:w-[50vw]"
       @submit="onSubmit"
     >
-      <UFormGroup label="Name" name="password">
-        <UInput v-model="state.name" type="text" />
+      <UFormGroup
+        label="Name"
+        name="password"
+        :ui="{ label: { base: 'text-elephant-950' } }"
+      >
+        <UInput v-model="state.name" type="text" variant="settings" />
       </UFormGroup>
-      <UFormGroup label="Username" name="password">
-        <UInput v-model="state.username" type="text" />
+      <UFormGroup
+        label="Username"
+        name="password"
+        :ui="{ label: { base: 'text-elephant-950' } }"
+      >
+        <UInput variant="settings" v-model="state.username" type="text" />
       </UFormGroup>
       <UCheckbox
+        :ui="{ label: { base: 'text-elephant-950' } }"
+        class="items-center justify-center flex"
         v-model="state.notifications"
+        size="xl"
         label="activate/desactivate public post when passing a level/completing a challenge"
       />
 

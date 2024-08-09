@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center flex-col pt-3">
+  <div class="flex items-center justify-center flex-col pt-3 min-h-[70vh]">
     <div class="flex items-center justify-center m-5 p-5">
       <img
         :src="data?.user?.image ? data?.user?.image : ''"

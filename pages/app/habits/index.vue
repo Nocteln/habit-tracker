@@ -33,7 +33,7 @@
           No goals found ?? Try
           <span
             @click="AddHabitOpen = true"
-            class="text-green-500 cursor-pointer"
+            class="text-pacific-blue-500 cursor-pointer"
           >
             adding
           </span>

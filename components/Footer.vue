@@ -8,7 +8,9 @@
         d="M0,32L48,53.3C96,75,192,117,288,117.3C384,117,480,75,576,69.3C672,64,768,96,864,101.3C960,107,1056,85,1152,80C1248,75,1344,85,1392,90.7L1440,96L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
       ></path>
     </svg>
-    <div class="flex justify-around items-center bg-[#219EBC] text-center p-2">
+    <div
+      class="flex justify-around items-center bg-pacific-blue-500 text-center p-2"
+    >
       <h1 class="font-bold text-2xl">
         <NuxtLink to="/">MyDailyTracking</NuxtLink>
       </h1>
@@ -21,7 +23,7 @@
         </ul>
       </div>
     </div>
-    <h5 class="bg-[#3f849671] text-sm text-center">
+    <h5 class="bg-pacific-blue-400 text-sm text-center">
       Made with ❤️ by <a href="https://nocteln.fr" target="_blank">Nocteln</a>
     </h5>
   </div>
