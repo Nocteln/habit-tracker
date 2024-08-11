@@ -70,7 +70,12 @@ async function reset() {
       DELETE
     </UButton>
     <div v-if="loading" class="flex items-center text-center justify-center">
-      <Icon name="i-heroicons-arrow-path" size="50" class="animate-spin" />
+      <UIcon
+        dynamic
+        name="i-heroicons-arrow-path"
+        size="50"
+        class="animate-spin"
+      />
     </div>
   </UCard>
 </template>

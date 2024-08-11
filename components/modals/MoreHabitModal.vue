@@ -103,7 +103,7 @@ function changeColor(color: string) {
                 />
               </template>
             </UPopover>
-            <Icon
+            <UIcon
               :name="`i-heroicons-${state.icon}`"
               :class="`text-${state.iconColor}`"
               size="24"
@@ -122,7 +122,7 @@ function changeColor(color: string) {
     </div>
     <UButton @click="onSubmit" class="mt-5" block size="lg"> Save </UButton>
     <div v-if="loading" class="flex items-center text-center justify-center">
-      <Icon name="i-heroicons-arrow-path" size="50" class="animate-spin" />
+      <UIcon name="i-heroicons-arrow-path" size="50" class="animate-spin" />
     </div>
   </UCard>
 </template>

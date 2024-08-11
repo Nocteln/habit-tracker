@@ -114,8 +114,9 @@ function changeColor(color: string) {
               />
             </template>
           </UPopover>
-          <Icon
+          <UIcon
             :name="`i-heroicons-${state.icon}`"
+            dynamic
             :class="`text-${state.iconColor}`"
             size="24"
           />
@@ -125,7 +126,7 @@ function changeColor(color: string) {
       </UForm>
     </div>
     <div v-else class="flex items-center text-center justify-center">
-      <Icon name="i-heroicons-arrow-path" size="50" class="animate-spin" />
+      <UIcon name="i-heroicons-arrow-path" size="50" class="animate-spin" />
     </div>
   </UCard>
 </template>
