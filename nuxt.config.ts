@@ -2,7 +2,10 @@
 export default defineNuxtConfig({
   ssr: true,
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@sidebase/nuxt-auth", "@pinia/nuxt"], // , "@nuxtjs/kinde", "nuxt-mongoose",
+
+  // , "@nuxtjs/kinde", "nuxt-mongoose",
+  modules: ["@nuxt/ui", "@sidebase/nuxt-auth", "@pinia/nuxt"],
+
   runtimeConfig: {
     // GithubClient: process.env.GITHUB_CLIENT_ID,
     // GithubSecret: process.env.GITHUB_SECRET_SECRET,
@@ -13,7 +16,9 @@ export default defineNuxtConfig({
     DiscordClientSecret: process.env.DISCORD_CLIENT_SECRET,
     DiscordClientId: process.env.DISCORD_CLIENT_ID,
     CurrentUrl: process.env.CURRENT_URL,
+    authOrigin: process.env.NUXT_AUTH_ORIGIN || "https://mydailytracking.com",
   },
+
   nitro: {
     plugins: ["~/server/index.ts"],
   },
@@ -23,11 +28,17 @@ export default defineNuxtConfig({
   },
 
   auth: {
-    baseURL: process.env.AUTH_ORIGIN,
+    baseURL: process.env.NUXT_AUTH_ORIGIN,
     provider: {
       type: "authjs",
     },
   },
+
+  // mongoose: {
+  //   uri: "process.env.MONGODB_URI",
+  //   options: {},
+  //   modelsDir: "models",
+  // },
   ui: {
     notifications: {
       // Show toasts at the top right of the screen
@@ -35,11 +46,8 @@ export default defineNuxtConfig({
     },
     safelistColors: ["elephant", "pacific-blue"],
   },
-  // mongoose: {
-  //   uri: "process.env.MONGODB_URI",
-  //   options: {},
-  //   modelsDir: "models",
-  // },
+
+  compatibilityDate: "2024-08-12",
 });
 
 //"@nuxtjs/tailwindcss", "@sidebase/nuxt-auth", "nuxt-vuefire",

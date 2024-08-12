@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-[#8ECAE6] min-h-screen">
+  <div class="bg-[#8ECAE6] min-h-screen dark">
+    <TopBar />
     <NavBar />
     <slot />
 

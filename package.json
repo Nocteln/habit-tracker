@@ -23,7 +23,7 @@
     "nuxt-mongoose": "^1.0.5",
     "nuxt-server-utils": "^0.0.7",
     "pinia": "^2.1.7",
-    "unenv": "^0.4.3",
+    "unenv": "^1.10.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "zod": "^3.23.8"
