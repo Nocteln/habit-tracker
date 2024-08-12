@@ -5,7 +5,7 @@
     <Hero />
 
     <section>
-      <h1 class="text-3xl font-bold">How it work ?</h1>
+      <h1 class="text-3xl font-bold">How does it work?</h1>
       <ol
         class="m-5 text-xl md:flex justify-center items-center text-center font-bold bg-pacific-blue-500 rounded-md p-5 w-[80vw] lg:w-[60vw]"
       >
@@ -24,27 +24,27 @@
     </section>
 
     <section class="my-12">
-      <h1 class="text-3xl font-bold mb-5">Our fonctionalities</h1>
+      <h1 class="text-3xl font-bold mb-5">Our functionalities</h1>
       <ShowFonctionalite
         image="/habit_page.png"
-        name="Gestion des habitudes"
-        description="La fonctionnalitée principale qui vous permettra d'ajouter, de modifier, de trier vos habitudes"
+        name="Habit Management"
+        description="The main feature that allows you to add, edit, and sort your habits"
       />
       <ShowFonctionalite
         image="/public_profile_page.png"
-        name="Profile public/privé"
-        description="Partagez votre progrès à travers votre profile!"
+        name="Public/Private Profile"
+        description="Share your progress through your profile!"
         :reversed="true"
       />
       <ShowFonctionalite
         image="/chat_page.png"
-        name="Forum de discussion"
-        description="Partagez vos pensées, vos progrès, et plein d'autres choses à travers le chat intégré!"
+        name="Discussion Forum"
+        description="Share your thoughts, progress, and much more through the integrated chat!"
       />
       <ShowFonctionalite
         image="/leaderboard_page.png"
         name="Leaderboard"
-        description="Gagnez de l'xp en complettant vos objectifs et vos challenges pour grimper au leaderboard!"
+        description="Earn XP by completing your goals and challenges to climb the leaderboard!"
         :reversed="true"
       />
     </section>
@@ -54,10 +54,15 @@
       <UButton
         size="xl"
         class="w-[40vw] h-[7vh] justify-center font-bold text-xl"
-        ><NuxtLink to="login" v-if="status !== 'authenticated'"
+        ><NuxtLink
+          to="login"
+          class="h-[5vh] w-[40vw]"
+          v-if="status !== 'authenticated'"
           >Join US !</NuxtLink
         >
-        <NuxtLink to="app" v-else>Go to the app!</NuxtLink>
+        <NuxtLink to="app" class="h-[5vh] w-[40vw]" v-else
+          >Go to the app!</NuxtLink
+        >
       </UButton>
     </section>
   </div>

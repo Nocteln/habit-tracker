@@ -34,6 +34,12 @@ export default defineNuxtConfig({
     },
   },
 
+  app: {
+    head: {
+      link: [{ rel: "icon", type: "image/x-icon", href: "/logo_base.png" }],
+    },
+  },
+
   // mongoose: {
   //   uri: "process.env.MONGODB_URI",
   //   options: {},

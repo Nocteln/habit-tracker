@@ -91,6 +91,7 @@ export const useUserStore = defineStore("userStore", {
             }),
           });
           if (this.settings.notifications) {
+            if (challenge.difficulty === "easy") return;
             await $fetch(`/api/posts/create`, {
               method: "POST",
               headers: {

@@ -6,11 +6,16 @@
     <h3 class="text-xl w-[70vw]">
       Join a community of habit builders and track your progress daily.
     </h3>
-    <UButton size="xl" class="w-[40vw] h-[7vh] justify-center font-bold text-xl"
-      ><NuxtLink to="login" v-if="status !== 'authenticated'"
+    <UButton size="xl" class="justify-center font-bold text-xl"
+      ><NuxtLink
+        to="login"
+        class="h-[5vh] w-[40vw]"
+        v-if="status !== 'authenticated'"
         >Join US !</NuxtLink
       >
-      <NuxtLink to="app" v-else>Go to the app!</NuxtLink>
+      <NuxtLink to="app" class="h-[5vh] w-[40vw]" v-else
+        >Go to the app!</NuxtLink
+      >
     </UButton>
   </div>
 </template>

@@ -100,13 +100,20 @@ const items = [
   <div
     class="flex flex-col md:flex-row items-center justify-between p-5 bg-[#219EBC] h-[15vh] sm:h-[10vh]"
   >
-    <div class="flex items-center justify-between mb-4 w-full">
-      <h1 class="text-3xl mr-4">
-        <NuxtLink :to="isLogged ? '/app' : '/'"
-          ><span class="font-bold">My</span>
-          <span class="underline"> Daily Tracking</span></NuxtLink
-        >
-      </h1>
+    <div class="flex items-center justify-between w-full">
+      <div class="flex items-center">
+        <img
+          src="/logo_base.png"
+          class="hidden md:block w-[6vw] lg:w-[5vw] xl:w-[3vw]"
+          alt="logo"
+        />
+        <h1 class="text-3xl mr-4">
+          <NuxtLink :to="isLogged ? '/app' : '/'"
+            ><span class="font-bold">My</span>
+            <span class="underline"> Daily Tracking</span></NuxtLink
+          >
+        </h1>
+      </div>
       <UInputMenu
         trailing-icon="i-heroicons-chevron-up-down-20-solid"
         class="hidden md:block mr-4"
