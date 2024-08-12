@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   // , "@nuxtjs/kinde", "nuxt-mongoose",
-  modules: ["@nuxt/ui", "@sidebase/nuxt-auth", "@pinia/nuxt"],
+  modules: ["@nuxt/ui", "@sidebase/nuxt-auth", "@pinia/nuxt", "@nuxtjs/plausible"],
 
   runtimeConfig: {
     // GithubClient: process.env.GITHUB_CLIENT_ID,

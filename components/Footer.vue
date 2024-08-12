@@ -14,12 +14,16 @@
       <h1 class="font-bold text-2xl">
         <NuxtLink to="/">MyDailyTracking</NuxtLink>
       </h1>
-      <div>
+      <div class="flex justify-between items-center gap-5">
         <ul>
           <li><NuxtLink to="/app/habits">My habits</NuxtLink></li>
           <li><NuxtLink to="/app/profile">My profile</NuxtLink></li>
           <li><NuxtLink to="/app/friends">My friends</NuxtLink></li>
           <li><NuxtLink to="/app">Home</NuxtLink></li>
+        </ul>
+        <ul>
+          <li><NuxtLink to="/legal-mentions">legal mentions</NuxtLink></li>
+          <li><NuxtLink to="/policy">policy terms</NuxtLink></li>
         </ul>
       </div>
     </div>
