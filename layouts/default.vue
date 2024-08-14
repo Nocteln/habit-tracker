@@ -1,11 +1,6 @@
 <template>
-  <div class="bg-[#8ECAE6] min-h-screen dark">
-    <TopBar />
-    <NavBar />
-    <slot />
-
-    <Footer />
+  <NuxtPage class="min-h-screen dark">
     <UNotifications />
-  </div>
+  </NuxtPage>
 </template>
 <script setup></script>

@@ -16,4 +16,7 @@
 
 <script setup>
 const { data } = useFetch("/api/user/leaderboard");
+definePageMeta({
+  layout: "page",
+});
 </script>

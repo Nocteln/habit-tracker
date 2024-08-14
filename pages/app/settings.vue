@@ -113,4 +113,9 @@ async function onSubmit(event) {
     description: "Your profile has been updated.",
   });
 }
+
+definePageMeta({
+  layout: "page",
+  middleware: "need-to-be-identified",
+});
 </script>

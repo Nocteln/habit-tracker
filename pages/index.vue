@@ -70,4 +70,7 @@
 
 <script setup>
 const { status } = useAuth();
+definePageMeta({
+  layout: "page",
+});
 </script>

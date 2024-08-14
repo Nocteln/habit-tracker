@@ -118,4 +118,8 @@ async function followUser() {
   isFollowing.value = !isFollowing.value;
   // userSearched.data.value.isFollowing = true;
 }
+
+definePageMeta({
+  layout: "page",
+});
 </script>

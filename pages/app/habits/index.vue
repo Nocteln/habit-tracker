@@ -214,4 +214,9 @@ function newLevel(level) {
     description: `Congratulations! You reached level ${level}!`,
   });
 }
+
+definePageMeta({
+  layout: "page",
+  middleware: "need-to-be-identified",
+});
 </script>

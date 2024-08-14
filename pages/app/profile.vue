@@ -60,6 +60,7 @@ function handleClose() {
 
 definePageMeta({
   middleware: "need-to-be-identified",
+  layout: "page",
 });
 </script>
 

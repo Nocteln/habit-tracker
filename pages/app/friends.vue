@@ -5,3 +5,8 @@
     <UButton to="/app">Go home</UButton>
   </div>
 </template>
+<script setup>
+definePageMeta({
+  layout: "page",
+});
+</script>

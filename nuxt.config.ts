@@ -22,10 +22,6 @@ export default defineNuxtConfig({
     DiscordClientId: process.env.DISCORD_CLIENT_ID,
     CurrentUrl: process.env.CURRENT_URL,
     authOrigin: process.env.NUXT_AUTH_ORIGIN || "https://mydailytracking.com",
-    public: {
-      posthogPublicKey: "phc_mSm6LJxQXknDLAwL6Owj6WiMqOPhhpyTLXdNN4XjVrk",
-      posthogHost: "https://eu.i.posthog.com",
-    },
   },
 
   nitro: {

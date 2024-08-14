@@ -92,3 +92,9 @@ z
     </section>
   </div>
 </template>
+
+<script setup>
+definePageMeta({
+  layout: "page",
+});
+</script>

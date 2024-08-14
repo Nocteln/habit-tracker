@@ -11,6 +11,7 @@ function handleDiscord() {
 
 definePageMeta({
   middleware: "login",
+  layout: "page",
 });
 </script>
 

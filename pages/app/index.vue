@@ -72,4 +72,7 @@ function changePage(direction) {
     fetchData(currentPage - 1);
   }
 }
+definePageMeta({
+  layout: "page",
+});
 </script>
