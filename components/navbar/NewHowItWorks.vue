@@ -19,8 +19,8 @@
           />
           <h2 class="text-[25px] font-bold">Create an account</h2>
           <p class="text-[20px]">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy.
+            Sign up with google or discord to start building and tracking your
+            daily habits effortlessly.
           </p>
         </li>
         <li class="flex items-start flex-col text-start gap-[12px]">
@@ -30,8 +30,8 @@
           />
           <h2 class="text-[25px] font-bold">Add habits to your list</h2>
           <p class="text-[20px]">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy.
+            Easily add the habits you want to track, from daily exercises to
+            reading goals.
           </p>
         </li>
         <li class="flex items-start flex-col text-start gap-[12px]">
@@ -59,8 +59,8 @@
           </svg>
           <h2 class="text-[25px] font-bold">Start tracking your progress</h2>
           <p class="text-[20px]">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy.
+            Monitor your progress and stay motivated with our user-friendly
+            tracking tools.
           </p>
         </li>
       </ul>

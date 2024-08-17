@@ -18,7 +18,7 @@ definePageMeta({
     <NewHowItWorks />
     <NewFeatures />
     <div class="text-center relative pb-24 flex flex-col items-center">
-      <h1 class="text-black text-[48px] font-semibold pb-[60px]">
+      <h1 class="text-black text-[48px] font-semibold pb-[60px] z-20">
         So? What are you waiting for?
       </h1>
       <button

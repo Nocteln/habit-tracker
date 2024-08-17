@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center justify-around text-[#1D2130] bg-white top-0 sticky p-3"
+    class="flex items-center justify-around text-[#1D2130] bg-white top-0 sticky p-3 z-50 shadow-xl"
   >
     <NuxtLink to="/">
       <img src="/logo_base.png" width="58" class="cursor-pointer" />
