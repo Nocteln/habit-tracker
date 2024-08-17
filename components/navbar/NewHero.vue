@@ -13,7 +13,7 @@
     <!-- <div class="p-5 shadow-lg shadow-cyan-500/50" /> -->
     <div class="mt-[60px] mb-[61px] z-20">
       <button
-        class="bg-[#1D2130] w-[30vw] text-[#fff] px-4 py-2 rounded-md z-20"
+        class="bg-[#1D2130] hover:bg-[#1D2130cc] w-[30vw] text-[#fff] px-4 py-2 rounded-[12px] z-20 transition"
       >
         Join us today!
       </button>
@@ -26,7 +26,7 @@
       class="rounded-[40px] z-20"
     />
     <div
-      class="w-56 h-56 bg-gradient-to-r from-[#373FFF] to-[#3ACAF8] rounded-full absolute blur-3xl top-[50%]"
+      class="w-56 h-56 bg-gradient-to-r from-[#373FFF] to-[#3ACAF8] rounded-full absolute blur-3xl top-[50vh]"
     ></div>
   </div>
 </template>
