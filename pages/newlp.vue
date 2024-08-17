@@ -4,6 +4,7 @@ import NewFooter from "~/components/navbar/NewFooter.vue";
 import NewHero from "~/components/navbar/NewHero.vue";
 import NewHowItWorks from "~/components/navbar/NewHowItWorks.vue";
 import NewNavBar from "~/components/navbar/NewNavBar.vue";
+import Pricing from "~/components/navbar/Pricing.vue";
 
 // import NewNavBar from "~/components/new/NewNavBar.vue";
 definePageMeta({
@@ -17,11 +18,13 @@ definePageMeta({
     <NewHero />
     <NewHowItWorks />
     <NewFeatures />
+    <Pricing />
     <div class="text-center relative pb-24 flex flex-col items-center">
       <h1 class="text-black text-[48px] font-semibold pb-[60px] z-20">
         So? What are you waiting for?
       </h1>
       <button
+        @click="navigateTo('/login')"
         class="bg-[#1D213ff0] hover:bg-[#1D2130cc] w-[30vw] text-[#fff] px-4 py-2 rounded-[12px] z-20 transition"
       >
         Join us!

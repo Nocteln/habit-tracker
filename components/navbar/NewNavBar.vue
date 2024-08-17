@@ -1,5 +1,10 @@
 <template>
-  <div class="bg-white top-0 sticky z-50 shadow-xl">
+  <div
+    :class="[
+      'bg-white top-0 sticky z-50 shadow-xl',
+      { 'hide-navbar': !isNavbarVisible, 'show-navbar': isNavbarVisible },
+    ]"
+  >
     <div class="container mx-auto flex items-center justify-between p-3">
       <NuxtLink to="/">
         <img src="/logo_base.png" width="58" class="cursor-pointer" />
@@ -7,22 +12,38 @@
 
       <!-- Menu pour desktop -->
       <ul class="hidden md:flex items-center gap-5 text-[#1D2130]">
-        <li class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition">
-          How it works
+        <li>
+          <a
+            href="#how-it-works"
+            class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition"
+          >
+            How it works
+          </a>
         </li>
-        <li class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition">
-          Features
+        <li>
+          <a
+            href="#features"
+            class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition"
+          >
+            Features
+          </a>
         </li>
-        <li class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition">
-          Pricing
+        <li>
+          <a
+            href="#pricing"
+            class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition"
+          >
+            Pricing
+          </a>
         </li>
       </ul>
 
-      <button
+      <NuxtLink
+        to="/login"
         class="hidden md:block bg-[#1D2130] hover:bg-[#1D2130cc] px-4 py-2 text-white rounded-[12px] transition"
       >
         Login
-      </button>
+      </NuxtLink>
 
       <!-- Burger menu pour mobile -->
       <div class="md:hidden">
@@ -96,17 +117,50 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const isMenuOpen = ref(false);
+const isNavbarVisible = ref(true);
+let lastScrollTop = 0;
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+const handleScroll = () => {
+  const currentScrollTop =
+    window.pageYOffset || document.documentElement.scrollTop;
+  if (currentScrollTop > lastScrollTop) {
+    // Scrolling down
+    isNavbarVisible.value = false;
+  } else {
+    // Scrolling up
+    isNavbarVisible.value = true;
+  }
+  lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <style scoped>
 .transition-all {
   transition-property: all;
+}
+
+.hide-navbar {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.show-navbar {
+  transform: translateY(0);
+  transition: transform 0.3s ease-in-out;
 }
 </style>

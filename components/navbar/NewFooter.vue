@@ -34,7 +34,7 @@
             <NuxtLink to="/app/habits" class="hover:text-white transition"
               >My Habits</NuxtLink
             >
-            <NuxtLink to="/leaderboard" class="hover:text-white transition"
+            <NuxtLink to="/app/leaderboard" class="hover:text-white transition"
               >Leaderboard</NuxtLink
             >
           </div>
@@ -45,7 +45,7 @@
             <NuxtLink to="/legal-mentions" class="hover:text-white transition"
               >Terms of Use</NuxtLink
             >
-            <NuxtLink to="/policy " class="hover:text-white transition"
+            <NuxtLink to="/policy" class="hover:text-white transition"
               >Privacy Policy</NuxtLink
             >
           </div>

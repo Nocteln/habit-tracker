@@ -13,6 +13,7 @@
     <!-- <div class="p-5 shadow-lg shadow-cyan-500/50" /> -->
     <div class="mt-[60px] mb-[61px] z-20">
       <button
+        @click="navigateTo('/login')"
         class="bg-[#1D2130] hover:bg-[#1D2130cc] w-[30vw] text-[#fff] px-4 py-2 rounded-[12px] z-20 transition"
       >
         Join us today!
