@@ -6,7 +6,7 @@
       <img src="/logo_base.png" width="58" class="cursor-pointer" />
     </NuxtLink>
     <ul class="flex justify-between items-center gap-5">
-      <li class="cursor-pointer p-2 hover:bg-slate-300 rounded-md transition">
+      <li class="cursor-pointer p-2 hover:bg-opacity-20 rounded-md transition">
         How it works
       </li>
       <li class="cursor-pointer p-2 hover:bg-slate-300 rounded-md transition">

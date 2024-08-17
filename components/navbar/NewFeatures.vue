@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import Feature from "./Feature.vue";
+</script>
+
 <template>
   <div
     class="bg-white text-[#1D2130] text-center items-center flex flex-col pt-12 pb-12"
@@ -8,5 +12,11 @@
       Features
     </h1>
     <p class="mt-[35px] text-[30px] w-[40vw] font-bold">Our fonctionalites</p>
+    <div class="flex flex-wrap items-center justify-center gap-[94px]">
+      <Feature />
+      <Feature />
+      <Feature />
+      <Feature />
+    </div>
   </div>
 </template>
