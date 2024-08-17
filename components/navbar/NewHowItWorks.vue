@@ -7,11 +7,13 @@
     >
       How it works
     </h1>
-    <p class="mt-[35px] text-[30px] w-[40vw] font-bold">
+    <p class="mt-[35px] text-[30px] w-[80vw] md:w-[40vw] font-bold">
       Discover how you can increase your productivity
     </p>
     <div class="bg-[#E0E4FC] w-[90vw] rounded-[24px] mt-[44px]">
-      <ul class="flex gap-[36px] pt-[43px] pb-[62px] px-[37px]">
+      <ul
+        class="flex flex-col md:flex-row gap-[36px] pt-[43px] pb-[62px] px-[37px]"
+      >
         <li class="flex items-start text-start flex-col gap-[12px]">
           <UIcon
             name="i-heroicons-solid-user"

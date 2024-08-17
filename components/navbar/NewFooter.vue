@@ -1,20 +1,30 @@
 <template>
   <div
-    class="bg-[#1D2130] text-white w-full rounded-t-[15px] pt-[75px] px-[125px] pb-[7px]"
+    class="bg-[#1D2130] text-white w-full rounded-t-[15px] pt-[75px] px-8 md:px-[50px] lg:px-[125px] pb-[7px] z-50"
   >
-    <div class="flex justify-evenly items-center">
-      <div class="flex flex-col w-[30vw] gap-[30px]">
-        <img src="/logo_base.png" alt="logo" class="w-[60px] h-[60px]" />
-        <h2>
+    <div
+      class="flex flex-col-reverse md:flex-row justify-evenly items-center gap-[30px] md:gap-0"
+    >
+      <div class="flex flex-col w-full md:w-[30vw] gap-[30px]">
+        <img
+          src="/logo_base.png"
+          alt="logo"
+          class="w-[60px] h-[60px] mx-auto md:mx-0 hidden md:block"
+        />
+        <h2 class="text-center md:text-left">
           MyDailyTracking is a web app that allows you to effectively track your
           habits.
         </h2>
-        <h3>MyDailyTracking © 2024 All rights reserved.</h3>
+        <h3 class="text-center md:text-left">
+          MyDailyTracking © 2024 All rights reserved.
+        </h3>
       </div>
-      <div class="flex justify-around gap-[114px]">
-        <div>
+      <div
+        class="flex flex-col md:flex-row justify-around gap-[30px] md:gap-[114px] w-full md:w-auto"
+      >
+        <div class="flex flex-col items-center md:items-start">
           <h1 class="text-[25px] font-semibold">Useful Links</h1>
-          <div class="flex flex-col text-[#ffffffcc]">
+          <div class="flex flex-col text-[#ffffffcc] text-center md:text-left">
             <NuxtLink to="/login" class="hover:text-white transition"
               >Login</NuxtLink
             >
@@ -29,9 +39,9 @@
             >
           </div>
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col items-center md:items-start">
           <h1 class="text-[25px] font-semibold">Legal Notices</h1>
-          <div class="flex flex-col text-[#ffffffcc]">
+          <div class="flex flex-col text-[#ffffffcc] text-center md:text-left">
             <NuxtLink to="/legal-mentions" class="hover:text-white transition"
               >Terms of Use</NuxtLink
             >

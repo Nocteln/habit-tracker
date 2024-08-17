@@ -23,7 +23,7 @@
       alt="page des habitudes"
       width="1024"
       height="666"
-      class="rounded-[40px] z-20"
+      class="rounded-[40px] z-20 max-w-[90vw]"
     />
     <div
       class="w-56 h-56 bg-gradient-to-r from-[#373FFF] to-[#3ACAF8] rounded-full absolute blur-3xl top-[50vh]"

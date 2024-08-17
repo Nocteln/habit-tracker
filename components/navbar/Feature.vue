@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-[23.97px] border-[1.24px] p-[17.98px] gap-[17.98px] border-[#E4E4EB] w-[30vw] items-start text-start"
+    class="rounded-[23.97px] border-[1.24px] p-[17.98px] gap-[17.98px] border-[#E4E4EB] w-[70vw] md:w-[30vw] items-start text-start"
   >
     <img
       :src="image"
