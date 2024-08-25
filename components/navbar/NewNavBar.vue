@@ -14,7 +14,7 @@
       <ul class="hidden md:flex items-center gap-5 text-[#1D2130]">
         <li>
           <a
-            href="#how-it-works"
+            href="/#how-it-works"
             class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition"
           >
             How it works
@@ -22,7 +22,7 @@
         </li>
         <li>
           <a
-            href="#features"
+            href="/#features"
             class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition"
           >
             Features
@@ -30,7 +30,7 @@
         </li>
         <li>
           <a
-            href="#pricing"
+            href="/#pricing"
             class="cursor-pointer p-2 hover:bg-slate-200 rounded-md transition"
           >
             Pricing
