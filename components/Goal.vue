@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mt-5 p-5 bg-[#023047] w-[80vw] sm:w-full rounded-lg items-center justify-between flex flex-col sm:flex-row"
+    class="my-5 p-5 bg-[#1D2130] w-[80vw] sm:w-full rounded-lg items-center justify-between flex flex-col sm:flex-row"
     :class="`${isAProfileDisplay ? 'rounded-lg' : 'md:rounded-r-none'}`"
   >
     <div

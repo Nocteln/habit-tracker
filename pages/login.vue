@@ -1,6 +1,4 @@
 <script setup>
-import NewFooter from "~/components/navbar/NewFooter.vue";
-import NewNavBar from "~/components/navbar/NewNavBar.vue";
 const { signIn, data } = useAuth();
 
 function handleGoogle() {
@@ -12,14 +10,13 @@ function handleDiscord() {
 }
 // import NewNavBar from "~/components/new/NewNavBar.vue";
 definePageMeta({
-  layout: "nothing",
+  layout: "landing-page",
   middleware: "login",
 });
 </script>
 
 <template>
   <div class="bg-white text-[#1D2130]">
-    <NewNavBar />
     <div class="text-center flex flex-col items-center pb-32">
       <h1
         class="p-12 text-[24px] bg-gradient-to-r from-[#373FFF] to-[#3ACAF8] inline-block text-transparent bg-clip-text font-bold"
@@ -67,7 +64,5 @@ definePageMeta({
         />
       </div>
     </div>
-
-    <NewFooter />
   </div>
 </template>

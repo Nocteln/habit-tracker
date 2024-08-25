@@ -1,20 +1,17 @@
 <script setup>
-import NewFeatures from "~/components/navbar/NewFeatures.vue";
-import NewFooter from "~/components/navbar/NewFooter.vue";
-import NewHero from "~/components/navbar/NewHero.vue";
-import NewHowItWorks from "~/components/navbar/NewHowItWorks.vue";
-import NewNavBar from "~/components/navbar/NewNavBar.vue";
-import Pricing from "~/components/navbar/Pricing.vue";
+import NewFeatures from "~/components/landingPage/NewFeatures.vue";
+import NewHero from "~/components/landingPage/NewHero.vue";
+import NewHowItWorks from "~/components/landingPage/NewHowItWorks.vue";
+import Pricing from "~/components/landingPage/Pricing.vue";
 
 // import NewNavBar from "~/components/new/NewNavBar.vue";
 definePageMeta({
-  layout: "nothing",
+  layout: "landing-page",
 });
 </script>
 
 <template>
   <div class="bg-white">
-    <NewNavBar />
     <NewHero />
     <NewHowItWorks />
     <NewFeatures />
@@ -33,6 +30,5 @@ definePageMeta({
         class="w-[60vw] h-[20vh] bg-gradient-to-r from-[#373FFF] to-[#3ACAF8] rounded-full absolute blur-3xl bottom-[5vh]"
       ></div>
     </div>
-    <NewFooter />
   </div>
 </template>
