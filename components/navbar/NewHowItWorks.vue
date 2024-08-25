@@ -4,7 +4,7 @@
     id="how-it-works"
   >
     <h1
-      class="text-[24px] bg-gradient-to-r from-[#373FFF] to-[#3ACAF8] inline-block text-transparent bg-clip-text font-bold"
+      class="text-[24px] bg-gradient-to-r from-[#373FFF] to-[#3ACAF8] inline-block text-transparent bg-clip-text font-bold mt-12"
     >
       HOW IT WORKS
     </h1>

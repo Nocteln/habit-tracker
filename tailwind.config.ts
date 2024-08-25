@@ -64,6 +64,19 @@ export default <Partial<Config>>{
           "950": "#102e3c",
         },
       },
+      boxShadow: {
+        yellow: "0 4px 6px -1px rgba(250, 204, 21, 0.5)",
+        red: "0 4px 6px -1px rgba(248, 113, 113, 0.5)",
+        purple: "0 4px 6px -1px rgba(167, 139, 250, 0.5)",
+      },
     },
+    safelist: [
+      "border-yellow-500",
+      "border-red-500",
+      "border-purple-500",
+      "shadow-yellow-500/50",
+      "shadow-red-500/50",
+      "shadow-purple-500/50",
+    ],
   },
 };

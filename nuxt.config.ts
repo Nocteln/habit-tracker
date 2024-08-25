@@ -1,7 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: true,
+  ssr: false,
   devtools: { enabled: true },
+  port: 3001,
 
   // , "@nuxtjs/kinde", "nuxt-mongoose",   "@nuxtjs/plausible",
   modules: [

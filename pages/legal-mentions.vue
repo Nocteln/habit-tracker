@@ -29,17 +29,15 @@ z
 
     <section class="mb-6">
       <h2 class="text-xl font-semibold mb-2">2. Host</h2>
-      <p><strong>Host Name:</strong> Hostinger</p>
-      <p>
-        <strong>Host Address:</strong> 61 Lordou Vironos Street, 6023 Larnaca
-      </p>
+      <p><strong>Host Name:</strong> Ionos</p>
       <p>
         <strong>Contact:</strong>
         <a
-          href="https://www.hostinger.fr/contact"
+          href="https://www.ionos.fr/contact"
           class="text-blue-500 hover:underline"
-          >https://www.hostinger.fr/contact</a
+          >https://www.ionos.fr/contact</a
         >
+        <a href="tel:0970 808 911">09 70 80 89 11</a>
       </p>
     </section>
 
