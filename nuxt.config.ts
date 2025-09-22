@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "@pinia/nuxt",
     "@nuxtjs/plausible",
+    "@netlify/nuxt",
   ],
 
   runtimeConfig: {
@@ -27,7 +28,6 @@ export default defineNuxtConfig({
 
   nitro: {
     plugins: ["~/server/index.ts"],
-    preset: 'netlify',
   },
 
   nuxtServerUtils: {
